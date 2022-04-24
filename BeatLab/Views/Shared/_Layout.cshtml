@@ -2,11 +2,11 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - приложение ASP.NET</title>
-  
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -26,46 +26,27 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Информация", "About", "Home")</li>
                     <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-
                 </ul>
-
-                @{ if (ViewContext.HttpContext.User.IsInRole("admin"))
-                    {<text>
-                            <ul class="nav navbar-nav navbar-right">
-
-                                <li class="navbar-text">
-                                    Hello, @User.Identity.Name!
+                <ul name="Hidd" class="nav navbar-nav navbar-right">
+                    @{ if (ViewContext.HttpContext.User.IsInRole("admin") || ViewContext.HttpContext.User.IsInRole("user"))
+                        {
+                            <li class="navbar-text">Hello, @User.Identity.Name!</li>
+                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"
+                                       style="color: #9d9d9d;">Log off</a>
                                 </li>
-
-                                
-            
-                           <button class="nav navbar-nav navbar-right"> Выйти</button>
-                
-                            
-                    </text>
-
-
-
-
-                }
-                else if (ViewContext.HttpContext.User.IsInRole("user"))
-                {
-
-
-
-                }
-                else
-                {
-                    <ul name="Hidd" class="nav navbar-nav navbar-right">
-
-
-                        <li>@Html.ActionLink("Авторизация", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
-
-                    </ul>
-                }
-
-                }
+                            }
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Авторизация", "Login", "Account")</li>
+                            <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+                        }
+                    }
+                </ul>
             </div>
         </div>
     </div>
