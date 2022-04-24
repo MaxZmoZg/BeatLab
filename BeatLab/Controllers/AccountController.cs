@@ -1,9 +1,5 @@
 ﻿using BeatLab.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -13,13 +9,16 @@ namespace BeatLab.Controllers
     {
         // GET: Account
 
-        [HttpPost]
-        public ActionResult SignOute()
-        {
-           
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Login()
         {
@@ -28,11 +27,6 @@ namespace BeatLab.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-      
-
-
-
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -41,13 +35,13 @@ namespace BeatLab.Controllers
                 User user = null;
                 using (UserContext db = new UserContext())
                 {
-                    user = db.Users.FirstOrDefault(u => u.Login== model.Login && u.Password == model.Password);
+                    user = db.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
 
                 }
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Login, true);
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -72,7 +66,7 @@ namespace BeatLab.Controllers
                 User user = null;
                 using (UserContext db = new UserContext())
                 {
-                    user = db.Users.FirstOrDefault(u =>  u.Email_User == model.Email);
+                    user = db.Users.FirstOrDefault(u => u.Email_User == model.Email);
                 }
                 if (user == null)
                 {
@@ -99,6 +93,6 @@ namespace BeatLab.Controllers
 
             return View(model);
         }
-        
-}
+
     }
+}
