@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BeatLab.Models
+﻿namespace BeatLab.Models
 {
-   public class LoginModel
-    {
-        public string Login { get; set; }   
-        public string Password { get; set; }
-    }
-    public class RegisterModel
+    public class IdentityModel
     {
         public string Login { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginModel : IdentityModel { }
+    public class RegisterModel : IdentityModel
+    {
         public string Email { get; set; }
-        public string Password { get; set; }    
     }
 }

@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0eb4065865214a26b277f43f714f7acf" Name="Diagram1">
-        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <AssociationConnector Association="BeatLabDBModel.FK_User_User_Type" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="2.125" />
+        <AssociationConnector Association="BeatLabDBModel.FK_User_User_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

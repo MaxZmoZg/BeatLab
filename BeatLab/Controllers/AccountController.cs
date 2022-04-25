@@ -1,5 +1,8 @@
 ﻿using BeatLab.Models;
+using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -31,32 +34,55 @@ namespace BeatLab.Controllers
         {
             if (ModelState.IsValid)
             {
-                // поиск пользователя в бд
-                User user = null;
-                using (UserContext db = new UserContext())
-                {
-                    user = db.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
+                User user = SearchUserInDatabase(model);
 
-                }
-                if (user != null)
+                bool isUserFound = user != null;
+                if (isUserFound)
                 {
                     FormsAuthentication.SetAuthCookie(model.Login, true);
-
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
+                    ModelState.AddModelError(
+                        nameof(model.Login), "Неверный логин или пароль");
                 }
             }
 
             return View(model);
         }
 
+        private static User SearchUserInDatabase(LoginModel model)
+        {
+            User user = null;
+            using (UserContext db = new UserContext())
+            {
+                user = db.Users.FirstOrDefault(u => u.Login == model.Login);
+                if (user == null)
+                {
+                    return null;
+                }
+                SaltedPasswordGenerator.GenerateHashAndSalt(model.Password,
+                                         out byte[] saltBytes,
+                                         out byte[] encryptedPasswordAndSalt,
+                                         salt: user.Salt);
+                if (Enumerable.SequenceEqual(user.Password_Hash,
+                                             encryptedPasswordAndSalt))
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
@@ -70,16 +96,9 @@ namespace BeatLab.Controllers
                 }
                 if (user == null)
                 {
-                    // создаем нового пользователя
-                    using (UserContext db = new UserContext())
-                    {
-                        db.Users.Add(new User { Email_User = model.Email, Password = model.Password, Login = model.Login, ID_User_Type = 2 });
-                        db.SaveChanges();
-
-                        user = db.Users.Where(u => u.Email_User == model.Email && u.Password == model.Password).FirstOrDefault();
-                    }
-                    // если пользователь удачно добавлен в бд
-                    if (user != null)
+                    user = CreateNewUser(model);
+                    bool isUserSuccessfullyAddedToDatabase = user != null;
+                    if (isUserSuccessfullyAddedToDatabase)
                     {
                         FormsAuthentication.SetAuthCookie(model.Login, true);
                         return RedirectToAction("Index", "Home");
@@ -87,12 +106,53 @@ namespace BeatLab.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Пользователь с таким логином уже существует");
+                    ModelState.AddModelError(
+                        nameof(model.Email), "Пользователь с таким email уже существует");
                 }
             }
 
             return View(model);
         }
 
+        private static User CreateNewUser(RegisterModel model)
+        {
+            SaltedPasswordGenerator.GenerateHashAndSalt(model.Password,
+                                         out byte[] saltBytes,
+                                         out byte[] encryptedPasswordAndSalt);
+            using (UserContext db = new UserContext())
+            {
+                User user = new User
+                {
+                    Email_User = model.Email,
+                    Password_Hash = encryptedPasswordAndSalt,
+                    Salt = saltBytes,
+                    Login = model.Login,
+                    ID_User_Type = 2
+                };
+                db.Users.Add(user);
+                db.SaveChanges();
+                return user;
+            }
+        }
+
+        private static void GeneratePasswordHashWithSalt(
+            IdentityModel model,
+            out byte[] saltBytes,
+            out byte[] encryptedPasswordAndSalt)
+        {
+            byte[] passwordBytes = Encoding.UTF8
+                .GetBytes(model.Password);
+            saltBytes = Encoding.UTF8
+                .GetBytes(
+                    Guid.NewGuid()
+                        .ToString()
+                        .Substring(0, 4));
+            byte[] passwordAndSalt = passwordBytes
+                .Concat(saltBytes)
+                .ToArray();
+            encryptedPasswordAndSalt = SHA256
+                .Create()
+                .ComputeHash(passwordAndSalt);
+        }
     }
 }
