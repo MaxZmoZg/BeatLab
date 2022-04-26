@@ -11,7 +11,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar header-style navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,22 +19,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand brand-style " })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Информация", "About", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Связаться", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " }    )</li>
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
-                    @{ if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                    @{
+                        
+                        if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
-                            <li class="navbar-text">Hello, @User.Identity.Name!</li>
+                            <li class="navbar-nav navbar-text navbar-right">Hello, @User.Identity.Name!</li>
+                           
                             using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
                             {
                                 @Html.AntiForgeryToken()
-                                <li>
+                                <li class="navbar-nav  navbar-right">
                                     <a href="javascript:document.getElementById('logoutForm').submit()"
                                        style="color: #9d9d9d;">Выйти</a>
                                 </li>
@@ -44,8 +47,8 @@
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Авторизация", "Login", "Account")</li>
-                            <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+                            <li>@Html.ActionLink(" Авторизация", "Login", "Account", new { area = "" }, new { @class = "glyphicon glyphicon-log-in" }) </li>
+                            <li>@Html.ActionLink(" Регистрация", "Register", "Account", new { area = "" }, new { @class = "glyphicon glyphicon-user" })</li>
                         }
                     }
                 </ul>
@@ -57,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <p class="dada">&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
         </footer>
     </div>
 

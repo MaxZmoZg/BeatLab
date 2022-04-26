@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,34 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.header-style {
+    background: white;
+    -webkit-box-shadow: -1px 5px 7px -3px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -1px 5px 7px -3px rgba(34, 60, 80, 0.2);
+    box-shadow: -1px 5px 7px -3px rgba(34, 60, 80, 0.2);
+}
+
+.header-style-text {
+    color: black;
+    font-size: 17px;
+}
+
+    .header-style-text:hover {
+        color: black;
+        font-size: 18px;
+        background: white !important;
+    }
+
+.brand-style {
+    color: black;
+}
+
+    .brand:hover {
+        color: black;
+    }
+
+.dada{
+    font-size:40px !important
 }
