@@ -1,8 +1,5 @@
 ﻿using BeatLab.Models;
-using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -10,10 +7,6 @@ namespace BeatLab.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-
-
-        [HttpPost]
         [Authorize]
         public ActionResult Logout()
         {

@@ -33,23 +33,19 @@
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
 
-                            <li>@Html.ActionLink($" {User.Identity.Name}" , "Contact", "Home", new { area = "" }, new { @class = "header-style-text glyphicon glyphicon-star-empty" })</li>
-
-                            using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <li class="nav navbar-nav navbar-right">
-                                    <a href="javascript:document.getElementById('logoutForm').submit()"
-                                       style="color: #9d9d9d;">Выйти</a>
-                                </li>
-                            }
-
-
+                            <li>@Html.ActionLink($"{User.Identity.Name}", "Contact", "Home", new { area = "" }, new { @class = "header-style-text glyphicon glyphicon-star-empty" })</li>
+                            <li>
+                                @Html.ActionLink(linkText: "Выйти",
+                                                 actionName: "Logout",
+                                                 controllerName: "Account",
+                                                 routeValues: new { },
+                                                 htmlAttributes: new { @class = "header-style-text glyphicon glyphicon-star-empty" })
+                            </li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink(" Авторизация", "Login", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-log-in" }) </li>
-                            <li>@Html.ActionLink(" Регистрация", "Register", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-user" })</li>
+                            <li>@Html.ActionLink("Авторизация", "Login", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-log-in" }) </li>
+                            <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-user" })</li>
                         }
                     }
                 </ul>
