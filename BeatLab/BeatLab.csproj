@@ -153,6 +153,7 @@
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />
+    <Compile Include="Services\SaltedPasswordGenerator.cs" />
     <Compile Include="User.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
@@ -187,6 +188,9 @@
     </EntityDeploy>
     <Content Include="BeatLab.edmx.diagram">
       <DependentUpon>BeatLab.edmx</DependentUpon>
+    </Content>
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
