@@ -1,8 +1,5 @@
 ﻿using BeatLab.Models;
-using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -10,10 +7,6 @@ namespace BeatLab.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-
-
-        [HttpPost]
         [Authorize]
         public ActionResult Logout()
         {
@@ -133,26 +126,6 @@ namespace BeatLab.Controllers
                 db.SaveChanges();
                 return user;
             }
-        }
-
-        private static void GeneratePasswordHashWithSalt(
-            IdentityModel model,
-            out byte[] saltBytes,
-            out byte[] encryptedPasswordAndSalt)
-        {
-            byte[] passwordBytes = Encoding.UTF8
-                .GetBytes(model.Password);
-            saltBytes = Encoding.UTF8
-                .GetBytes(
-                    Guid.NewGuid()
-                        .ToString()
-                        .Substring(0, 4));
-            byte[] passwordAndSalt = passwordBytes
-                .Concat(saltBytes)
-                .ToArray();
-            encryptedPasswordAndSalt = SHA256
-                .Create()
-                .ComputeHash(passwordAndSalt);
         }
     }
 }
