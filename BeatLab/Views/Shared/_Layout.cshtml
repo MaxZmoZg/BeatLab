@@ -34,16 +34,11 @@
                         {
 
                             <li>@Html.ActionLink($"{User.Identity.Name}", "Contact", "Home", new { area = "" }, new { @class = "header-style-text glyphicon glyphicon-star-empty" })</li>
-                            <li>
-                                @Html.ActionLink(linkText: "Выйти",
-                                                 actionName: "Logout",
-                                                 controllerName: "Account",
-                                                 htmlAttributes: new { @class = "header-style-text glyphicon" })
-                            </li>
+                            <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text glyphicon")</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Авторизация", "Login", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-log-in" }) </li>
+                            <li>@Html.ActionLink("Авторизация", "Login", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-log-in" })</li>
                             <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-user" })</li>
                         }
                     }
