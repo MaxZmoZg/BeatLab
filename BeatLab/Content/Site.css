@@ -38,7 +38,7 @@ textarea {
 
     .header-style-text:hover {
         color: black;
-        font-size: 18px;
+        font-size: 17.3px;
         background: white !important;
     }
 
@@ -46,10 +46,10 @@ textarea {
     color: black;
 }
 
-    .brand:hover {
+    .brand-style:hover {
         color: black;
     }
 
-.dada{
-    font-size:40px !important
+.aaaa {
+    display: inline-block;
 }
