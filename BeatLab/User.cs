@@ -23,8 +23,9 @@ namespace BeatLab
         public byte[] Image_User { get; set; }
         public string Nickname_User { get; set; }
         public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> ID_User_Type { get; set; }
+        public byte[] Password_Hash { get; set; }
+        public byte[] Salt { get; set; }
+        public int ID_User_Type { get; set; }
         public string Email_User { get; set; }
     
         public virtual User_Type User_Type { get; set; }
