@@ -134,25 +134,5 @@ namespace BeatLab.Controllers
                 return user;
             }
         }
-
-        private static void GeneratePasswordHashWithSalt(
-            IdentityModel model,
-            out byte[] saltBytes,
-            out byte[] encryptedPasswordAndSalt)
-        {
-            byte[] passwordBytes = Encoding.UTF8
-                .GetBytes(model.Password);
-            saltBytes = Encoding.UTF8
-                .GetBytes(
-                    Guid.NewGuid()
-                        .ToString()
-                        .Substring(0, 4));
-            byte[] passwordAndSalt = passwordBytes
-                .Concat(saltBytes)
-                .ToArray();
-            encryptedPasswordAndSalt = SHA256
-                .Create()
-                .ComputeHash(passwordAndSalt);
-        }
     }
 }
