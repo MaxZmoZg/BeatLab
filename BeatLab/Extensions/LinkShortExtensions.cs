@@ -25,7 +25,7 @@
                                          actionName: controllerAndActionArray[1],
                                          controllerName: controllerAndActionArray[0],
                                          routeValues: new { },
-                                         htmlAttributes: HtmlHelper.AnonymousObjectToHtmlAttributes(new { @class = @class }));
+                                        htmlAttributes: new { @class });
         }
     }
 }
