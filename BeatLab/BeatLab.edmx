@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище BeatLabDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище BeatLabDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID_User" />
@@ -17,9 +17,10 @@
           <Property Name="Age_User" Type="int" />
           <Property Name="Image_User" Type="binary" MaxLength="50" />
           <Property Name="Nickname_User" Type="varchar" MaxLength="50" />
-          <Property Name="Login" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="ID_User_Type" Type="int" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password_Hash" Type="varbinary" MaxLength="1024" Nullable="false" />
+          <Property Name="Salt" Type="varbinary" MaxLength="16" Nullable="false" />
+          <Property Name="ID_User_Type" Type="int" Nullable="false" />
           <Property Name="Email_User" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User_Type">
@@ -30,7 +31,7 @@
           <Property Name="Name_User_Type" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_User_User_Type">
-          <End Role="User_Type" Type="Self.User_Type" Multiplicity="0..1" />
+          <End Role="User_Type" Type="Self.User_Type" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_Type">
@@ -49,11 +50,18 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeatLabDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BeatLabDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="BeatLabDBModel.User" />
+          <EntitySet Name="User_Type" EntityType="BeatLabDBModel.User_Type" />
+          <AssociationSet Name="FK_User_User_Type" Association="BeatLabDBModel.FK_User_User_Type">
+            <End Role="User_Type" EntitySet="User_Type" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID_User" />
@@ -66,23 +74,24 @@
           <Property Name="Age_User" Type="Int32" />
           <Property Name="Image_User" Type="Binary" MaxLength="50" FixedLength="true" />
           <Property Name="Nickname_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ID_User_Type" Type="Int32" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password_Hash" Type="Binary" Nullable="false" MaxLength="1024" FixedLength="false" />
+          <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="16" FixedLength="false" />
+          <Property Name="ID_User_Type" Type="Int32" Nullable="false" />
           <Property Name="Email_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User_Type" Relationship="Self.FK_User_User_Type" FromRole="User" ToRole="User_Type" />
+          <NavigationProperty Name="User_Type" Relationship="BeatLabDBModel.FK_User_User_Type" FromRole="User" ToRole="User_Type" />
         </EntityType>
         <EntityType Name="User_Type">
           <Key>
             <PropertyRef Name="ID_User_Type" />
           </Key>
           <Property Name="ID_User_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name_User_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_User_Type" FromRole="User_Type" ToRole="User" />
+          <Property Name="Name_User_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_User_User_Type" FromRole="User_Type" ToRole="User" />
         </EntityType>
         <Association Name="FK_User_User_Type">
-          <End Role="User_Type" Type="Self.User_Type" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="BeatLabDBModel.User_Type" Role="User_Type" Multiplicity="1" />
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_Type">
               <PropertyRef Name="ID_User_Type" />
@@ -92,14 +101,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BeatLabDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="User_Type" EntityType="Self.User_Type" />
-          <AssociationSet Name="FK_User_User_Type" Association="Self.FK_User_User_Type">
-            <End Role="User_Type" EntitySet="User_Type" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -109,26 +110,27 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BeatLabDBModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
-                <ScalarProperty Name="Last_Name_User" ColumnName="Last_Name_User" />
-                <ScalarProperty Name="First_Name_User" ColumnName="First_Name_User" />
-                <ScalarProperty Name="Middle_Name_User" ColumnName="Middle_Name_User" />
-                <ScalarProperty Name="Description_User" ColumnName="Description_User" />
-                <ScalarProperty Name="Age_User" ColumnName="Age_User" />
-                <ScalarProperty Name="Image_User" ColumnName="Image_User" />
-                <ScalarProperty Name="Nickname_User" ColumnName="Nickname_User" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ID_User_Type" ColumnName="ID_User_Type" />
                 <ScalarProperty Name="Email_User" ColumnName="Email_User" />
+                <ScalarProperty Name="ID_User_Type" ColumnName="ID_User_Type" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password_Hash" ColumnName="Password_Hash" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Nickname_User" ColumnName="Nickname_User" />
+                <ScalarProperty Name="Image_User" ColumnName="Image_User" />
+                <ScalarProperty Name="Age_User" ColumnName="Age_User" />
+                <ScalarProperty Name="Description_User" ColumnName="Description_User" />
+                <ScalarProperty Name="Middle_Name_User" ColumnName="Middle_Name_User" />
+                <ScalarProperty Name="First_Name_User" ColumnName="First_Name_User" />
+                <ScalarProperty Name="Last_Name_User" ColumnName="Last_Name_User" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_Type">
             <EntityTypeMapping TypeName="BeatLabDBModel.User_Type">
               <MappingFragment StoreEntitySet="User_Type">
-                <ScalarProperty Name="ID_User_Type" ColumnName="ID_User_Type" />
                 <ScalarProperty Name="Name_User_Type" ColumnName="Name_User_Type" />
+                <ScalarProperty Name="ID_User_Type" ColumnName="ID_User_Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

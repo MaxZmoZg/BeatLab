@@ -1,8 +1,6 @@
 ﻿using BeatLab.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
 namespace BeatLab.Providers
@@ -46,7 +44,7 @@ namespace BeatLab.Providers
                 if (user != null && user.User_Type != null)
                 {
                     // получаем роль
-                    roles = new string[] { user.User_Type.Name_User_Type};
+                    roles = new string[] { user.User_Type.Name_User_Type };
                 }
                 return roles;
             }
@@ -63,16 +61,13 @@ namespace BeatLab.Providers
             using (UserContext db = new UserContext())
             {
                 // Получаем пользователя
-                User user = db.Users.FirstOrDefault(u => u.Email_User == username);
-                if(user != null)
+                User user = db.Users.FirstOrDefault(u => u.Login == username);
+                if (user != null)
                 {
                     User_Type userType = db.Roles.Find(user.ID_User_Type);
                     if (userType != null && userType.Name_User_Type != null && userType.Name_User_Type == roleName)
                         outputResult = true;
-
                 }
-
-               
             }
             return outputResult;
         }
