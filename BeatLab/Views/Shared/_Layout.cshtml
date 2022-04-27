@@ -33,16 +33,13 @@
 
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
-
                             <li>@Html.ActionLink("Личный кабинет", "Users.Details", @class: "header-style-text")</li>
                             <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text")</li>
-
-
                         }
                         else
                         {
-                            <li>@Html.ActionLink(" Авторизация", "Account.Login", @class: " header-style-text glyphicon glyphicon-log-in")</li>
-                            <li>@Html.ActionLink(" Регистрация", "Account.Register", @class: " header-style-text glyphicon glyphicon-user")</li>
+                            <li>@Html.ActionLink("Авторизация", "Account.Login", @class: "header-style-text glyphicon glyphicon-log-in")</li>
+                            <li>@Html.ActionLink("Регистрация", "Account.Register", @class: "header-style-text glyphicon glyphicon-user")</li>
                         }
                     }
                 </ul>

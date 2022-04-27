@@ -34,6 +34,7 @@ textarea {
 .header-style-text {
     color: black;
     font-size: 17px;
+    margin-left: 10px;
 }
 
     .header-style-text:hover {
