@@ -134,6 +134,8 @@ namespace BeatLab.Controllers
                                          out byte[] encryptedPasswordAndSalt);
             using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
+
+
                 User user = new User
                 {
                     Email_User = model.Email,
@@ -142,6 +144,7 @@ namespace BeatLab.Controllers
                     Login = model.Login,
                     ID_User_Type = 2
                 };
+             
                 db.User.Add(user);
                 db.SaveChanges();
             }
