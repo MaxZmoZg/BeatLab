@@ -19,30 +19,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("BeatLab", "Index", "Home", new { area = "" }, new { @class = "navbar-brand brand-style " })
+                @Html.ActionLink("BeatLab", "Home.Index", @class: "navbar-brand brand-style ")
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Биты", "Index", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
-                    <li>@Html.ActionLink("Семплы", "About", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
-                    <li>@Html.ActionLink("Плагины", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
-                    <li>@Html.ActionLink("Ударные установки", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Биты", "Home.Index", @class: "header-style-text")</li>
+                    <li>@Html.ActionLink("Семплы", "Home.About", @class: "header-style-text")</li>
+                    <li>@Html.ActionLink("Плагины", "Home.Contact", @class: "header-style-text")</li>
+                    <li>@Html.ActionLink("Ударные установки", "Home.Contact", @class: "header-style-text")</li>
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
                     @{
 
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
-
-                        <li>@Html.ActionLink("Личный кабинет", "СreateUserrs", "Home", new { area = "" }, new { @class = "header-style-text" })</li>
-                        <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text")</li>
-
-
+                            <li>@Html.ActionLink("Личный кабинет", "Users.Details", @class: "header-style-text")</li>
+                            <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text")</li>
                         }
                         else
                         {
-                        <li>@Html.ActionLink(" Авторизация", "Login", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-log-in" })</li>
-                        <li>@Html.ActionLink(" Регистрация", "Register", "Account", new { area = "" }, new { @class = " header-style-text glyphicon glyphicon-user" })</li>
+                            <li>@Html.ActionLink("Авторизация", "Account.Login", @class: "header-style-text glyphicon glyphicon-log-in")</li>
+                            <li>@Html.ActionLink("Регистрация", "Account.Register", @class: "header-style-text glyphicon glyphicon-user")</li>
                         }
                     }
                 </ul>
