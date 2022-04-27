@@ -1,5 +1,6 @@
 ﻿using BeatLab.Models;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -7,6 +8,8 @@ namespace BeatLab.Controllers
 {
     public class AccountController : Controller
     {
+        private const string EmailPattern = @"\w+@\w+\.\w{2,3}";
+
         [Authorize]
         public ActionResult Logout()
         {
@@ -80,34 +83,51 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (model.Email == null || !Regex.IsMatch(model.Email, EmailPattern))
             {
-                User user = null;
+                ModelState.AddModelError(nameof(model.Email), "Введите корректный e-mail");
+            }
+            else
+            {
                 using (BeatLabDBEntities db = new BeatLabDBEntities())
                 {
-                    user = db.User.FirstOrDefault(u => u.Email_User == model.Email);
-                }
-                if (user == null)
-                {
-                    user = CreateNewUser(model);
-                    bool isUserSuccessfullyAddedToDatabase = user != null;
-                    if (isUserSuccessfullyAddedToDatabase)
+                    if (db.User.Any(u => u.Email_User == model.Email))
                     {
-                        FormsAuthentication.SetAuthCookie(model.Login, true);
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError(nameof(model.Email), "Такой e-mail уже существует");
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError(
-                        nameof(model.Email), "Пользователь с таким email уже существует");
                 }
             }
 
+            if (model.Login == null)
+            {
+                ModelState.AddModelError(nameof(model.Login), "Введите логин");
+            }
+            else
+            {
+                using (BeatLabDBEntities db = new BeatLabDBEntities())
+                {
+                    if (db.User.Any(u => u.Login == model.Login))
+                    {
+                        ModelState.AddModelError(nameof(model.Login), "Такой логин уже существует");
+                    }
+                }
+            }
+
+            if (model.Password == null || model.Password.Length < 5)
+            {
+                ModelState.AddModelError(nameof(model.Password), "Введите пароль от 5 символов");
+            }
+
+            if (ModelState.IsValid)
+            {
+                CreateNewUser(model);
+                FormsAuthentication.SetAuthCookie(model.Login, true);
+                return RedirectToAction("Index", "Home");
+            }
             return View(model);
         }
 
-        private static User CreateNewUser(RegisterModel model)
+        private static void CreateNewUser(RegisterModel model)
         {
             SaltedPasswordGenerator.GenerateHashAndSalt(model.Password,
                                          out byte[] saltBytes,
@@ -124,7 +144,6 @@ namespace BeatLab.Controllers
                 };
                 db.User.Add(user);
                 db.SaveChanges();
-                return user;
             }
         }
     }
