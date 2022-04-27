@@ -30,7 +30,6 @@
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
                     @{
-
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("Личный кабинет", "Users.Details", @class: "header-style-text")</li>
