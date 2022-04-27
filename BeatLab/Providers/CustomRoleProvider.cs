@@ -1,5 +1,4 @@
-﻿using BeatLab.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Security;
 
@@ -37,10 +36,10 @@ namespace BeatLab.Providers
         public override string[] GetRolesForUser(string username)
         {
             string[] roles = new string[] { };
-            using (UserContext db = new UserContext())
+            using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
                 // Получаем пользователя
-                User user = db.Users.FirstOrDefault(u => u.Email_User == username);
+                User user = db.User.FirstOrDefault(u => u.Email_User == username);
                 if (user != null && user.User_Type != null)
                 {
                     // получаем роль
@@ -58,13 +57,13 @@ namespace BeatLab.Providers
         public override bool IsUserInRole(string username, string roleName)
         {
             bool outputResult = false;
-            using (UserContext db = new UserContext())
+            using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
                 // Получаем пользователя
-                User user = db.Users.FirstOrDefault(u => u.Login == username);
+                User user = db.User.FirstOrDefault(u => u.Login == username);
                 if (user != null)
                 {
-                    User_Type userType = db.Roles.Find(user.ID_User_Type);
+                    User_Type userType = db.User_Type.Find(user.ID_User_Type);
                     if (userType != null && userType.Name_User_Type != null && userType.Name_User_Type == roleName)
                         outputResult = true;
                 }

@@ -9,22 +9,21 @@
 
 namespace BeatLab
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class BeatLabDBEntities : DbContext
     {
         public BeatLabDBEntities()
             : base("name=BeatLabDBEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<User_Type> User_Type { get; set; }
     }

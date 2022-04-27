@@ -48,9 +48,9 @@ namespace BeatLab.Controllers
         private static User SearchUserInDatabase(LoginModel model)
         {
             User user = null;
-            using (UserContext db = new UserContext())
+            using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
-                user = db.Users.FirstOrDefault(u => u.Login == model.Login);
+                user = db.User.FirstOrDefault(u => u.Login == model.Login);
                 if (user == null)
                 {
                     return null;
@@ -83,9 +83,9 @@ namespace BeatLab.Controllers
             if (ModelState.IsValid)
             {
                 User user = null;
-                using (UserContext db = new UserContext())
+                using (BeatLabDBEntities db = new BeatLabDBEntities())
                 {
-                    user = db.Users.FirstOrDefault(u => u.Email_User == model.Email);
+                    user = db.User.FirstOrDefault(u => u.Email_User == model.Email);
                 }
                 if (user == null)
                 {
@@ -112,7 +112,7 @@ namespace BeatLab.Controllers
             SaltedPasswordGenerator.GenerateHashAndSalt(model.Password,
                                          out byte[] saltBytes,
                                          out byte[] encryptedPasswordAndSalt);
-            using (UserContext db = new UserContext())
+            using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
                 User user = new User
                 {
@@ -122,7 +122,7 @@ namespace BeatLab.Controllers
                     Login = model.Login,
                     ID_User_Type = 2
                 };
-                db.Users.Add(user);
+                db.User.Add(user);
                 db.SaveChanges();
                 return user;
             }
