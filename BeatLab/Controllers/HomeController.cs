@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeatLab.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,5 +27,13 @@ namespace BeatLab.Controllers
 
             return View();
         }
+        [Authorize]
+        public ActionResult PersonalArea()
+        {
+         
+            return View();
+        }
+        
+       
     }
 }

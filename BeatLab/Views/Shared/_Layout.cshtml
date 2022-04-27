@@ -23,9 +23,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Биты", "Index", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Семплы", "About", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Плагины", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
+                    <li>@Html.ActionLink("Ударные установки", "Contact", "Home", new { area = "" }, new { @class = "header-style-text  " })</li>
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
                     @{
@@ -33,8 +34,8 @@
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
 
-                        <li>@Html.ActionLink($"{User.Identity.Name}", "Contact", "Home", new { area = "" }, new { @class = "header-style-text glyphicon glyphicon-star-empty" })</li>
-                        <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text glyphicon")</li>
+                        <li>@Html.ActionLink("Личный кабинет", "СreateUserrs", "Home", new { area = "" }, new { @class = "header-style-text" })</li>
+                        <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text")</li>
 
 
                         }
