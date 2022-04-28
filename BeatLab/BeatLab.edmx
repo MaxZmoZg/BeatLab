@@ -15,7 +15,7 @@
           <Property Name="Middle_Name_User" Type="varchar" MaxLength="50" />
           <Property Name="Description_User" Type="varchar" MaxLength="500" />
           <Property Name="Age_User" Type="int" />
-          <Property Name="Image_User" Type="binary" MaxLength="50" />
+          <Property Name="Image_User" Type="image" />
           <Property Name="Nickname_User" Type="varchar" MaxLength="50" />
           <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password_Hash" Type="varbinary" MaxLength="1024" Nullable="false" />
@@ -72,7 +72,7 @@
           <Property Name="Middle_Name_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description_User" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Age_User" Type="Int32" />
-          <Property Name="Image_User" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="Image_User" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Nickname_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password_Hash" Type="Binary" Nullable="false" MaxLength="1024" FixedLength="false" />
