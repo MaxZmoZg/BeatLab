@@ -13,7 +13,7 @@ namespace BeatLab.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "admin")]
+    
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

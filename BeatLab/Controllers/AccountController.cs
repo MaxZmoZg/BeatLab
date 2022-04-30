@@ -142,7 +142,7 @@ namespace BeatLab.Controllers
                     Password_Hash = encryptedPasswordAndSalt,
                     Salt = saltBytes,
                     Login = model.Login,
-                    ID_User_Type = 2
+                    ID_User_Type = UserTypes.User
                 };
              
                 db.User.Add(user);
