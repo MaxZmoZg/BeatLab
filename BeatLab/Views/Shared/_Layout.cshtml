@@ -37,7 +37,7 @@
                     @{
                         if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                         {
-                            <li>@Html.ActionLink("Личный кабинет", "Users.Details", @class: "header-style-text")</li>
+                            <li>@Html.ActionLink("Личный кабинет", "Users.Details", new { login = ViewContext.HttpContext.User.Identity.Name }, @class: "header-style-text")</li>
                             <li>@Html.ActionLink("Выйти", "Account.Logout", @class: "header-style-text")</li>
                         }
                         else

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.IO;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BeatLab;
 
 namespace BeatLab.Controllers
 {
@@ -23,11 +18,12 @@ namespace BeatLab.Controllers
             return View(user.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Users/Details/{login}
         [Authorize]
-        public ActionResult Details()
+        public ActionResult Details(string login)
         {
-            return View(db.User.First(u => u.Login == HttpContext.User.Identity.Name));
+            User user = db.User.First(u => u.Login == login);
+            return View(user);
         }
 
         // GET: Users/Create 
@@ -39,8 +35,6 @@ namespace BeatLab.Controllers
         }
 
         // POST: Users/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -75,35 +69,24 @@ namespace BeatLab.Controllers
         }
 
         // POST: Users/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
         public ActionResult Edit(User user, HttpPostedFileBase uploadImage)
         {
-           
-           
-
             if (ModelState.IsValid)
             {
-                byte[] imageData = null;
-                using (var binaryReader = new BinaryReader(uploadImage.InputStream))
-                {
-                    imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
-                }
                 User userFromDatabase = db.User.First(u => u.Login == HttpContext.User.Identity.Name);
-                user.Image_User = imageData;
                 userFromDatabase.Login = user.Login;
                 userFromDatabase.Last_Name_User = user.Last_Name_User;
                 userFromDatabase.First_Name_User = user.First_Name_User;
-                userFromDatabase.Last_Name_User = user.Middle_Name_User;
+                userFromDatabase.Middle_Name_User = user.Middle_Name_User;
                 userFromDatabase.Nickname_User = user.Nickname_User;
-                userFromDatabase.Image_User = user.Image_User;
+                userFromDatabase.Image_User = uploadImage.ToByteArray();
                 userFromDatabase.Description_User = user.Description_User;
                 userFromDatabase.Age_User = user.Age_User;
                 userFromDatabase.Email_User = user.Email_User;
-              
+
                 db.SaveChanges();
                 return RedirectToAction("Details");
             }
