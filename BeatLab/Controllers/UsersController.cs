@@ -87,7 +87,10 @@ namespace BeatLab.Controllers
                 userFromDatabase.First_Name_User = user.First_Name_User;
                 userFromDatabase.Middle_Name_User = user.Middle_Name_User;
                 userFromDatabase.Nickname_User = user.Nickname_User;
-                userFromDatabase.Image_User = uploadImage.ToByteArray();
+                if (uploadImage != null)
+                {
+                    userFromDatabase.Image_User = uploadImage.ToByteArray();
+                }
                 userFromDatabase.Description_User = user.Description_User;
                 userFromDatabase.Age_User = user.Age_User;
                 userFromDatabase.Email_User = user.Email_User;
