@@ -22,8 +22,13 @@ namespace BeatLab.Controllers
         [Authorize]
         public ActionResult Details(string login)
         {
-            User user = db.User.First(u => u.Login == login);
-            return View(user);
+            if (login == null)
+            {
+                return View(
+                    db.User.First(u => u.Login == HttpContext.User.Identity.Name));
+            }
+            return View(
+                db.User.First(u => u.Login == login));
         }
 
         // GET: Users/Create 
