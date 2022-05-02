@@ -68,33 +68,29 @@
             </div>
         </div>
     </section>
-    <section class="u-clearfix u-section-3" id="sec-fde9">
-        <div class="u-clearfix u-sheet u-sheet-1">
-            <div class="u-align-left u-expanded-width u-left-0 u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
-            <div class="u-clearfix u-layout-wrap u-layout-wrap-1">
-                <div class="u-layout">
-                    <div class="u-layout-row">
-                        <div class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-container-style u-layout-cell u-left-cell u-size-43 u-layout-cell-1">
-                            <div class="u-container-layout u-valign-middle u-container-layout-1">
-                                <h3 class="u-text u-text-default u-text-1">Редактировать страницу</h3>
-                                <p class="u-text u-text-2">Необходимые параметры можно изменить, нажав на данную кнопку.</p>
+    {@if (HttpContext.Current.Request.QueryString["login"] == HttpContext.Current.User.Identity.Name || HttpContext.Current.Request.QueryString["login"] == null)
+    {
+        <section class="u-clearfix u-section-3" id="sec-fde9">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <div class="u-align-left u-expanded-width u-left-0 u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+                <div class="u-clearfix u-layout-wrap u-layout-wrap-1">
+                    <div class="u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-md u-align-left-xl u-container-style u-layout-cell u-left-cell u-size-43 u-layout-cell-1">
+                                <div class="u-container-layout u-valign-middle u-container-layout-1">
+                                    <h3 class="u-text u-text-default u-text-1">Редактировать страницу</h3>
+                                    <p class="u-text u-text-2">Необходимые параметры можно изменить, нажав на данную кнопку.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-17 u-layout-cell-2">
-                            <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                @Html.ActionLink("Изменить данные", "Edit", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style u-btn-1" })
-
-
+                            <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-17 u-layout-cell-2">
+                                <div class="u-container-layout u-valign-middle u-container-layout-2">
+                                    @Html.ActionLink("Изменить данные", "Edit", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style u-btn-1" })
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-
-
-
+        </section>
+    }
 </div>
