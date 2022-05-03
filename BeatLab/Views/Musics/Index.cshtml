@@ -35,41 +35,50 @@
         <th>
             @Html.DisplayNameFor(model => model.User.Last_Name_User)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Music_file)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name_music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description_Music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Priсe_Music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image_music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Alboms.Name_Album)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genere_Of_Music.Name_Gener_of_music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Last_Name_User)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Music }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Music }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Music })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name_music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description_Music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priсe_Music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image_music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alboms.Name_Album)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genere_Of_Music.Name_Gener_of_music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+            </td>
+            <td>
+                <audio controls>
+                    <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music})" type="audio/mp3" />
+                </audio>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Music }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_Music }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_Music })
+            </td>
+        </tr>
+    }
 
 </table>

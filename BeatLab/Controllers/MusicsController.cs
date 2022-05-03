@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BeatLab;
 
 namespace BeatLab.Controllers
 {
@@ -55,7 +52,10 @@ namespace BeatLab.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                if (Request.Files["uploadMusic"] != null)
+                {
+                    music.Music_file = Request.Files["uploadMusic"].ToByteArray();
+                }
                 db.Music.Add(music);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -131,6 +131,17 @@ namespace BeatLab.Controllers
             db.Music.Remove(music);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult LoadAudio(int musicId)
+        {
+            byte[] songBytes;
+            songBytes = db.Music.First(m => m.ID_Music == musicId).Music_file;
+            if (songBytes == null) return null;
+            FileStreamResult songStreamResult =
+                new FileStreamResult(new MemoryStream(songBytes),
+                                     "audio/mp3");
+            return songStreamResult;
         }
 
         protected override void Dispose(bool disposing)

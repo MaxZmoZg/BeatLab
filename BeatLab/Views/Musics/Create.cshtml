@@ -6,12 +6,8 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(Html.BeginForm("Create", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
-
-
-
-
     @Html.AntiForgeryToken()
 
     <h2 class="h2--margin">Добавить музыкальный файл</h2>
@@ -88,7 +84,7 @@
 
                         </div>
                         <div class="editCard--margin">
-                            <input id="musicInput" type="file" name="uploadMusic" />
+                            <input id="musicInput" type="file" name="uploadImage" />
                         </div>
                     </div>
 

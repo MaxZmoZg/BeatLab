@@ -10,7 +10,7 @@
 {
     @Html.AntiForgeryToken()
 
-<h2 class="h2--margin">Редактирование информации обо мне</h2>
+    <h2 class="h2--margin">Редактирование информации обо мне</h2>
     <section class="u-clearfix u-section-1" id="carousel_34a0">
 
         <div class="u-clearfix u-sheet u-sheet-1">
@@ -24,7 +24,7 @@
             <div class="u-align-left u-image u-image-circle u-preserve-proportions u-image-1" data-image-width="616" data-image-height="616"></div>
             <div class="u-palette-1-light-2 u-shape u-shape-circle u-shape-2"></div>
             <div class="u-form u-radius-31 u-white u-form-1 editCrard--padding editCard--shadow ">
-               
+
                 <form action="#" method="POST" class="u-clearfix u-form-spacing-33 u-form-vertical u-inner-form" source="email" name="form" style="padding: 35px;">
                     @Html.HiddenFor(model => model.ID_User)
                     <div class="u-form-group u-form-name">
@@ -69,14 +69,21 @@
                         @Html.EditorFor(model => model.Description_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Description", required = "text", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Description_User, "", new { @class = "text-danger" })
                     </div>
-                    <label for="text-1f9b" class="u-label">Фото</label> 
+                    <label for="text-1f9b" class="u-label">Фото</label>
                     <div class="form-group editCard--margin">
 
                         <div class="col-md-10 editCard_DivImage--margin">
-
-                            @Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
-                                           + Convert.ToBase64String(Model.Image_User) + "\" />")
-                            @Html.ValidationMessageFor(model => model.Image_User, "", new { @class = "text-danger" })
+                            @{ if (Model.Image_User == null)
+                                {
+                                    <img id='previewImage' style='width:130px; height:120px;' src="~/Resource/user.png" />
+                                }
+                                else
+                                {
+                                    @Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
+                                                            + Convert.ToBase64String(Model.Image_User) + "\" />")
+                                    @Html.ValidationMessageFor(model => model.Image_User, "", new { @class = "text-danger" })
+                                }
+                            }
                         </div>
 
                         <div class="editCard--margin">
@@ -88,7 +95,7 @@
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Сохранить" class="btn btn btn-primary editCard_button_size" />
                         </div>
-                    </div>  
+                    </div>
 
 
 
