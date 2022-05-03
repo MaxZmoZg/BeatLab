@@ -14,6 +14,16 @@ namespace BeatLab
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Alboms = new HashSet<Alboms>();
+            this.Comments = new HashSet<Comments>();
+            this.Music = new HashSet<Music>();
+            this.Сhat = new HashSet<Сhat>();
+            this.Сhat1 = new HashSet<Сhat>();
+        }
+    
         public int ID_User { get; set; }
         public string Last_Name_User { get; set; }
         public string First_Name_User { get; set; }
@@ -28,6 +38,16 @@ namespace BeatLab
         public int ID_User_Type { get; set; }
         public string Email_User { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alboms> Alboms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comments> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Music> Music { get; set; }
         public virtual User_Type User_Type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Сhat> Сhat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Сhat> Сhat1 { get; set; }
     }
 }

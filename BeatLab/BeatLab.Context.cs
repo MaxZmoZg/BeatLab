@@ -25,7 +25,17 @@ namespace BeatLab
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Alboms> Alboms { get; set; }
+        public virtual DbSet<Comments> Comments { get; set; }
+        public virtual DbSet<Format_Plugin> Format_Plugin { get; set; }
+        public virtual DbSet<Genere_Of_Music> Genere_Of_Music { get; set; }
+        public virtual DbSet<Music> Music { get; set; }
+        public virtual DbSet<Plugins> Plugins { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Type_Music> Type_Music { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<User_Type> User_Type { get; set; }
+        public virtual DbSet<Version_Plugins> Version_Plugins { get; set; }
+        public virtual DbSet<Сhat> Сhat { get; set; }
     }
 }

@@ -4,10 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0eb4065865214a26b277f43f714f7acf" Name="Diagram1">
-        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="2.125" />
+      <Diagram DiagramId="0eb4065865214a26b277f43f714f7acf" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="BeatLabDBModel.Alboms" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Comments" Width="1.5" PointX="9.75" PointY="4.5" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Format_Plugin" Width="1.5" PointX="5.25" PointY="14.125" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Genere_Of_Music" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Music" Width="1.5" PointX="7.5" PointY="3.75" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Plugins" Width="1.5" PointX="7.5" PointY="13.25" />
+        <EntityTypeShape EntityType="BeatLabDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="9" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Type_Music" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Version_Plugins" Width="1.5" PointX="9.75" PointY="14" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Сhat" Width="1.5" PointX="5.25" PointY="6.125" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Alboms_User" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Music_Alboms" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Comments_Music" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Comments_Plugins" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Comments_User" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Plugins_Format_Plugin" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Music_Genere_Of_Music" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Music_Type_Music" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Music_User" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Version_Plugins_Plugins" />
         <AssociationConnector Association="BeatLabDBModel.FK_User_User_Type" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Сhat_User" />
+        <AssociationConnector Association="BeatLabDBModel.FK_Сhat_User1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

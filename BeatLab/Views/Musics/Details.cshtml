@@ -1,0 +1,82 @@
+﻿@model BeatLab.Music
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Music</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description_Music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description_Music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priсe_Music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priсe_Music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image_music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image_music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alboms.Name_Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alboms.Name_Album)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genere_Of_Music.Name_Gener_of_music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_Music.Name_Type_Music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_Music.Name_Type_Music)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Last_Name_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Music }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -5,6 +5,85 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище BeatLabDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alboms">
+          <Key>
+            <PropertyRef Name="ID_Album" />
+          </Key>
+          <Property Name="ID_Album" Type="int" Nullable="false" />
+          <Property Name="ID_Uer" Type="int" Nullable="false" />
+          <Property Name="Name_Album" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image_Album" Type="image" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID_Comments" />
+          </Key>
+          <Property Name="ID_Comments" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content_Сomments" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Data_Comments" Type="date" Nullable="false" />
+          <Property Name="ID_Music" Type="int" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="ID_Plugin" Type="int" />
+        </EntityType>
+        <EntityType Name="Format_Plugin">
+          <Key>
+            <PropertyRef Name="ID_Format_Plugin" />
+          </Key>
+          <Property Name="ID_Format_Plugin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Format_Plugin" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genere_Of_Music">
+          <Key>
+            <PropertyRef Name="ID_Genere_Of_Music" />
+          </Key>
+          <Property Name="ID_Genere_Of_Music" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Gener_of_music" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Music">
+          <Key>
+            <PropertyRef Name="ID_Music" />
+          </Key>
+          <Property Name="ID_Music" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Genere_of_Music" Type="int" Nullable="false" />
+          <Property Name="ID_Type_mysic" Type="int" Nullable="false" />
+          <Property Name="Name_music" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description_Music" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Priсe_Music" Type="int" />
+          <Property Name="ID_Alboms" Type="int" />
+          <Property Name="Music_file" Type="varbinary(max)" />
+          <Property Name="Image_music" Type="image" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plugins">
+          <Key>
+            <PropertyRef Name="ID_Plugin" />
+          </Key>
+          <Property Name="ID_Plugin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_of_issue_Plugin" Type="date" Nullable="false" />
+          <Property Name="ID_Format_Plugins" Type="int" Nullable="false" />
+          <Property Name="Name_Plugin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plugin_file" Type="varbinary(max)" />
+          <Property Name="Description_plugin" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Image_Plugin" Type="image" />
+          <Property Name="Price_Plugin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_Music">
+          <Key>
+            <PropertyRef Name="ID_Type_music" />
+          </Key>
+          <Property Name="ID_Type_music" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Type_Music" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID_User" />
@@ -30,6 +109,132 @@
           <Property Name="ID_User_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name_User_Type" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Version_Plugins">
+          <Key>
+            <PropertyRef Name="ID_Version" />
+          </Key>
+          <Property Name="ID_Version" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Version_Number" Type="int" Nullable="false" />
+          <Property Name="ID_Plugin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сhat">
+          <Key>
+            <PropertyRef Name="ID_Chat" />
+          </Key>
+          <Property Name="ID_Chat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_User1" Type="int" Nullable="false" />
+          <Property Name="ID_User2_" Type="int" Nullable="false" />
+          <Property Name="IsFirstTyping_Chat" Type="bit" Nullable="false" />
+          <Property Name="Message_Char" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Alboms_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Alboms" Type="Self.Alboms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Alboms">
+              <PropertyRef Name="ID_Uer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Music">
+          <End Role="Music" Type="Self.Music" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Music">
+              <PropertyRef Name="ID_Music" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_Music" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Plugins">
+          <End Role="Plugins" Type="Self.Plugins" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_Plugin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Alboms">
+          <End Role="Alboms" Type="Self.Alboms" Multiplicity="0..1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alboms">
+              <PropertyRef Name="ID_Album" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Alboms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Genere_Of_Music">
+          <End Role="Genere_Of_Music" Type="Self.Genere_Of_Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genere_Of_Music">
+              <PropertyRef Name="ID_Genere_Of_Music" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Genere_of_Music" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Type_Music">
+          <End Role="Type_Music" Type="Self.Type_Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Music">
+              <PropertyRef Name="ID_Type_music" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Type_mysic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plugins_Format_Plugin">
+          <End Role="Format_Plugin" Type="Self.Format_Plugin" Multiplicity="1" />
+          <End Role="Plugins" Type="Self.Plugins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format_Plugin">
+              <PropertyRef Name="ID_Format_Plugin" />
+            </Principal>
+            <Dependent Role="Plugins">
+              <PropertyRef Name="ID_Format_Plugins" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User_Type">
           <End Role="User_Type" Type="Self.User_Type" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -42,12 +247,106 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Version_Plugins_Plugins">
+          <End Role="Plugins" Type="Self.Plugins" Multiplicity="1" />
+          <End Role="Version_Plugins" Type="Self.Version_Plugins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Principal>
+            <Dependent Role="Version_Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сhat_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Сhat" Type="Self.Сhat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Сhat">
+              <PropertyRef Name="ID_User1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сhat_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Сhat" Type="Self.Сhat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Сhat">
+              <PropertyRef Name="ID_User2_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище BeatLabDBModelContainer">
+          <EntitySet Name="Alboms" EntityType="Self.Alboms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Format_Plugin" EntityType="Self.Format_Plugin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genere_Of_Music" EntityType="Self.Genere_Of_Music" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Music" EntityType="Self.Music" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plugins" EntityType="Self.Plugins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Music" EntityType="Self.Type_Music" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Type" EntityType="Self.User_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Version_Plugins" EntityType="Self.Version_Plugins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сhat" EntityType="Self.Сhat" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alboms_User" Association="Self.FK_Alboms_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Alboms" EntitySet="Alboms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Music" Association="Self.FK_Comments_Music">
+            <End Role="Music" EntitySet="Music" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Plugins" Association="Self.FK_Comments_Plugins">
+            <End Role="Plugins" EntitySet="Plugins" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_User" Association="Self.FK_Comments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Alboms" Association="Self.FK_Music_Alboms">
+            <End Role="Alboms" EntitySet="Alboms" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Genere_Of_Music" Association="Self.FK_Music_Genere_Of_Music">
+            <End Role="Genere_Of_Music" EntitySet="Genere_Of_Music" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Type_Music" Association="Self.FK_Music_Type_Music">
+            <End Role="Type_Music" EntitySet="Type_Music" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_User" Association="Self.FK_Music_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plugins_Format_Plugin" Association="Self.FK_Plugins_Format_Plugin">
+            <End Role="Format_Plugin" EntitySet="Format_Plugin" />
+            <End Role="Plugins" EntitySet="Plugins" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_User_Type" Association="Self.FK_User_User_Type">
             <End Role="User_Type" EntitySet="User_Type" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Version_Plugins_Plugins" Association="Self.FK_Version_Plugins_Plugins">
+            <End Role="Plugins" EntitySet="Plugins" />
+            <End Role="Version_Plugins" EntitySet="Version_Plugins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сhat_User" Association="Self.FK_Сhat_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сhat" EntitySet="Сhat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сhat_User1" Association="Self.FK_Сhat_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сhat" EntitySet="Сhat" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -55,13 +354,166 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BeatLabDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BeatLabDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alboms" EntityType="BeatLabDBModel.Alboms" />
+          <EntitySet Name="Comments" EntityType="BeatLabDBModel.Comments" />
+          <EntitySet Name="Format_Plugin" EntityType="BeatLabDBModel.Format_Plugin" />
+          <EntitySet Name="Genere_Of_Music" EntityType="BeatLabDBModel.Genere_Of_Music" />
+          <EntitySet Name="Music" EntityType="BeatLabDBModel.Music" />
+          <EntitySet Name="Plugins" EntityType="BeatLabDBModel.Plugins" />
+          <EntitySet Name="sysdiagrams" EntityType="BeatLabDBModel.sysdiagrams" />
+          <EntitySet Name="Type_Music" EntityType="BeatLabDBModel.Type_Music" />
           <EntitySet Name="User" EntityType="BeatLabDBModel.User" />
           <EntitySet Name="User_Type" EntityType="BeatLabDBModel.User_Type" />
+          <EntitySet Name="Version_Plugins" EntityType="BeatLabDBModel.Version_Plugins" />
+          <EntitySet Name="Сhat" EntityType="BeatLabDBModel.Сhat" />
+          <AssociationSet Name="FK_Alboms_User" Association="BeatLabDBModel.FK_Alboms_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Alboms" EntitySet="Alboms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Alboms" Association="BeatLabDBModel.FK_Music_Alboms">
+            <End Role="Alboms" EntitySet="Alboms" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Music" Association="BeatLabDBModel.FK_Comments_Music">
+            <End Role="Music" EntitySet="Music" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Plugins" Association="BeatLabDBModel.FK_Comments_Plugins">
+            <End Role="Plugins" EntitySet="Plugins" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_User" Association="BeatLabDBModel.FK_Comments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plugins_Format_Plugin" Association="BeatLabDBModel.FK_Plugins_Format_Plugin">
+            <End Role="Format_Plugin" EntitySet="Format_Plugin" />
+            <End Role="Plugins" EntitySet="Plugins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Genere_Of_Music" Association="BeatLabDBModel.FK_Music_Genere_Of_Music">
+            <End Role="Genere_Of_Music" EntitySet="Genere_Of_Music" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_Type_Music" Association="BeatLabDBModel.FK_Music_Type_Music">
+            <End Role="Type_Music" EntitySet="Type_Music" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Music_User" Association="BeatLabDBModel.FK_Music_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Music" EntitySet="Music" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Version_Plugins_Plugins" Association="BeatLabDBModel.FK_Version_Plugins_Plugins">
+            <End Role="Plugins" EntitySet="Plugins" />
+            <End Role="Version_Plugins" EntitySet="Version_Plugins" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_User_Type" Association="BeatLabDBModel.FK_User_User_Type">
             <End Role="User_Type" EntitySet="User_Type" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_Сhat_User" Association="BeatLabDBModel.FK_Сhat_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сhat" EntitySet="Сhat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сhat_User1" Association="BeatLabDBModel.FK_Сhat_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Сhat" EntitySet="Сhat" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Alboms">
+          <Key>
+            <PropertyRef Name="ID_Album" />
+          </Key>
+          <Property Name="ID_Album" Type="Int32" Nullable="false" />
+          <Property Name="ID_Uer" Type="Int32" Nullable="false" />
+          <Property Name="Name_Album" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image_Album" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Alboms_User" FromRole="Alboms" ToRole="User" />
+          <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Music_Alboms" FromRole="Alboms" ToRole="Music" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID_Comments" />
+          </Key>
+          <Property Name="ID_Comments" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content_Сomments" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Data_Comments" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_Music" Type="Int32" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="ID_Plugin" Type="Int32" />
+          <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Comments_Music" FromRole="Comments" ToRole="Music" />
+          <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Comments_Plugins" FromRole="Comments" ToRole="Plugins" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Comments_User" FromRole="Comments" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Format_Plugin">
+          <Key>
+            <PropertyRef Name="ID_Format_Plugin" />
+          </Key>
+          <Property Name="ID_Format_Plugin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Format_Plugin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Plugins_Format_Plugin" FromRole="Format_Plugin" ToRole="Plugins" />
+        </EntityType>
+        <EntityType Name="Genere_Of_Music">
+          <Key>
+            <PropertyRef Name="ID_Genere_Of_Music" />
+          </Key>
+          <Property Name="ID_Genere_Of_Music" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Gener_of_music" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Music_Genere_Of_Music" FromRole="Genere_Of_Music" ToRole="Music" />
+        </EntityType>
+        <EntityType Name="Music">
+          <Key>
+            <PropertyRef Name="ID_Music" />
+          </Key>
+          <Property Name="ID_Music" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Genere_of_Music" Type="Int32" Nullable="false" />
+          <Property Name="ID_Type_mysic" Type="Int32" Nullable="false" />
+          <Property Name="Name_music" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description_Music" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Priсe_Music" Type="Int32" />
+          <Property Name="ID_Alboms" Type="Int32" />
+          <Property Name="Music_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Image_music" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alboms" Relationship="BeatLabDBModel.FK_Music_Alboms" FromRole="Music" ToRole="Alboms" />
+          <NavigationProperty Name="Comments" Relationship="BeatLabDBModel.FK_Comments_Music" FromRole="Music" ToRole="Comments" />
+          <NavigationProperty Name="Genere_Of_Music" Relationship="BeatLabDBModel.FK_Music_Genere_Of_Music" FromRole="Music" ToRole="Genere_Of_Music" />
+          <NavigationProperty Name="Type_Music" Relationship="BeatLabDBModel.FK_Music_Type_Music" FromRole="Music" ToRole="Type_Music" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Music_User" FromRole="Music" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Plugins">
+          <Key>
+            <PropertyRef Name="ID_Plugin" />
+          </Key>
+          <Property Name="ID_Plugin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_of_issue_Plugin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_Format_Plugins" Type="Int32" Nullable="false" />
+          <Property Name="Name_Plugin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Plugin_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description_plugin" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Image_Plugin" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Price_Plugin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="BeatLabDBModel.FK_Comments_Plugins" FromRole="Plugins" ToRole="Comments" />
+          <NavigationProperty Name="Format_Plugin" Relationship="BeatLabDBModel.FK_Plugins_Format_Plugin" FromRole="Plugins" ToRole="Format_Plugin" />
+          <NavigationProperty Name="Version_Plugins" Relationship="BeatLabDBModel.FK_Version_Plugins_Plugins" FromRole="Plugins" ToRole="Version_Plugins" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_Music">
+          <Key>
+            <PropertyRef Name="ID_Type_music" />
+          </Key>
+          <Property Name="ID_Type_music" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Type_Music" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Music_Type_Music" FromRole="Type_Music" ToRole="Music" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID_User" />
@@ -79,7 +531,12 @@
           <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="16" FixedLength="false" />
           <Property Name="ID_User_Type" Type="Int32" Nullable="false" />
           <Property Name="Email_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alboms" Relationship="BeatLabDBModel.FK_Alboms_User" FromRole="User" ToRole="Alboms" />
+          <NavigationProperty Name="Comments" Relationship="BeatLabDBModel.FK_Comments_User" FromRole="User" ToRole="Comments" />
+          <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Music_User" FromRole="User" ToRole="Music" />
           <NavigationProperty Name="User_Type" Relationship="BeatLabDBModel.FK_User_User_Type" FromRole="User" ToRole="User_Type" />
+          <NavigationProperty Name="Сhat" Relationship="BeatLabDBModel.FK_Сhat_User" FromRole="User" ToRole="Сhat" />
+          <NavigationProperty Name="Сhat1" Relationship="BeatLabDBModel.FK_Сhat_User1" FromRole="User" ToRole="Сhat" />
         </EntityType>
         <EntityType Name="User_Type">
           <Key>
@@ -89,6 +546,147 @@
           <Property Name="Name_User_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_User_User_Type" FromRole="User_Type" ToRole="User" />
         </EntityType>
+        <EntityType Name="Version_Plugins">
+          <Key>
+            <PropertyRef Name="ID_Version" />
+          </Key>
+          <Property Name="ID_Version" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Version_Number" Type="Int32" Nullable="false" />
+          <Property Name="ID_Plugin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Version_Plugins_Plugins" FromRole="Version_Plugins" ToRole="Plugins" />
+        </EntityType>
+        <EntityType Name="Сhat">
+          <Key>
+            <PropertyRef Name="ID_Chat" />
+          </Key>
+          <Property Name="ID_Chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_User1" Type="Int32" Nullable="false" />
+          <Property Name="ID_User2_" Type="Int32" Nullable="false" />
+          <Property Name="IsFirstTyping_Chat" Type="Boolean" Nullable="false" />
+          <Property Name="Message_Char" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Сhat_User" FromRole="Сhat" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="BeatLabDBModel.FK_Сhat_User1" FromRole="Сhat" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Alboms_User">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Alboms" Role="Alboms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Alboms">
+              <PropertyRef Name="ID_Uer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Alboms">
+          <End Type="BeatLabDBModel.Alboms" Role="Alboms" Multiplicity="0..1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alboms">
+              <PropertyRef Name="ID_Album" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Alboms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Music">
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="0..1" />
+          <End Type="BeatLabDBModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Music">
+              <PropertyRef Name="ID_Music" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_Music" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Plugins">
+          <End Type="BeatLabDBModel.Plugins" Role="Plugins" Multiplicity="0..1" />
+          <End Type="BeatLabDBModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_Plugin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_User">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="BeatLabDBModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plugins_Format_Plugin">
+          <End Type="BeatLabDBModel.Format_Plugin" Role="Format_Plugin" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Plugins" Role="Plugins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Format_Plugin">
+              <PropertyRef Name="ID_Format_Plugin" />
+            </Principal>
+            <Dependent Role="Plugins">
+              <PropertyRef Name="ID_Format_Plugins" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Genere_Of_Music">
+          <End Type="BeatLabDBModel.Genere_Of_Music" Role="Genere_Of_Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genere_Of_Music">
+              <PropertyRef Name="ID_Genere_Of_Music" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Genere_of_Music" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_Type_Music">
+          <End Type="BeatLabDBModel.Type_Music" Role="Type_Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Music">
+              <PropertyRef Name="ID_Type_music" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_Type_mysic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Music_User">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Music">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Version_Plugins_Plugins">
+          <End Type="BeatLabDBModel.Plugins" Role="Plugins" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Version_Plugins" Role="Version_Plugins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Principal>
+            <Dependent Role="Version_Plugins">
+              <PropertyRef Name="ID_Plugin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User_Type">
           <End Type="BeatLabDBModel.User_Type" Role="User_Type" Multiplicity="1" />
           <End Type="BeatLabDBModel.User" Role="User" Multiplicity="*" />
@@ -101,12 +699,123 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Сhat_User">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Сhat" Role="Сhat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Сhat">
+              <PropertyRef Name="ID_User1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сhat_User1">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Сhat" Role="Сhat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Сhat">
+              <PropertyRef Name="ID_User2_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище BeatLabDBModelContainer" CdmEntityContainer="BeatLabDBEntities">
+          <EntitySetMapping Name="Alboms">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Alboms">
+              <MappingFragment StoreEntitySet="Alboms">
+                <ScalarProperty Name="Image_Album" ColumnName="Image_Album" />
+                <ScalarProperty Name="Name_Album" ColumnName="Name_Album" />
+                <ScalarProperty Name="ID_Uer" ColumnName="ID_Uer" />
+                <ScalarProperty Name="ID_Album" ColumnName="ID_Album" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="ID_Plugin" ColumnName="ID_Plugin" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="ID_Music" ColumnName="ID_Music" />
+                <ScalarProperty Name="Data_Comments" ColumnName="Data_Comments" />
+                <ScalarProperty Name="Content_Сomments" ColumnName="Content_Сomments" />
+                <ScalarProperty Name="ID_Comments" ColumnName="ID_Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Format_Plugin">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Format_Plugin">
+              <MappingFragment StoreEntitySet="Format_Plugin">
+                <ScalarProperty Name="Name_Format_Plugin" ColumnName="Name_Format_Plugin" />
+                <ScalarProperty Name="ID_Format_Plugin" ColumnName="ID_Format_Plugin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genere_Of_Music">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Genere_Of_Music">
+              <MappingFragment StoreEntitySet="Genere_Of_Music">
+                <ScalarProperty Name="Name_Gener_of_music" ColumnName="Name_Gener_of_music" />
+                <ScalarProperty Name="ID_Genere_Of_Music" ColumnName="ID_Genere_Of_Music" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Music">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Music">
+              <MappingFragment StoreEntitySet="Music">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Image_music" ColumnName="Image_music" />
+                <ScalarProperty Name="Music_file" ColumnName="Music_file" />
+                <ScalarProperty Name="ID_Alboms" ColumnName="ID_Alboms" />
+                <ScalarProperty Name="Priсe_Music" ColumnName="Priсe_Music" />
+                <ScalarProperty Name="Description_Music" ColumnName="Description_Music" />
+                <ScalarProperty Name="Name_music" ColumnName="Name_music" />
+                <ScalarProperty Name="ID_Type_mysic" ColumnName="ID_Type_mysic" />
+                <ScalarProperty Name="ID_Genere_of_Music" ColumnName="ID_Genere_of_Music" />
+                <ScalarProperty Name="ID_Music" ColumnName="ID_Music" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plugins">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Plugins">
+              <MappingFragment StoreEntitySet="Plugins">
+                <ScalarProperty Name="Price_Plugin" ColumnName="Price_Plugin" />
+                <ScalarProperty Name="Image_Plugin" ColumnName="Image_Plugin" />
+                <ScalarProperty Name="Description_plugin" ColumnName="Description_plugin" />
+                <ScalarProperty Name="Plugin_file" ColumnName="Plugin_file" />
+                <ScalarProperty Name="Name_Plugin" ColumnName="Name_Plugin" />
+                <ScalarProperty Name="ID_Format_Plugins" ColumnName="ID_Format_Plugins" />
+                <ScalarProperty Name="Date_of_issue_Plugin" ColumnName="Date_of_issue_Plugin" />
+                <ScalarProperty Name="ID_Plugin" ColumnName="ID_Plugin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BeatLabDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Music">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Type_Music">
+              <MappingFragment StoreEntitySet="Type_Music">
+                <ScalarProperty Name="Name_Type_Music" ColumnName="Name_Type_Music" />
+                <ScalarProperty Name="ID_Type_music" ColumnName="ID_Type_music" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BeatLabDBModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -131,6 +840,26 @@
               <MappingFragment StoreEntitySet="User_Type">
                 <ScalarProperty Name="Name_User_Type" ColumnName="Name_User_Type" />
                 <ScalarProperty Name="ID_User_Type" ColumnName="ID_User_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Version_Plugins">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Version_Plugins">
+              <MappingFragment StoreEntitySet="Version_Plugins">
+                <ScalarProperty Name="ID_Plugin" ColumnName="ID_Plugin" />
+                <ScalarProperty Name="Version_Number" ColumnName="Version_Number" />
+                <ScalarProperty Name="ID_Version" ColumnName="ID_Version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сhat">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Сhat">
+              <MappingFragment StoreEntitySet="Сhat">
+                <ScalarProperty Name="Message_Char" ColumnName="Message_Char" />
+                <ScalarProperty Name="IsFirstTyping_Chat" ColumnName="IsFirstTyping_Chat" />
+                <ScalarProperty Name="ID_User2_" ColumnName="ID_User2_" />
+                <ScalarProperty Name="ID_User1" ColumnName="ID_User1" />
+                <ScalarProperty Name="ID_Chat" ColumnName="ID_Chat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

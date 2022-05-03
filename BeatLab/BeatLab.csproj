@@ -53,6 +53,9 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NetCoreAudio, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetCoreAudio.1.6.3\lib\netstandard2.0\NetCoreAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -126,6 +129,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alboms.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -144,23 +150,51 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeatLab.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Comments.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MusicsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Format_Plugin.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Genere_Of_Music.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\UserTypes.cs" />
+    <Compile Include="Music.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />
     <Compile Include="Services\SaltedPasswordGenerator.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type_Music.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="User_Type.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Version_Plugins.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Сhat.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -175,7 +209,8 @@
       <DependentUpon>BeatLab.edmx</DependentUpon>
       <LastGenOutput>BeatLab.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\AccountStyle.css" />
+    <Content Include="Content\StylePage\AccountEditStyle.css" />
+    <Content Include="Content\StylePage\AccountStyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -184,9 +219,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resource\182.jpg" />
     <Content Include="Resource\1828439.png" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />
+    <Content Include="Resource\Gray.png" />
     <Content Include="Resource\user.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -233,6 +270,11 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Musics\Create.cshtml" />
+    <Content Include="Views\Musics\Delete.cshtml" />
+    <Content Include="Views\Musics\Details.cshtml" />
+    <Content Include="Views\Musics\Edit.cshtml" />
+    <Content Include="Views\Musics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

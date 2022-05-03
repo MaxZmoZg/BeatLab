@@ -18,11 +18,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 480px;
-}
+
 
 .header-style {
     background: white;
@@ -145,8 +141,33 @@ textarea {
     margin-bottom: 35px;
 }
 
+.editCard--margin{
+    margin-top:10px;
+}
+.editCard_DivImage--margin{
+    margin-bottom:20px;
+}
+.editCrard--padding {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 45px;
+    padding-top: 30px;
+}
 
+.editCard--shadow {
+    -webkit-box-shadow: -1px 4px 11px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -1px 4px 11px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: -1px 4px 11px 2px rgba(34, 60, 80, 0.2);
+}
 
+.h2--margin{
+    margin-top:80px !important;
+}
+
+.editCard_button_size{
+    width:100px;
+    
+}
 
 @media only screen and (max-width: 479px) {
     .form-horizontal .form-group {
