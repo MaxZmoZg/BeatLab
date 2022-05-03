@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -130,6 +131,17 @@ namespace BeatLab.Controllers
             db.Music.Remove(music);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult LoadAudio(int musicId)
+        {
+            byte[] songBytes;
+            songBytes = db.Music.First(m => m.ID_Music == musicId).Music_file;
+            if (songBytes == null) return null;
+            FileStreamResult songStreamResult =
+                new FileStreamResult(new MemoryStream(songBytes),
+                                     "audio/mp3");
+            return songStreamResult;
         }
 
         protected override void Dispose(bool disposing)
