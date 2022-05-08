@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+
 <h2>Index</h2>
 
 <p>
@@ -69,16 +70,61 @@
                 @Html.DisplayFor(modelItem => item.User.Last_Name_User)
             </td>
             <td>
-                <audio controls>
-                    <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music})" type="audio/mp3" />
+                <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
+
+                    <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
+
                 </audio>
+
             </td>
+
+
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID_Music }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ID_Music }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID_Music })
             </td>
         </tr>
+
+
+
     }
 
-</table>
+    </table>
+
+    <section id="container-id" class="playerm">
+        <div >
+            <div  class="player__track-descr-box">
+                <p>
+                    лолоал
+                </p>
+            </div>
+            <div>
+                @foreach (var item in Model)
+                {
+                    <audio id="audioId" controls controlsList="nodownload" oncontextmenu="return false;" id="player" style="width:700px !important;"
+                           onended="document.getElementById('container-id').remove() " 
+                          >
+                        <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
+
+                    </audio>
+                }
+                </div>
+            <div>
+                <p>
+                    лолоал
+                </p>
+            </div>
+           
+        </div>
+        
+       
+
+           
+
+        
+    </section>
+    <script>
+        document.getElementById("audioId").addEventListener('pause', setTimeout(() => { if (!audioId.paused) return; document.getElementById('container-id').remove(); }, 60 * 50))
+    </script>

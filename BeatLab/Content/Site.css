@@ -49,11 +49,26 @@
 
 
 
+.playerm {
+    background: var(--player-bg);
+    bottom: 0;
+    color: var(--player-text);
+    font-size: 12px;
+    left: 50px;
+    position: fixed;
+    right: 20px;
+   
+}
+
+
+
+
+
 .form-horizontal {
     background: #fff;
     padding-bottom: 40px;
     border-radius: 15px;
-    margin-bottom:100px;
+    margin-bottom: 100px;
     text-align: center;
 }
 
