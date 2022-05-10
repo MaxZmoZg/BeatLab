@@ -1366,7 +1366,6 @@ a.text-warning:focus {
 }
 .text-danger {
   color: #a94442;
-
 }
 a.text-danger:hover,
 a.text-danger:focus {
@@ -4666,7 +4665,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: navbar-default;
+  background-color: #222;
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {

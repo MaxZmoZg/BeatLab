@@ -1,51 +1,47 @@
 ﻿@model IEnumerable<BeatLab.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Пользователи";
 }
 
-<h2>Index</h2>
+<h2>Пользователи</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить нового пользователя", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Last_Name_User)
+           Фамилия
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First_Name_User)
+           Имя
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Middle_Name_User)
+           Отчество
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description_User)
+           Описание
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age_User)
+           Возраст
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image_User)
+            Фото
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nickname_User)
+           Никнейм
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Login)
+            Логин
+        </th>
+       
+        
+        <th>
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password_Hash)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email_User)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User_Type.Name_User_Type)
+           Тип пользователя
         </th>
         <th></th>
     </tr>
@@ -65,7 +61,7 @@
             @Html.DisplayFor(modelItem => item.Description_User)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Age_User)
+            @Html.DisplayFor(modelItem => item.Age_User) лет
         </td>
         <td>
             @{
@@ -88,12 +84,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Login)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password_Hash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Salt)
-        </td>
+     
         <td>
             @Html.DisplayFor(modelItem => item.Email_User)
         </td>
@@ -101,9 +92,9 @@
             @Html.DisplayFor(modelItem => item.User_Type.Name_User_Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_User }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_User }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_User })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_User }) |
+            @Html.ActionLink("Детали", "Details", new { id=item.ID_User }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_User })
         </td>
     </tr>
 }
