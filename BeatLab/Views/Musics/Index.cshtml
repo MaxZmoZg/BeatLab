@@ -1,43 +1,45 @@
 ﻿@model IEnumerable<BeatLab.Music>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Биты|ADMIN";
+    
 }
 
 
-<h2>Index</h2>
 
+<h2>Биты</h2>
+<br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить новый трек", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name_music)
+           Название
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description_Music)
+           Описание
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Priсe_Music)
+          Цена
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image_music)
+           Фото
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Alboms.Name_Album)
+           Альбом
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genere_Of_Music.Name_Gener_of_music)
+           Жанр
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type_Music.Name_Type_Music)
+            Тип файла
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+            Никнейм
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Music_file)
+            Музыкальный файл
         </th>
         <th></th>
     </tr>
@@ -52,10 +54,20 @@
                 @Html.DisplayFor(modelItem => item.Description_Music)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Priсe_Music)
+                @Html.DisplayFor(modelItem => item.Priсe_Music) рублей
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image_music)
+                @{ if (item.Image_music == null)
+                    {
+                        <img id='previewImage' style='width:60px; height:50px;' src="~/Resource/user.png" />
+                    }
+                    else
+                    {
+                        @Html.Raw("<img id='previewImage' style='width:60px; height:50px;' src=\"data:image/jpeg;base64,"
+                                                + Convert.ToBase64String(item.Image_music) + "\" />")
+                        @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Alboms.Name_Album)
@@ -67,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+                @Html.DisplayFor(modelItem => item.User.Nickname_User)
             </td>
             <td>
                 <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
@@ -81,9 +93,9 @@
 
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Music }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_Music }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_Music })
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID_Music }) |
+                @Html.ActionLink("Детали", "Details", new { id = item.ID_Music }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Music })
             </td>
         </tr>
 
@@ -91,40 +103,64 @@
 
     }
 
-    </table>
+</table>
 
-    <section id="container-id" class="playerm">
-        <div >
-            <div  class="player__track-descr-box">
-                <p>
-                    лолоал
-                </p>
+
+
+<section id="container-id" class="playerm">
+    <div class="common-container">
+        <div class="player__container">
+
+            <div class="player__track-descr-box">
+
+                <div class="track-descr">
+                    <img class="track-descr__cover-img" src="https://beatmaker.tv/Default/General/Image/198874?type=BeatImageSmall" alt="Lilia | Живая гитара cover" />
+
+                    <div class="track-descr__content">
+                        <a class="track-descr__name" href="/beatmaker/176887">GREEDI</a>
+                        <span>-</span>
+                        <a class="track-descr__name" href="/beat/198874">Солныщко блястящее</a>
+                        <p class="track-descr__style">
+                            Рок
+                        </p>
+                    </div>
+
+                </div>
             </div>
-            <div>
+
+            <div class="player__controls-box">
+                
                 @foreach (var item in Model)
                 {
-                    <audio id="audioId" controls controlsList="nodownload" oncontextmenu="return false;" id="player" style="width:700px !important;"
-                           onended="document.getElementById('container-id').remove() " 
-                          >
+                    <audio id="audioId" controls controlsList="nodownload" oncontextmenu="return false;" class="player-controls" 
+                           onended="document.getElementById('container-id').remove() ">
                         <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
 
                     </audio>
                 }
-                </div>
-            <div>
-                <p>
-                    лолоал
-                </p>
             </div>
-           
+
+
+            <div class="player__tools-box">
+                <div class="player__add-btn-box">
+
+                    <button class="bg" tabindex="0">
+                        <span class="text">
+                            Купить
+                        </span>
+                        <span class="btn-icon icon-cart">
+
+                        </span>
+                    </button>
+
+                </div>
+            </div>
         </div>
-        
-       
+    </div>
 
-           
 
-        
-    </section>
-    <script>
-        document.getElementById("audioId").addEventListener('pause', setTimeout(() => { if (!audioId.paused) return; document.getElementById('container-id').remove(); }, 60 * 50))
-    </script>
+
+
+
+
+</section>

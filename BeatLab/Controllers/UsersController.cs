@@ -45,6 +45,8 @@ namespace BeatLab.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "ID_User,Last_Name_User,First_Name_User,Middle_Name_User,Description_User,Age_User,Image_User,Nickname_User,Login,Password_Hash,Salt,ID_User_Type,Email_User")] User user)
         {
+            if (user.Last_Name_User == null || user.Last_Name_User == "")
+         
             if (ModelState.IsValid)
             {
                 db.User.Add(user);
@@ -79,6 +81,20 @@ namespace BeatLab.Controllers
         [Authorize]
         public ActionResult Edit(User user, HttpPostedFileBase uploadImage)
         {
+
+            if (user.Last_Name_User == null || user.Last_Name_User ==  "")
+            {
+                ModelState.AddModelError(nameof(user.Last_Name_User), "Введите фамилию");
+            }
+            if (user.Middle_Name_User == null || user.Middle_Name_User == "")
+            {
+                ModelState.AddModelError(nameof(user.Middle_Name_User), "Введите отчество");
+            }
+            if (user.First_Name_User == null || user.First_Name_User == "")
+            {
+                ModelState.AddModelError(nameof(user.First_Name_User), "Введите имя");
+            }
+      
             if (ModelState.IsValid)
             {
                 User userFromDatabase = db.User.First(u => u.Login == HttpContext.User.Identity.Name);

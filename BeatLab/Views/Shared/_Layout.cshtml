@@ -31,7 +31,13 @@
                     <li>@Html.ActionLink("Биты", "Home.Index", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Семплы", "Home.About", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Плагины", "Home.Contact", @class: "header-style-text")</li>
-                    <li>@Html.ActionLink("Барабаны", "Home.Contact", @class: "header-style-text")</li>
+                    <li>@Html.ActionLink("Управление данными", "Account.Login", @class: "header-style-text ")</li>
+                    @{
+                        if (ViewContext.HttpContext.User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("Управление данными", "Account.Login", @class: "header-style-text ")</li>
+                        }
+                    }
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
                     @{
@@ -45,6 +51,7 @@
                             <li>@Html.ActionLink("Авторизация", "Account.Login", @class: "header-style-text glyphicon glyphicon-log-in")</li>
                             <li>@Html.ActionLink("Регистрация", "Account.Register", @class: "header-style-text glyphicon glyphicon-user")</li>
                         }
+                        
                     }
                 </ul>
 
@@ -58,7 +65,7 @@
         </div>
         <hr />
         <footer>
-            <p class="dada">&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <p class="dada">&copy;BeatLab|2022</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
