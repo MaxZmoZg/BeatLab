@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Биты|ADMIN";
-    
+
 }
 
 
@@ -15,22 +15,22 @@
 <table class="table">
     <tr>
         <th>
-           Название
+            Название
         </th>
         <th>
-           Описание
+            Описание
         </th>
         <th>
-          Цена
+            Цена
         </th>
         <th>
-           Фото
+            Фото
         </th>
         <th>
-           Альбом
+            Альбом
         </th>
         <th>
-           Жанр
+            Жанр
         </th>
         <th>
             Тип файла
@@ -82,7 +82,11 @@
                 @Html.DisplayFor(modelItem => item.User.Nickname_User)
             </td>
             <td>
-                <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
+                <audio controls
+                       controlsList="nodownload"
+                       oncontextmenu="preventDefault()"
+                       muted
+                       id="player">
 
                     <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
 
@@ -107,7 +111,7 @@
 
 
 
-<section id="container-id" class="playerm">
+<section id="container-id" class="playerm" hidden>
     <div class="common-container">
         <div class="player__container">
 
@@ -118,8 +122,6 @@
 
                     <div class="track-descr__content">
                         <a class="track-descr__name" href="/beatmaker/176887">GREEDI</a>
-                        <span>-</span>
-                        <a class="track-descr__name" href="/beat/198874">Солныщко блястящее</a>
                         <p class="track-descr__style">
                             Рок
                         </p>
@@ -129,15 +131,7 @@
             </div>
 
             <div class="player__controls-box">
-                
-                @foreach (var item in Model)
-                {
-                    <audio id="audioId" controls controlsList="nodownload" oncontextmenu="return false;" class="player-controls" 
-                           onended="document.getElementById('container-id').remove() ">
-                        <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
 
-                    </audio>
-                }
             </div>
 
 
@@ -157,10 +151,25 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 </section>
+<script>
+    for (const player of Array.from(document.querySelectorAll('td > audio'))) {
+        player.addEventListener('play', onPlayListener);
+    }
+
+    function onPlayListener(event) {
+        document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('td').textContent.trim();
+        document.querySelector('.track-descr__cover-img').src = event.target.parentElement.parentElement.querySelector('img').src;
+        event.preventDefault();
+        event.target.pause();
+        document.getElementById('container-id').hidden = false;
+        const audio = event.target;
+        const audioClone = audio.cloneNode(true);
+        audioClone.muted = false;
+        audioClone.removeEventListener('play', onPlayListener);
+        audioClone.play();
+        const audioContainer = document.querySelector('.player__controls-box');
+        audioContainer.removeChild(audioContainer.firstChild);
+        audioContainer.appendChild(audioClone);
+    }
+</script>
