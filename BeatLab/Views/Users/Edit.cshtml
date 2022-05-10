@@ -29,44 +29,44 @@
                     @Html.HiddenFor(model => model.ID_User)
                     <div class="u-form-group u-form-name">
                         <label for="name-4c18" class="u-label">Фамилия</label>
-                        @Html.EditorFor(model => model.Last_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Last Name", type = "text", required = "text" } })
+                        @Html.EditorFor(model => model.Last_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Last Name", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Last_Name_User, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-group">
                         <label for="message-4c18" class="u-label">Имя</label>
-                        @Html.EditorFor(model => model.First_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.First_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", type = "text", placeholder = "Enter your name" } })
                         @Html.ValidationMessageFor(model => model.First_Name_User, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-group">
                         <label for="name-4c18" class="u-label">Отчество</label>
-                        @Html.EditorFor(model => model.Middle_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Midle Name", required = "text" } })
+                        @Html.EditorFor(model => model.Middle_Name_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Midle Name" } })
                         @Html.ValidationMessageFor(model => model.Middle_Name_User, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="u-form-group u-form-group-4">
                         <label for="text-7110" class="u-label">Никнейм</label>
-                        @Html.EditorFor(model => model.Nickname_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Nickname", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.Nickname_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Nickname"} })
                         @Html.ValidationMessageFor(model => model.Nickname_User, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-group u-form-group-5">
                         <label for="text-ce90" class="u-label">Возраст</label>
-                        @Html.EditorFor(model => model.Age_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Age", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.Age_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Age", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Age_User, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-group u-form-group-6">
                         <label for="text-2d34" class="u-label">Логин</label>
-                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Login", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Login", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-email u-form-group u-form-group-7">
                         <label for="text-1f9b" class="u-label">Почта</label>
-                        @Html.EditorFor(model => model.Email_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Email", required = "email", type = "email" } })
+                        @Html.EditorFor(model => model.Email_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Email", type = "email" } })
                         @Html.ValidationMessageFor(model => model.Email_User, "", new { @class = "text-danger" })
                     </div>
                     <div class="u-form-group u-form-message u-form-group-8">
                         <label for="text-3dd1" class="u-label">Описание</label>
 
-                        @Html.EditorFor(model => model.Description_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Description", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.Description_User, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Enter your Description", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Description_User, "", new { @class = "text-danger" })
                     </div>
                     <label for="text-1f9b" class="u-label">Фото</label>

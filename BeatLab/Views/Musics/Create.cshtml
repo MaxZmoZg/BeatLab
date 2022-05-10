@@ -29,19 +29,19 @@
 
                     <div class="u-form-group u-form-name">
                         <label for="name-4c18" class="u-label">Название</label>
-                        @Html.EditorFor(model => model.Name_music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите название", type = "text", required = "text" } })
+                        @Html.EditorFor(model => model.Name_music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите название", type = "text" } })
                         @Html.ValidationMessageFor(model => model.Name_music, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="u-form-group">
                         <label for="message-4c18" class="u-label">Описание</label>
-                        @Html.EditorFor(model => model.Description_Music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите описание", required = "text", type = "text" } })
+                        @Html.EditorFor(model => model.Description_Music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите описание" } })
                         @Html.ValidationMessageFor(model => model.Description_Music, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="u-form-group">
                         <label for="name-4c18" class="u-label">Цена</label>
-                        @Html.EditorFor(model => model.Priсe_Music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите цену", required = "text" } })
+                        @Html.EditorFor(model => model.Priсe_Music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите цену"} })
                         @Html.ValidationMessageFor(model => model.Priсe_Music, "", new { @class = "text-danger" })
 
                     </div>

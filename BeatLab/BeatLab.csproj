@@ -169,6 +169,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\PartialUser.cs" />
     <Compile Include="Models\UserTypes.cs" />
     <Compile Include="Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
