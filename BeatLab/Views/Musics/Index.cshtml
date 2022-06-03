@@ -12,105 +12,64 @@
 <p>
     @Html.ActionLink("Добавить новый трек", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Название
-        </th>
-        <th>
-            Описание
-        </th>
-        <th>
-            Цена
-        </th>
-        <th>
-            Фото
-        </th>
-        <th>
-            Альбом
-        </th>
-        <th>
-            Жанр
-        </th>
-        <th>
-            Тип файла
-        </th>
-        <th>
-            Никнейм
-        </th>
-        <th>
-            Музыкальный файл
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm(Html.BeginForm("Filter", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
+{
+    @Html.TextBox("Name");
+    @Html.DropDownList("ID_Genere_of_Music")
+    @Html.DropDownList("ID_User")
+    @Html.DropDownList("ID_Type_mysic")
+    <input type="submit" name="Искать">
+    <div>
+        Сортировать по
+        <input type="submit" value="Алфавиту" name="Алфавиту">
+        <input type="submit" value="Рейтингу" name="Рейтингу">
+        <input type="submit" value="Цене" name="Цене">
+    </div>
 
-    @foreach (var item in Model)
+}
+<div style="display:flex; flex-wrap: wrap;">
+    @if (Model.Count() == 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name_music)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description_Music)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priсe_Music) рублей
-            </td>
-            <td>
-                @{ if (item.Image_music == null)
-                    {
-                        <img id='previewImage' style='width:60px; height:50px;' src="~/Resource/user.png" />
-                    }
-                    else
-                    {
-                        @Html.Raw("<img id='previewImage' style='width:60px; height:50px;' src=\"data:image/jpeg;base64,"
-                                                + Convert.ToBase64String(item.Image_music) + "\" />")
-                        @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
-                    }
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alboms.Name_Album)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genere_Of_Music.Name_Gener_of_music)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
-            </td>
-            <td >
-                @Html.DisplayFor(modelItem => item.User.Nickname_User)
-            </td>
-            <td>
-                <audio controls
-                       controlsList="nodownload"
-                      oncontextmenu="return false;"
-                       muted
-                       id="player">
-
-                    <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
-
-                </audio>
-
-            </td>
-
-
-
-            <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID_Music }) |
-                @Html.ActionLink("Детали", "Details", new { id = item.ID_Music }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Music })
-            </td>
-        </tr>
-
-
-
+        @("Ничего не найдено. Введите другое условие запроса");
     }
-
-</table>
-
-
-
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div style="grid-template-rows: 70% 30%; margin: 2em;">
+                <div style="position:relative;">
+                    @{ if (item.Image_music == null)
+                        {
+                            <img id='previewImage' style='width:150px; height:150px;' src="~/Resource/user.png" />
+                        }
+                        else
+                        {
+                            @Html.Raw("<img id='previewImage' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                                 + Convert.ToBase64String(item.Image_music) + "\" />")
+                            @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
+                        }
+                    }
+                    <audio controls
+                           controlsList="nodownload"
+                           oncontextmenu="return false;"
+                           style="position: absolute; margin-left:-200px; z-index:1;"
+                           muted
+                           id="player">
+                        <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
+                    </audio>
+                </div>
+                <div style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                    <div>
+                        @Html.ActionLink(item.Name_music, "Details", new { id = item.ID_Music }, new { style = "color: black;" })
+                    </div>
+                    <div>
+                        @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Music }, new { style = "color: black;" })
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
 <section id="container-id" class="playerm" hidden>
     <div class="common-container">
         <div class="player__container">
@@ -156,15 +115,14 @@
     </div>
 </section>
 <script>
-    for (const player of Array.from(document.querySelectorAll('td > audio'))) {
+    for (const player of Array.from(document.querySelectorAll('audio'))) {
         player.addEventListener('play', onPlayListener);
     }
 
     function onPlayListener(event) {
-        document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('td').textContent.trim();
-        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('body > div.container.body-content > table > tbody > tr > td:nth-child(8)').textContent.trim();
-        document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('body > div.container.body-content > table > tbody > tr > td:nth-child(6)').textContent.trim();
-        document.querySelector('.track-descr__cover-img').src = event.target.parentElement.parentElement.querySelector('img').src;
+        console.log(event);
+        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.children[1].firstChild.textContent.trim();
+        document.querySelector('.track-descr__cover-img').src = event.target.parentElement.querySelector('img').src;
         event.preventDefault();
         event.target.pause();
         document.getElementById('container-id').hidden = false;
