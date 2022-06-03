@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,8 +16,28 @@ namespace BeatLab.Controllers
         // GET: Musics
         public ActionResult Index()
         {
-            var music = db.Music.Include(m => m.Alboms).Include(m => m.Genere_Of_Music).Include(m => m.Type_Music).Include(m => m.User);
+            LoadDropDownLists();
+            var music = db.Music
+                .Include(m => m.Alboms)
+                .Include(m => m.Genere_Of_Music)
+                .Include(m => m.Type_Music)
+                .Include(m => m.User);
             return View(music.ToList());
+        }
+
+        private void LoadDropDownLists()
+        {
+            List<Genere_Of_Music> genres = db.Genere_Of_Music.ToList();
+            genres.Insert(0, new Genere_Of_Music { Name_Gener_of_music = "-----" });
+            ViewBag.ID_Genere_of_Music = new SelectList(genres, "ID_Genere_Of_Music", "Name_Gener_of_music");
+
+            List<Type_Music> types = db.Type_Music.ToList();
+            types.Insert(0, new Type_Music { Name_Type_Music = "-----" });
+            ViewBag.ID_Type_mysic = new SelectList(types, "ID_Type_music", "Name_Type_Music");
+
+            List<User> users = db.User.ToList();
+            users.Insert(0, new User { Nickname_User = "-----" });
+            ViewBag.ID_User = new SelectList(users, "ID_User", "Nickname_User");
         }
 
         // GET: Musics/Details/5
@@ -55,7 +77,7 @@ namespace BeatLab.Controllers
 
                 if (uploadImage != null)
                 {
-                    music.Image_music= uploadImage.ToByteArray();
+                    music.Image_music = uploadImage.ToByteArray();
                 }
                 if (Request.Files["uploadMusic"] != null)
                 {
@@ -138,7 +160,7 @@ namespace BeatLab.Controllers
             return RedirectToAction("Index");
         }
 
-        
+
         public ActionResult LoadAudio(int musicId)
         {
             byte[] songBytes;
@@ -157,6 +179,73 @@ namespace BeatLab.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Filter()
+        {
+            List<Music> filteredMusics = db.Music
+                .Include(m => m.Alboms)
+                .Include(m => m.Genere_Of_Music)
+                .Include(m => m.Type_Music)
+                .Include(m => m.User)
+                .ToList();
+            if (!string.IsNullOrWhiteSpace(Request["Name"]))
+            {
+                filteredMusics = filteredMusics.Where(m =>
+                {
+                    return m.Name_music.IndexOf(Request["Name"],
+                                                StringComparison.OrdinalIgnoreCase) != -1;
+                })
+                    .ToList();
+            }
+
+            if (Request.Form["ID_Genere_of_Music"] is string musicGenreId && musicGenreId != "0")
+            {
+                filteredMusics = filteredMusics.Where(m => m.ID_Genere_of_Music == int.Parse(musicGenreId))
+                    .ToList();
+            }
+            if (Request.Form["ID_User"] is string userId && userId != "0")
+            {
+                filteredMusics = filteredMusics.Where(m => m.ID_User == int.Parse(userId))
+                    .ToList();
+            }
+            if (Request.Form["ID_Type_mysic"] is string musicTypeId && musicTypeId != "0")
+            {
+                filteredMusics = filteredMusics.Where(m => m.ID_Type_mysic == int.Parse(musicTypeId))
+                    .ToList();
+            }
+
+            if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
+            {
+                filteredMusics = filteredMusics
+                    .OrderByDescending(m => m.Name_music)
+                    .ToList();
+            }
+            else if (Request.Form.Keys.OfType<string>().Contains("Рейтингу"))
+            {
+                filteredMusics = filteredMusics
+                    .OrderByDescending(m => m.Order_Music.Count)
+                    .ToList();
+            }
+            else if (Request.Form.Keys.OfType<string>().Contains("Цене"))
+            {
+                filteredMusics = filteredMusics
+                    .OrderByDescending(m =>
+                    {
+                        if (m.Price_Music.LastOrDefault() is Price_Music priceMusic)
+                        {
+                            return priceMusic.Price;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    })
+                    .ToList();
+            }
+            LoadDropDownLists();
+            return View("Index", filteredMusics);
         }
     }
 }

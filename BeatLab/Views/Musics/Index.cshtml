@@ -12,38 +12,60 @@
 <p>
     @Html.ActionLink("Добавить новый трек", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Название
-        </th>
-        <th>
-            Описание
-        </th>
-        <th>
-            Цена
-        </th>
-        <th>
-            Фото
-        </th>
-        <th>
-            Альбом
-        </th>
-        <th>
-            Жанр
-        </th>
-        <th>
-            Тип файла
-        </th>
-        <th>
-            Никнейм
-        </th>
-        <th>
-            Музыкальный файл
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm(Html.BeginForm("Filter", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
+{
+    @Html.TextBox("Name");
+    @Html.DropDownList("ID_Genere_of_Music")
+    @Html.DropDownList("ID_User")
+    @Html.DropDownList("ID_Type_mysic")
+    <input type="submit" name="Искать">
+    <div>
+        Сортировать по
+        <input type="submit" value="Алфавиту" name="Алфавиту">
+        <input type="submit" value="Рейтингу" name="Рейтингу">
+        <input type="submit" value="Цене" name="Цене">
+    </div>
 
+}
+<table class="table">
+    @if (Model.Count() == 0)
+    {
+        @("Ничего не найдено. Введите другое условие запроса");
+    }
+    else
+    {
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Описание
+            </th>
+            <th>
+                Цена
+            </th>
+            <th>
+                Фото
+            </th>
+            <th>
+                Альбом
+            </th>
+            <th>
+                Жанр
+            </th>
+            <th>
+                Тип файла
+            </th>
+            <th>
+                Никнейм
+            </th>
+            <th>
+                Музыкальный файл
+            </th>
+            <th></th>
+        </tr>
+
+    }
     @foreach (var item in Model)
     {
         <tr>
