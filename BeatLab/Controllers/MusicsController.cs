@@ -48,7 +48,7 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Priсe_Music,ID_Alboms,Image_music,ID_User")] Music music, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User")] Music music, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Priсe_Music,ID_Alboms,Image_music,ID_User")] Music music)
+        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User")] Music music)
         {
             if (ModelState.IsValid)
             {
