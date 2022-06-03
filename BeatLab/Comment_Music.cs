@@ -12,12 +12,15 @@ namespace BeatLab
     using System;
     using System.Collections.Generic;
     
-    public partial class Version_Plugins
+    public partial class Comment_Music
     {
-        public int ID_Version { get; set; }
-        public int Version_Number { get; set; }
-        public int ID_Plugin { get; set; }
+        public int ID_Comments_Music { get; set; }
+        public string Content_Comments { get; set; }
+        public System.DateTime Data_Comments { get; set; }
+        public int ID_Music { get; set; }
+        public int ID_User { get; set; }
     
-        public virtual Plugins Plugins { get; set; }
+        public virtual Music Music { get; set; }
+        public virtual User User { get; set; }
     }
 }

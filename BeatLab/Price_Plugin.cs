@@ -12,18 +12,13 @@ namespace BeatLab
     using System;
     using System.Collections.Generic;
     
-    public partial class Format_Plugin
+    public partial class Price_Plugin
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Format_Plugin()
-        {
-            this.Plugins = new HashSet<Plugins>();
-        }
+        public int ID_Price_Plugin { get; set; }
+        public int Price { get; set; }
+        public System.DateTime Date { get; set; }
+        public int ID_Plugin { get; set; }
     
-        public int ID_Format_Lpugin { get; set; }
-        public string Name_Format_Plugin { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plugins> Plugins { get; set; }
+        public virtual Plugins Plugins { get; set; }
     }
 }

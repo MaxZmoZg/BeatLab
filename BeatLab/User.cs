@@ -18,8 +18,12 @@ namespace BeatLab
         public User()
         {
             this.Alboms = new HashSet<Alboms>();
-            this.Comments = new HashSet<Comments>();
+            this.Comment_Music = new HashSet<Comment_Music>();
+            this.Comment_Plugin = new HashSet<Comment_Plugin>();
             this.Music = new HashSet<Music>();
+            this.Order_Music = new HashSet<Order_Music>();
+            this.Order_Plugin = new HashSet<Order_Plugin>();
+            this.Plugins = new HashSet<Plugins>();
             this.Сhat = new HashSet<Сhat>();
             this.Сhat1 = new HashSet<Сhat>();
         }
@@ -41,9 +45,17 @@ namespace BeatLab
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Alboms> Alboms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
+        public virtual ICollection<Comment_Music> Comment_Music { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment_Plugin> Comment_Plugin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Music> Music { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Music> Order_Music { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Plugin> Order_Plugin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Plugins> Plugins { get; set; }
         public virtual User_Type User_Type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Сhat> Сhat { get; set; }

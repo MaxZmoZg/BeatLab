@@ -12,23 +12,20 @@ namespace BeatLab
     using System;
     using System.Collections.Generic;
     
-    public partial class Alboms
+    public partial class Option
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Alboms()
+        public Option()
         {
-            this.Music = new HashSet<Music>();
+            this.Answer = new HashSet<Answer>();
         }
     
-        public int ID_Album { get; set; }
-        public int ID_User { get; set; }
-        public string Name_Album { get; set; }
-        public byte[] Image_Album { get; set; }
-        public int ID_Type_Alboms { get; set; }
+        public int Id { get; set; }
+        public int QuestionId { get; set; }
+        public string Text { get; set; }
     
-        public virtual Type_Alboms Type_Alboms { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Music> Music { get; set; }
+        public virtual ICollection<Answer> Answer { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

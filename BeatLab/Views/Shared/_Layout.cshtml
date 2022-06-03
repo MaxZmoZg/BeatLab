@@ -7,12 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - приложение ASP.NET</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  
+
 
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+   
+       
+            @Styles.Render("~/Content/css")
+        
+       
+    
 
 
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -31,7 +36,7 @@
                     <li>@Html.ActionLink("Биты", "Home.Index", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Семплы", "Home.About", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Плагины", "Home.Contact", @class: "header-style-text")</li>
-                    <li>@Html.ActionLink("Управление данными", "Account.Login", @class: "header-style-text ")</li>
+                    <li>@Html.ActionLink("Чат", "Account.Login", @class: "header-style-text ")</li>
                     @{
                         if (ViewContext.HttpContext.User.IsInRole("admin"))
                         {
@@ -51,14 +56,14 @@
                             <li>@Html.ActionLink("Авторизация", "Account.Login", @class: "header-style-text glyphicon glyphicon-log-in")</li>
                             <li>@Html.ActionLink("Регистрация", "Account.Register", @class: "header-style-text glyphicon glyphicon-user")</li>
                         }
-                        
+
                     }
                 </ul>
 
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div  class="container body-content">
         @RenderBody()
         <div>
             <audio ></audio>

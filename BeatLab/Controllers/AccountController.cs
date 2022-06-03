@@ -83,21 +83,7 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (model.Email == null || !Regex.IsMatch(model.Email, EmailPattern))
-            {
-                ModelState.AddModelError(nameof(model.Email), "Введите корректный e-mail");
-            }
-            else
-            {
-                using (BeatLabDBEntities db = new BeatLabDBEntities())
-                {
-                    if (db.User.Any(u => u.Email_User == model.Email))
-                    {
-                        ModelState.AddModelError(nameof(model.Email), "Такой e-mail уже существует");
-                    }
-                }
-            }
-
+          
             if (model.Login == null)
             {
                 ModelState.AddModelError(nameof(model.Login), "Введите логин");

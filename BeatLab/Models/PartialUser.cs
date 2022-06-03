@@ -29,7 +29,7 @@ namespace BeatLab
                     if (string.IsNullOrWhiteSpace(Login))
                         return "Введите логин";
                 if (columnName == nameof(Email_User))
-                    if (string.IsNullOrWhiteSpace(Login) || Regex.IsMatch(Email_User, EmailPattern))
+                    if (string.IsNullOrWhiteSpace(Email_User) || !Regex.IsMatch(Email_User, EmailPattern))
                         return "Введите корректную почту";
                 return null;
             }

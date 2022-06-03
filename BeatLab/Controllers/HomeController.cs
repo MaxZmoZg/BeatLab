@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Data.Entity;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,9 +12,11 @@ namespace BeatLab.Controllers
 {
     public class HomeController : Controller
     {
+        private BeatLabDBEntities db = new BeatLabDBEntities();
         public ActionResult Index()
         {
-            return View();
+            var music = db.Music.Include(m => m.Alboms).Include(m => m.Genere_Of_Music).Include(m => m.Type_Music).Include(m => m.User);
+            return View(music.ToList());
         }
     
         public ActionResult About()

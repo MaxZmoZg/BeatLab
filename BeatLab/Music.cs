@@ -17,15 +17,16 @@ namespace BeatLab
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Music()
         {
-            this.Comments = new HashSet<Comments>();
+            this.Comment_Music = new HashSet<Comment_Music>();
+            this.Order_Music = new HashSet<Order_Music>();
+            this.Price_Music = new HashSet<Price_Music>();
         }
     
         public int ID_Music { get; set; }
-        public int ID_Genere_of_Music { get; set; }
+        public Nullable<int> ID_Genere_of_Music { get; set; }
         public int ID_Type_mysic { get; set; }
         public string Name_music { get; set; }
         public string Description_Music { get; set; }
-        public Nullable<int> Priсe_Music { get; set; }
         public Nullable<int> ID_Alboms { get; set; }
         public byte[] Music_file { get; set; }
         public byte[] Image_music { get; set; }
@@ -33,9 +34,13 @@ namespace BeatLab
     
         public virtual Alboms Alboms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
+        public virtual ICollection<Comment_Music> Comment_Music { get; set; }
         public virtual Genere_Of_Music Genere_Of_Music { get; set; }
         public virtual Type_Music Type_Music { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Music> Order_Music { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Price_Music> Price_Music { get; set; }
     }
 }

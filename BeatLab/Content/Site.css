@@ -101,6 +101,15 @@
     font-size: 14px;
     font-weight: 700;
 }
+
+
+.track-artist__name {
+    color: var(--main-text);
+    display: inline;
+    font-size: 14px;
+    font-weight: 700;
+}
+
 a {
     text-decoration: none;
 }
@@ -200,6 +209,16 @@ audio::-webkit-media-controls-panel {
             outline: 0 none;
         }
 
+
+.listwiev_image{
+    width:270px !important;
+    height:230px !important;
+}
+
+.audioplayer_nicknameartict {
+    font-weight: 700
+}
+
     .form-horizontal .form-group i {
         position: absolute;
         top: 12px;
@@ -281,14 +300,39 @@ audio::-webkit-media-controls-panel {
     
 }
 
-@media only screen and (max-width: 479px) {
-    .form-horizontal .form-group {
-        padding: 0 25px;
+    .widthelements{
+        width:100% !important;
     }
 
-        .form-horizontal .form-group i {
-            left: 45px;
-        }
+@media (min-width: 1200px) {
+    .widthelements {
+        width: 100% !important;
+    }
 }
 
+    @media (min-width: 992px) {
+        .widthelements {
+            width: 100% !important;
+        }
+    }
+@media (min-width: 768px) {
+    .widthelements {
+        width: 100% !important;
+    }
+}
 
+    @media only screen and (max-width: 479px) {
+        .form-horizontal .form-group {
+            padding: 0 25px;
+        }
+
+            .form-horizontal .form-group i {
+                left: 45px;
+            }
+    }
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

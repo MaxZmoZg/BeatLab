@@ -78,13 +78,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
             </td>
-            <td>
+            <td >
                 @Html.DisplayFor(modelItem => item.User.Nickname_User)
             </td>
             <td>
                 <audio controls
                        controlsList="nodownload"
-                       oncontextmenu="preventDefault()"
+                      oncontextmenu="return false;"
                        muted
                        id="player">
 
@@ -121,6 +121,9 @@
                     <img class="track-descr__cover-img" src="https://beatmaker.tv/Default/General/Image/198874?type=BeatImageSmall" alt="Lilia | Живая гитара cover" />
 
                     <div class="track-descr__content">
+
+                        <a class="track-artist__name" href="/beatmaker/176887">GREEDI</a>
+                        <span style="font-size:14px"> — </span>
                         <a class="track-descr__name" href="/beatmaker/176887">GREEDI</a>
                         <p class="track-descr__style">
                             Рок
@@ -159,6 +162,8 @@
 
     function onPlayListener(event) {
         document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('td').textContent.trim();
+        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('body > div.container.body-content > table > tbody > tr > td:nth-child(8)').textContent.trim();
+        document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('body > div.container.body-content > table > tbody > tr > td:nth-child(6)').textContent.trim();
         document.querySelector('.track-descr__cover-img').src = event.target.parentElement.parentElement.querySelector('img').src;
         event.preventDefault();
         event.target.pause();
