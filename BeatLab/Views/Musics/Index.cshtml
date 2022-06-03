@@ -54,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.Description_Music)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Priсe_Music) рублей
+                @Html.DisplayFor(modelItem => item.Price_Music) рублей
             </td>
             <td>
                 @{ if (item.Image_music == null)
@@ -78,13 +78,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
             </td>
-            <td >
+            <td>
                 @Html.DisplayFor(modelItem => item.User.Nickname_User)
             </td>
             <td>
                 <audio controls
                        controlsList="nodownload"
-                      oncontextmenu="return false;"
+                       oncontextmenu="return false;"
                        muted
                        id="player">
 
