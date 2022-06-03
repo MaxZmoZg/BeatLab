@@ -54,7 +54,14 @@
                 @Html.DisplayFor(modelItem => item.Description_Music)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price_Music) рублей
+                @if (item.Price_Music.LastOrDefault() is Price_Music price_Music)
+                {
+                    @(price_Music.Price.ToString("F2") + " руб.");
+                }
+                else
+                {
+                    @("Цена не указана");
+                }
             </td>
             <td>
                 @{ if (item.Image_music == null)
