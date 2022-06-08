@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Created:ce44715c-8c4e-446b-879c-ea9ebe0f09c8-->
+<OfficeApp 
+          xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
+          xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" 
+          xsi:type="MailApp">
+
+  <!-- Начало основных настроек: метаданные надстройки, используемые для всех версий Office, если не предоставлено переопределение. -->
+
+  <!-- ВАЖНО! Идентификатор должен быть уникальным для надстройки. Если этот манифест используется многократно, измените идентификатор на новый GUID. -->
+  <Id>78c60b91-bb03-46be-b620-4d1de6e0c193</Id>
+
+  <!--Версия. Обновления из Магазина активируются, только если изменяется версия. -->
+  <Version>1.0.0.0</Version>
+  <ProviderName>[Имя поставщика]</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <!-- Отображаемое имя надстройки. Используется в Магазине и различных местах пользовательского интерфейса Office, например в диалоговом окне надстройки. -->
+  <DisplayName DefaultValue="BeatLab" />
+  <Description DefaultValue="BeatLab Description"/>
+  <IconUrl DefaultValue="~remoteAppUrl/Images/icon64.png"/>
+
+  <SupportUrl DefaultValue="http://www.contoso.com" />
+  <!-- Домены, которые будут разрешены при навигации. Например, если использовать ShowTaskpane, а затем указать ссылку "href", навигация будет разрешена только для домена, находящегося в списке. -->
+  <AppDomains>
+    <AppDomain>AppDomain1</AppDomain>
+    <AppDomain>AppDomain2</AppDomain>
+    <AppDomain>AppDomain3</AppDomain>
+  </AppDomains>
+  <!--Конец основных настроек. -->
+  
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1" />
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="~remoteAppUrl/"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox" />
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+
+        <DesktopFormFactor>
+          <!-- Расположение функций, которые могут активироваться кнопками без пользовательского интерфейса (действия ExecuteFunction). -->
+          <FunctionFile resid="functionFile" />
+
+          <!-- Сообщение прочитано -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <!-- Использовать вкладку по умолчанию ExtensionPoint или создать собственную вкладку с помощью <CustomTab id="myTab"> -->
+            <OfficeTab id="TabDefault">
+              <!-- До 6 добавленных групп на вкладку -->
+              <Group id="msgReadGroup">
+                <Label resid="groupLabel" />
+                <!-- Запустить надстройку: кнопка области задач -->
+                <Control xsi:type="Button" id="msgReadOpenPaneButton">
+                  <Label resid="paneReadButtonLabel" />
+                  <Supertip>
+                    <Title resid="paneReadSuperTipTitle" />
+                    <Description resid="paneReadSuperTipDescription" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16" />
+                    <bt:Image size="32" resid="icon32" />
+                    <bt:Image size="80" resid="icon80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="messageReadTaskPaneUrl" />
+                  </Action>
+                </Control>
+                <!-- Сведения о добавлении дополнительных элементов управления — "ExecuteFunction" и "Menu" — см. на сайте http://aka.ms/ButtonCommands. -->
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+          <!-- Сведения о добавлении дополнительных точек расширения — MessageRead, AppointmentOrganizer и AppointmentAttendee — см. на сайте http://aka.ms/ExtensionPointsCommands. -->
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="~remoteAppUrl/Images/icon16.png"/>
+        <bt:Image id="icon32" DefaultValue="~remoteAppUrl/Images/icon32.png"/>
+        <bt:Image id="icon80" DefaultValue="~remoteAppUrl/Images/icon80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="functionFile" DefaultValue="~remoteAppUrl/Functions/FunctionFile.html"/>
+        <bt:Url id="messageReadTaskPaneUrl" DefaultValue="~remoteAppUrl/MessageRead.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="groupLabel" DefaultValue="My Add-in Group"/>
+        <bt:String id="customTabLabel"  DefaultValue="My Add-in Tab"/>
+        <bt:String id="paneReadButtonLabel" DefaultValue="Display all properties"/>
+        <bt:String id="paneReadSuperTipTitle" DefaultValue="Get all properties"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="paneReadSuperTipDescription" DefaultValue="Opens a pane displaying all available properties. This is an example of a button that opens a task pane."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

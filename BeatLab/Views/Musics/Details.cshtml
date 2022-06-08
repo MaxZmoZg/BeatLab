@@ -1,82 +1,205 @@
 ﻿@model BeatLab.Music
 
+
 @{
     ViewBag.Title = "Details";
+
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Music</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name_music)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name_music)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description_Music)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description_Music)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price_Music)
-        </dt>
+<br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Price_Music)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image_music)
-        </dt>
+<div class="container">
+    <div id="main">
 
-        <dd>
-            @Html.DisplayFor(model => model.Image_music)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Alboms.Name_Album)
-        </dt>
+        <div class="row" id="real-estates-detail">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <div class="text-center">
+                                <strong>Товар</strong>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="panel-body" style=" overflow: hidden;">
+                        <div class="text-center" id="author">
 
-        <dd>
-            @Html.DisplayFor(model => model.Alboms.Name_Album)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genere_Of_Music.Name_Gener_of_music)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)
-        </dd>
+                            @{ if (Model.Image_music == null)
+                                {
+                                    <img id='previewImage' class="img_cardDetalies " src="~/Resource/user.png" />
+                                }
+                                else
+                                {
+                                    @Html.Raw("<img id='previewImage' class='img_cardDetalies'   src=\"data:image/jpeg;base64,"
+                                              + Convert.ToBase64String(Model.Image_music) + "\" />")
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type_Music.Name_Type_Music)
-        </dt>
+                                }
+                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.Type_Music.Name_Type_Music)
-        </dd>
+                            <h3>@Html.DisplayFor(model => model.Name_music)</h3>
+                            <small class="label label-warning"> Жанр:  @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)</small>
+                            <br />
+                            <br />
+                            <p>@Html.DisplayFor(model => model.Description_Music)</p>
+                            <p class="sosmed-author">
+                                
+                                    Цена: @Html.DisplayFor(model => model.Price_Music) рублей
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Last_Name_User)
-        </dt>
+                                </p>
+                            <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
+                                <source src="@Url.Action("LoadAudio", "Musics", new { musicId = Model.ID_Music })" type="audio/mp3" />
 
-        <dd>
-            @Html.DisplayFor(model => model.User.Last_Name_User)
-        </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Music }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <ul id="myTab" class="nav nav-pills">
+                            <li class=""><a href="#contact" data-toggle="tab">Купить</a></li>
+                            <li class="">
+                              
+                                <a href="#contact" data-toggle="tab">График изменения цен</a>
+                            </li>
+                            <li class="active"><a href="#detail" data-toggle="tab">О пользователе</a></li>
+                            <li class=""><a href="#contact" data-toggle="tab">Написать сообщение</a></li>
+                        </ul>
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"> </textarea>
+
+                                        <div class="mar-top clearfix">
+                                            <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Добавить</button>
+                                           
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel">
+                                    <div class="panel-body">
+
+                                        @foreach (var item in Model.Comment_Music)
+                                        {
+                                            <div class="media-block">
+                                                <a class="media-left" href="#">
+
+
+
+                                                    @{ if (item.User.Image_User == null)
+                                                        {
+                                                            <img id='previewImage' class="img-circle img-sm" alt="Профиль пользователя" src="~/Resource/user.png" />
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Raw("<img id='previewImage' class='img-circle img-sm'  alt='Профиль пользователя' src=\"data:image/jpeg;base64,"
+                                                                                                 + Convert.ToBase64String(item.User.Image_User) + "\" />")
+
+                                                        }
+                                                    }
+
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="mar-btm">
+                                                        <a href="#" class="btn-link text-semibold media-heading box-inline"> @(item.User.Nickname_User)</a>
+                                                        <p class="text-muted text-sm"><i class="fa fa-globe fa-lg"></i> - @(item.Data_Comments.Day).@(item.Data_Comments.Month).@(item.Data_Comments.Year)</p>
+                                                    </div>
+                                                    <p>@(item.Content_Comments)</p>
+
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        }
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<dl class="dl-horizontal">
+
+                <dd>
+
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name_music)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description_Music)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price_Music)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Image_music)
+                </dd>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)
+                </dd>
+
+            </dl>*@
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Music }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <script>
+        function play() {
+            var audio = document.querySelector(".adu");
+            audio.play();
+        }
+        for (const player of Array.from(document.querySelectorAll('audio'))) {
+            player.addEventListener('play', onPlayListener);
+        }
+
+
+        function onPlayListener(event) {
+            console.log(event);
+
+
+
+            document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('.nameartistforlayer ').textContent.trim().slice(2);
+            document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('.namesongforplayer ').textContent.trim();
+            document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('.nameagenereforsong ').textContent.trim();
+            document.querySelector('.track-descr__cover-img').src = event.target.parentElement.querySelector('img').src;
+            event.preventDefault();
+            event.target.pause();
+            document.getElementById('container-id').hidden = false;
+            const audio = event.target;
+            const audioClone = audio.cloneNode(true);
+            audioClone.muted = false;
+            audioClone.removeEventListener('play', onPlayListener);
+            audioClone.play();
+            const audioContainer = document.querySelector('.player__controls-box');
+            audioContainer.removeChild(audioContainer.firstChild);
+            audioContainer.appendChild(audioClone);
+        }
+    </script>

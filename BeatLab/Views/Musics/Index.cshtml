@@ -6,25 +6,58 @@
 }
 
 
+<div class="breadcrumbs">
+    <div class="breadcrumbs-level-1" style="color:white; font-size:24px;">
+        Биты
+    </div>
+    
+</div>
 
-<h2>Биты</h2>
-<br />
-<p>
-    @Html.ActionLink("Добавить новый трек", "Create")
-</p>
+
+
+
+
+
+
 @using (Html.BeginForm(Html.BeginForm("Filter", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
 {
-    @Html.TextBox("Name");
-    @Html.DropDownList("ID_Genere_of_Music")
-    @Html.DropDownList("ID_User")
-    @Html.DropDownList("ID_Type_mysic")
-    <input type="submit" name="Искать">
-    <div>
-        Сортировать по
-        <input type="submit" value="Алфавиту" name="Алфавиту">
-        <input type="submit" value="Рейтингу" name="Рейтингу">
-        <input type="submit" value="Цене" name="Цене">
+<div style="display: flex; flex-wrap: wrap;  align-items: flex-end;">
+
+    <div class="bar">
+        <div class="bar2" >
+
+
+            @Html.TextBox("Name", "", htmlAttributes: new { @class = "searchbar" })
+
+            <a href="#"> <img class="voice" src="~/Resource/Magnifying_glass_icon.svg.png" title="Search by Voice"></a>
+        </div>
     </div>
+
+    <div style="display: flex;"  class="div_filter ">
+    <label class="labelstyle ">Жанр</label>
+    @Html.DropDownList("ID_Genere_of_Music", null, htmlAttributes: new { @class = "cb" })
+
+    </div>
+    <div style="display: flex;" class="div_filter ">
+    <label class="labelstyle">Исполнитель</label>
+    @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "cb" })
+
+    </div>
+    <div style="display: flex;" class="div_filter " >
+    <label  class="labelstyle">Категория</label>
+    @Html.DropDownList("ID_Type_mysic", null, htmlAttributes: new { @class = "cb" })
+
+    </div>
+    <input type="submit" style=" margin-bottom:15px;" name="Искать"  value="Найти" class="cb btn btn-default btn_filter ">
+</div>
+    <div>
+        <label style="color: #a7a7a7; font-size: 14px; ">Сортировать по</label>
+        <input type="submit" value="Алфавиту" name="Алфавиту" class="btn_sort btn_sort--margin">
+        <input type="submit" value="Рейтингу" name="Рейтингу" class="btn_sort btn_sort--margin">
+        <input type="submit" value="Цене" name="Цене" class="btn_sort btn_sort--margin">
+    </div>
+
+
 
 }
 <div style="display:flex; flex-wrap: wrap;">
@@ -36,41 +69,57 @@
     {
         foreach (var item in Model)
         {
+
+
+
             <div style="grid-template-rows: 70% 30%; margin: 2em;">
-                <div style="position:relative;">
+
+                <div style="position:relative;" >
+                   
                     @{ if (item.Image_music == null)
                         {
-                            <img id='previewImage' style='width:150px; height:150px;' src="~/Resource/user.png" />
+                            <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
                         }
                         else
                         {
-                            @Html.Raw("<img id='previewImage' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                            @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
                                                                  + Convert.ToBase64String(item.Image_music) + "\" />")
                             @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
                         }
                     }
-                    <audio controls
-                           controlsList="nodownload"
-                           oncontextmenu="return false;"
-                           style="position: absolute; margin-left:-200px; z-index:1;"
-                           muted
-                           id="player">
+
+
+
+                    <audio  id="player">
                         <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
+
+
                     </audio>
+                  
+
+
+
+
+
+
+
                 </div>
-                <div style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                     <div>
-                        @Html.ActionLink(item.Name_music, "Details", new { id = item.ID_Music }, new { style = "color: black;" })
+                        @Html.ActionLink(item.Name_music, "Details", new { id = item.ID_Music }, new { @class = "namesongforplayer" })
                     </div>
                     <div>
-                        @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Music }, new { style = "color: black;" })
+                        @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Music }, new { @class = "nameartistforlayer" })
+                    </div>
+                    <div>
+                        @Html.ActionLink(@"Жанр: " + item.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
                     </div>
                 </div>
             </div>
         }
     }
 </div>
-<section id="container-id" class="playerm" hidden>
+<section id="container-id" class="playerm" style="background:white !important" hidden>
     <div class="common-container">
         <div class="player__container">
 
@@ -82,6 +131,7 @@
                     <div class="track-descr__content">
 
                         <a class="track-artist__name" href="/beatmaker/176887">GREEDI</a>
+
                         <span style="font-size:14px"> — </span>
                         <a class="track-descr__name" href="/beatmaker/176887">GREEDI</a>
                         <p class="track-descr__style">
@@ -115,13 +165,23 @@
     </div>
 </section>
 <script>
+    function play() {
+        var audio = document.querySelector(".adu");
+        audio.play();
+    }
     for (const player of Array.from(document.querySelectorAll('audio'))) {
         player.addEventListener('play', onPlayListener);
     }
 
+    
     function onPlayListener(event) {
         console.log(event);
-        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.children[1].firstChild.textContent.trim();
+
+
+
+        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('.nameartistforlayer ').textContent.trim().slice(2 );
+        document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('.namesongforplayer ').textContent.trim();
+        document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('.nameagenereforsong ').textContent.trim();
         document.querySelector('.track-descr__cover-img').src = event.target.parentElement.querySelector('img').src;
         event.preventDefault();
         event.target.pause();

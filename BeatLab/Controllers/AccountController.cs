@@ -1,6 +1,5 @@
 ﻿using BeatLab.Models;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -10,15 +9,15 @@ namespace BeatLab.Controllers
     {
         private const string EmailPattern = @"\w+@\w+\.\w{2,3}";
 
-        [Authorize]
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            Session.Clear();
-            Session.RemoveAll();
-            Session.Abandon();
-            return RedirectToAction("Index", "Home");
-        }
+            [Authorize]
+            public ActionResult Logout()
+            {
+                FormsAuthentication.SignOut();
+                Session.Clear();
+                Session.RemoveAll();
+                Session.Abandon();
+                return RedirectToAction("Index", "Home");
+            }
         public ActionResult Login()
         {
             return View();
@@ -47,7 +46,7 @@ namespace BeatLab.Controllers
 
             return View(model);
         }
-
+        
         private static User SearchUserInDatabase(LoginModel model)
         {
             User user = null;
@@ -83,7 +82,7 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-          
+
             if (model.Login == null)
             {
                 ModelState.AddModelError(nameof(model.Login), "Введите логин");
@@ -130,7 +129,7 @@ namespace BeatLab.Controllers
                     Login = model.Login,
                     ID_User_Type = UserTypes.User
                 };
-             
+
                 db.User.Add(user);
                 db.SaveChanges();
             }
