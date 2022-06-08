@@ -18,7 +18,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -156,6 +157,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MusicPriceChartController.cs" />
     <Compile Include="Controllers\MusicsController.cs" />
     <Compile Include="Controllers\Price_MusicController.cs" />
     <Compile Include="Controllers\Type_MusicController.cs" />
@@ -261,6 +263,7 @@
     <Content Include="Views\Type_Music\Details.cshtml" />
     <Content Include="Views\Type_Music\Edit.cshtml" />
     <Content Include="Views\Type_Music\Index.cshtml" />
+    <Content Include="Views\MusicPriceChart\Index.cshtml" />
     <Resource Include="Resource\bg-img.jpg" />
     <Content Include="Resource\Ableton Push 2 2.jpg" />
     <Resource Include="Resource\breadcrumbs_1_level_after.png" />

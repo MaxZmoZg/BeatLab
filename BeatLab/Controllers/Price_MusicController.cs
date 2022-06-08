@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows.Forms.DataVisualization.Charting;
-using WebMatrix.Data;
 using BeatLab;
 
 namespace BeatLab.Controllers
