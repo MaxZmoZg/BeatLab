@@ -74,15 +74,7 @@ namespace BeatLab.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                if (uploadImage != null)
-                {
-                    music.Image_music = uploadImage.ToByteArray();
-                }
-                if (Request.Files["uploadMusic"] != null)
-                {
-                    music.Music_file = Request.Files["uploadMusic"].ToByteArray();
-                }
+                music.Price_Music.Add(new Price_Music { Price = int.Parse((string)Request.Form["PriceInput"]), Date = DateTime.Now }); ;
                 db.Music.Add(music);
                 db.SaveChanges();
                 return RedirectToAction("Index");

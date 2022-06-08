@@ -13,9 +13,9 @@ namespace BeatLab
                 if (columnName == nameof(Name_music))
                     if (string.IsNullOrWhiteSpace(Name_music))
                         return "Введите название трека";
-                if (columnName == nameof(Price_Music))
-                    if (Price_Music.LastOrDefault() != null || Price_Music.Last().Price <= 0)
-                        return "Введите корректную цену";
+                //if (columnName == nameof(Price_Music))
+                //    if (Price_Music.LastOrDefault() != null || Price_Music.Last().Price <= 0)
+                //        return "Введите корректную цену";
                 return null;
             }
         }
