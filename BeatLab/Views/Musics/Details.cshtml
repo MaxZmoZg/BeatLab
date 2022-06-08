@@ -46,19 +46,15 @@
                             }
 
                             <h3>@Html.DisplayFor(model => model.Name_music)</h3>
-                            <small class="label label-warning"> Жанр:  @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)</small>
+                            <small class="label label-warning"> Жанр: @Html.DisplayFor(model => model.Genere_Of_Music.Name_Gener_of_music)</small>
                             <br />
                             <br />
                             <p>@Html.DisplayFor(model => model.Description_Music)</p>
                             <p class="sosmed-author">
-                                
-                                    Цена: @Html.DisplayFor(model => model.Price_Music) рублей
-
-                                </p>
+                                Цена: @(Model.Price_Music.ToList().First().Price) руб.
+                            </p>
                             <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
                                 <source src="@Url.Action("LoadAudio", "Musics", new { musicId = Model.ID_Music })" type="audio/mp3" />
-
-
                             </audio>
                         </div>
                     </div>
@@ -70,8 +66,7 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class=""><a href="#contact" data-toggle="tab">Купить</a></li>
                             <li class="">
-                              
-                                <a href="#contact" data-toggle="tab">График изменения цен</a>
+                                @Html.ActionLink(linkText: "График изменения цен", actionName: "Index", controllerName: "MusicPriceChart", routeValues: new { id = Model.ID_Music }, htmlAttributes: null)
                             </li>
                             <li class="active"><a href="#detail" data-toggle="tab">О пользователе</a></li>
                             <li class=""><a href="#contact" data-toggle="tab">Написать сообщение</a></li>
@@ -82,13 +77,13 @@
                             <div class="col-md-12">
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"> </textarea>
-
-                                        <div class="mar-top clearfix">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Добавить</button>
-                                           
-                                           
-                                        </div>
+                                        @using (Html.BeginForm("PostComment", "Musics", new { musicId = Model.ID_Music }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {
+                                            <textarea name="comment" class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"></textarea>
+                                            <div class="mar-top clearfix">
+                                                <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Добавить</button>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div class="panel">
@@ -98,9 +93,6 @@
                                         {
                                             <div class="media-block">
                                                 <a class="media-left" href="#">
-
-
-
                                                     @{ if (item.User.Image_User == null)
                                                         {
                                                             <img id='previewImage' class="img-circle img-sm" alt="Профиль пользователя" src="~/Resource/user.png" />
@@ -125,9 +117,6 @@
                                                 </div>
                                             </div>
                                         }
-
-
-
                                     </div>
                                 </div>
                             </div>
