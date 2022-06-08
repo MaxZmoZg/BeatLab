@@ -247,5 +247,19 @@ namespace BeatLab.Controllers
             LoadDropDownLists();
             return View("Index", filteredMusics);
         }
+
+        public ActionResult PostComment(int musicId, string comment)
+        {
+            Comment_Music newComment = new Comment_Music
+            {
+                ID_Music = musicId,
+                Data_Comments = DateTime.Now,
+                Content_Comments = comment,
+                ID_User = db.User.First(u=>u.Login == HttpContext.User.Identity.Name).ID_User
+            };
+            db.Comment_Music.Add(newComment);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = musicId });
+        }
     }
 }
