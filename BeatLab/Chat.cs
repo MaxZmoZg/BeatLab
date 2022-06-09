@@ -12,13 +12,14 @@ namespace BeatLab
     using System;
     using System.Collections.Generic;
     
-    public partial class Order_Music
+    public partial class Chat
     {
-        public int ID_Order_Music { get; set; }
-        public int ID_Music { get; set; }
-        public int ID_User { get; set; }
+        public int ID_Chat { get; set; }
+        public int ID_Sender { get; set; }
+        public int ID_Receiver { get; set; }
+        public string Message { get; set; }
     
-        public virtual Music Music { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

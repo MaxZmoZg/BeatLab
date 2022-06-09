@@ -1,0 +1,138 @@
+﻿@model BeatLabDBEntities
+
+@{
+    @Styles.Render("~/Content/StylePage/ChatStyle.css")
+    ViewBag.Title = "Чат";
+    User receiver = Model.User.Find(ViewBag.ReceiverId);
+    User me = Model.User.First(u => u.Login == User.Identity.Name);
+}
+
+<div id="frame" style="margin-right:0 !important; margin-left:0 !important">
+    <div id="sidepanel">
+        <div id="contacts">
+            <ul>
+                @foreach (var user in Model.User.ToList().Where(u => u.Login != me.Login))
+                {
+
+                    <li class="contact @(Request.QueryString["inputReceiverId"] != null && Request.QueryString["inputReceiverId"] == user.ID_User.ToString() ? "active" : "")">
+                        <a onmousedown="window.location.href = &quot;@("/Chat?inputReceiverId=" + user.ID_User)&quot;" style="color: white;">
+                            <div class="wrap">
+                                <img src="data:image/jpeg;base64,@if (user.Image_User == null)
+                            {
+                                 @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+                            }
+                            else
+                            {
+                                @(Convert.ToBase64String(user.Image_User))
+                            }"
+                                     alt="" />
+                                <div class="meta">
+                                    <p class="name">@user.Login</p>
+                                    <p class="preview">
+                                        @if (user.Chat.Count() > 0)
+                                        {
+                                            if (user.Chat.Last().ID_Sender == me.ID_User)
+                                            {
+                                                <span>Вы:</span>@(user.Chat.Last().Message)
+                                            }
+                                            else
+                                            {
+                                                @(user.Chat.Last().Message)
+                                            }
+                                        }
+                                        else if (user.Chat1.Count() > 0)
+                                        {
+                                            @(user.Chat1.Last().Message)
+                                        }
+                                        else
+                                        {
+                                            @("Сообщений нет")
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+    <div class="content">
+        <div class="contact-profile">
+            <img src="data:image/jpeg;base64,@if (receiver.Image_User == null)
+            {
+                                 @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+            }
+            else
+            {
+                                @(Convert.ToBase64String(receiver.Image_User))
+            }"
+                 alt="" />
+            <p style="margin-top:20px;">@receiver.Login</p>
+
+        </div>
+        <div class="messages">
+            <ul>
+                @foreach (var message in (IEnumerable<Chat>)ViewBag.Chat)
+                {
+                    if (message.Sender.Login != User.Identity.Name)
+                    {
+                        <li class="sent">
+                            <img src="data:image/jpeg;base64,@if (message.Sender.Image_User == null)
+                            {
+                                 @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+                            }
+                            else
+                            {
+                                @(Convert.ToBase64String(message.Sender.Image_User))
+                            }"
+                                 alt="" />
+                            <p>@message.Message</p>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="replies">
+                            <img src="data:image/jpeg;base64,@if (message.Receiver.Image_User == null)
+                            {
+                                 @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+                            }
+                            else
+                            {
+                                @(Convert.ToBase64String(message.Receiver.Image_User))
+                            }"
+                                 alt="" />
+                            <p>@message.Message</p>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="message-input">
+            <div class="wrap">
+                @using (Html.BeginForm("PostComment", "Chat", routeValues: new { receiverId = receiver.ID_User, senderId = me.ID_User}))
+                {
+                    <input type="text" name="text" placeholder="Напишитe сообщение..." />
+                    <button class="submit" type="submit">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script>
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+    $("#profile-img").click(function () {
+        $("#status-options").toggleClass("active");
+    });
+
+    $(".expand-button").click(function () {
+        $("#profile").toggleClass("expanded");
+        $("#contacts").toggleClass("expanded");
+    });
+//# sourceURL=pen.js</script>
