@@ -62,21 +62,21 @@
 
                 <div style="position:relative;">
 
-                    @{ if (item.Image_music == null)
+                    <a onmousedown="window.location.href = &quot;@("/Musics?musicId=" + item.ID_Music)&quot;">
+                        <img id="previewImage"
+                             class="imgactive"
+                             style="width:150px; height:150px;"
+                             src="data:image/jpeg;base64,@if (item.Image_music == null)
                         {
-                            <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
+                             @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
                         }
                         else
                         {
-                            @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
-                                                                 + Convert.ToBase64String(item.Image_music) + "\" />")
-                            @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
+                            @(Convert.ToBase64String(item.Image_music))
                         }
-                    }
-
-                    <audio id="player">
-                        <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
-                    </audio>
+                        " />
+                    </a>
+                    @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
                 </div>
                 <div class="rndclss" style="background-color: lightgray; width: 150px; text-align:center;">
                     <div>
@@ -104,21 +104,33 @@
         }
     }
 </div>
-<section id="container-id" class="playerm" style="background:white !important" hidden>
+<section id="container-id" class="playerm" style="background:white !important" @(Request.QueryString["musicId"] != null ? "" : "hidden")>
     <div class="common-container">
         <div class="player__container">
 
             <div class="player__track-descr-box">
 
                 <div class="track-descr">
-                    <img class="track-descr__cover-img" src="https://beatmaker.tv/Default/General/Image/198874?type=BeatImageSmall" alt="Lilia | Живая гитара cover" />
+                    <img class="track-descr__cover-img"
+                         src="data:image/jpeg;base64,@if (Request.QueryString["musicId"] != null && Model.FirstOrDefault(m => m.ID_Music.ToString() == Request.QueryString["musicId"]) is Music music)
+                        {
+                             if(music.Image_music == null)
+                             {
+                                @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+                             }
+                             else
+                             {
+                                @(Convert.ToBase64String(music.Image_music))
+                             }
+                        }"
+                         alt="Обложка трека, играющего в музыкальном плеере" />
 
                     <div class="track-descr__content">
 
-                        <a class="track-artist__name" href="/beatmaker/176887">GREEDI</a>
+                        <a class="track-artist__name" href="/beatmaker/176887">@(Request.QueryString["musicId"] != null ? Model.First(m => m.ID_Music.ToString() == Request.QueryString["musicId"]).User.Login : "")</a>
 
                         <span style="font-size:14px"> — </span>
-                        <a class="track-descr__name" href="/beatmaker/176887">GREEDI</a>
+                        <a class="track-descr__name" href="/beatmaker/176887">@(Request.QueryString["musicId"] != null ? Model.First(m => m.ID_Music.ToString() == Request.QueryString["musicId"]).Name_music : "")</a>
                         <p class="track-descr__style">
                             Рок
                         </p>
@@ -128,7 +140,10 @@
             </div>
 
             <div class="player__controls-box">
-
+                <audio controls autoplay>
+                    <source src="/Musics/LoadAudio?musicId=@(Request.QueryString["musicId"])" />
+                    В вашем браузере не поддерживается проигрывание музыки.
+                </audio>
             </div>
 
 
@@ -149,35 +164,3 @@
         </div>
     </div>
 </section>
-<script>
-    function play() {
-        var audio = document.querySelector(".adu");
-        audio.play();
-    }
-    for (const player of Array.from(document.querySelectorAll('audio'))) {
-        player.addEventListener('play', onPlayListener);
-    }
-
-
-    function onPlayListener(event) {
-        console.log(event);
-
-
-
-        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('.nameartistforlayer ').textContent.trim().slice(2);
-        document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('.namesongforplayer ').textContent.trim();
-        document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('.nameagenereforsong ').textContent.trim();
-        document.querySelector('.track-descr__cover-img').src = event.target.parentElement.querySelector('img').src;
-        event.preventDefault();
-        event.target.pause();
-        document.getElementById('container-id').hidden = false;
-        const audio = event.target;
-        const audioClone = audio.cloneNode(true);
-        audioClone.muted = false;
-        audioClone.removeEventListener('play', onPlayListener);
-        audioClone.play();
-        const audioContainer = document.querySelector('.player__controls-box');
-        audioContainer.removeChild(audioContainer.firstChild);
-        audioContainer.appendChild(audioClone);
-    }
-</script>

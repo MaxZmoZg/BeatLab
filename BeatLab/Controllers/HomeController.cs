@@ -12,7 +12,7 @@ namespace BeatLab.Controllers
 {
     public class HomeController : Controller
     {
-        private BeatLabDBEntities db = new BeatLabDBEntities();
+        private readonly BeatLabDBEntities db = new BeatLabDBEntities();
         public ActionResult Index()
         {
             var music = db.Music.Include(m => m.Alboms).Include(m => m.Genere_Of_Music).Include(m => m.Type_Music).Include(m => m.User);

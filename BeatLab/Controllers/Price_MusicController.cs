@@ -13,7 +13,7 @@ namespace BeatLab.Controllers
 {
     public class Price_MusicController : Controller
     {
-        private BeatLabDBEntities db = new BeatLabDBEntities();
+        private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Price_Music
         public ActionResult Index()
