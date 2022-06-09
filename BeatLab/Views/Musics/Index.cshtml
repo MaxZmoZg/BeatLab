@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Биты|ADMIN";
-
 }
 
 
@@ -10,55 +9,45 @@
     <div class="breadcrumbs-level-1" style="color:white; font-size:24px;">
         Биты
     </div>
-    
+
 </div>
 
-
-
-
-
-
-
-@using (Html.BeginForm(Html.BeginForm("Filter", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
+@using (@Html.BeginForm("Filter", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-<div style="display: flex; flex-wrap: wrap;  align-items: flex-end;">
+    <div style="display: flex; flex-wrap: wrap;  align-items: flex-end;">
 
-    <div class="bar">
-        <div class="bar2" >
+        <div class="bar">
+            <div class="bar2">
 
+                @Html.TextBox("Name", "", htmlAttributes: new { @class = "searchbar" })
 
-            @Html.TextBox("Name", "", htmlAttributes: new { @class = "searchbar" })
-
-            <a href="#"> <img class="voice" src="~/Resource/Magnifying_glass_icon.svg.png" title="Search by Voice"></a>
+                <a href="#"> <img class="voice" src="~/Resource/Magnifying_glass_icon.svg.png" title="Search by Voice"></a>
+            </div>
         </div>
-    </div>
 
-    <div style="display: flex;"  class="div_filter ">
-    <label class="labelstyle ">Жанр</label>
-    @Html.DropDownList("ID_Genere_of_Music", null, htmlAttributes: new { @class = "cb" })
+        <div style="display: flex;" class="div_filter ">
+            <label class="labelstyle ">Жанр</label>
+            @Html.DropDownList("ID_Genere_of_Music", null, htmlAttributes: new { @class = "cb" })
 
-    </div>
-    <div style="display: flex;" class="div_filter ">
-    <label class="labelstyle">Исполнитель</label>
-    @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "cb" })
+        </div>
+        <div style="display: flex;" class="div_filter ">
+            <label class="labelstyle">Исполнитель</label>
+            @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "cb" })
 
-    </div>
-    <div style="display: flex;" class="div_filter " >
-    <label  class="labelstyle">Категория</label>
-    @Html.DropDownList("ID_Type_mysic", null, htmlAttributes: new { @class = "cb" })
+        </div>
+        <div style="display: flex;" class="div_filter ">
+            <label class="labelstyle">Категория</label>
+            @Html.DropDownList("ID_Type_mysic", null, htmlAttributes: new { @class = "cb" })
 
+        </div>
+        <input type="submit" style=" margin-bottom:15px;" name="Искать" value="Найти" class="cb btn btn-default btn_filter ">
     </div>
-    <input type="submit" style=" margin-bottom:15px;" name="Искать"  value="Найти" class="cb btn btn-default btn_filter ">
-</div>
     <div>
         <label style="color: #a7a7a7; font-size: 14px; ">Сортировать по</label>
         <input type="submit" value="Алфавиту" name="Алфавиту" class="btn_sort btn_sort--margin">
         <input type="submit" value="Рейтингу" name="Рейтингу" class="btn_sort btn_sort--margin">
         <input type="submit" value="Цене" name="Цене" class="btn_sort btn_sort--margin">
     </div>
-
-
-
 }
 <div style="display:flex; flex-wrap: wrap;">
     @if (Model.Count() == 0)
@@ -74,8 +63,8 @@
 
             <div style="grid-template-rows: 70% 30%; margin: 2em;">
 
-                <div style="position:relative;" >
-                   
+                <div style="position:relative;">
+
                     @{ if (item.Image_music == null)
                         {
                             <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
@@ -90,12 +79,12 @@
 
 
 
-                    <audio  id="player">
+                    <audio id="player">
                         <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
 
 
                     </audio>
-                  
+
 
 
 
@@ -114,7 +103,7 @@
                     <div>
                         @Html.ActionLink(@"Жанр: " + item.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
                     </div>
-                    
+
                 </div>
             </div>
         }
@@ -174,13 +163,13 @@
         player.addEventListener('play', onPlayListener);
     }
 
-    
+
     function onPlayListener(event) {
         console.log(event);
 
 
 
-        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('.nameartistforlayer ').textContent.trim().slice(2 );
+        document.querySelector('.track-artist__name').innerHTML = event.target.parentElement.parentElement.querySelector('.nameartistforlayer ').textContent.trim().slice(2);
         document.querySelector('.track-descr__name').innerHTML = event.target.parentElement.parentElement.querySelector('.namesongforplayer ').textContent.trim();
         document.querySelector('.track-descr__style').innerHTML = event.target.parentElement.parentElement.querySelector('.nameagenereforsong ').textContent.trim();
         document.querySelector('.track-descr__cover-img').src = event.target.parentElement.querySelector('img').src;
