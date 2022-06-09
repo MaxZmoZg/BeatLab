@@ -8,7 +8,7 @@ namespace BeatLab.Controllers
 {
     public class UsersController : Controller
     {
-        private BeatLabDBEntities db = new BeatLabDBEntities();
+        private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Users
         [Authorize]

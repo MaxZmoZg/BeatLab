@@ -41,8 +41,8 @@
                     </div>
                     <div class="u-form-group">
                         <label for="name-4c18" class="u-label">Цена</label>
-                        @Html.EditorFor(model => model.Price_Music.ToList().First().Price, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите цену", name = "PriceInput" } })
-                        @Html.ValidationMessageFor(model => model.Price_Music, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.PriceString, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите цену" } })
+                        @Html.ValidationMessageFor(model => model.PriceString, "", new { @class = "text-danger" })
 
                     </div>
 
@@ -78,7 +78,7 @@
 
                         <div class="col-md-10 editCard_DivImage--margin">
 
-                         
+
                             @Html.ValidationMessageFor(model => model.Image_music, "", new { @class = "text-danger" })
 
 
@@ -96,7 +96,7 @@
                         <div class="col-md-10 editCard_DivImage--margin">
 
                             @*@Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
-                                        + Convert.ToBase64String(Model.Image_music) + "\" />")*@
+                                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
 
 
                             @Html.ValidationMessageFor(model => model.Music_file, "", new { @class = "text-danger" })
