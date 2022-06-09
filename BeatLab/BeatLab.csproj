@@ -18,8 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44358</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -162,6 +161,7 @@
     <Compile Include="Controllers\Price_MusicController.cs" />
     <Compile Include="Controllers\Type_MusicController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\СhatController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Format_Plugin.cs">
@@ -243,6 +243,7 @@
     <Content Include="Content\OfficeThemes.css" />
     <Content Include="Content\StylePage\AccountEditStyle.css" />
     <Content Include="Content\StylePage\AccountStyle.css" />
+    <Content Include="Content\StylePage\ChatStyle.css" />
     <Content Include="Content\StylePage\DetaliesMusic.css" />
     <Content Include="Content\StylePage\HomeStyle.css" />
     <Content Include="favicon.ico" />
@@ -264,6 +265,11 @@
     <Content Include="Views\Type_Music\Edit.cshtml" />
     <Content Include="Views\Type_Music\Index.cshtml" />
     <Content Include="Views\MusicPriceChart\Index.cshtml" />
+    <Content Include="Views\Сhat\Create.cshtml" />
+    <Content Include="Views\Сhat\Delete.cshtml" />
+    <Content Include="Views\Сhat\Details.cshtml" />
+    <Content Include="Views\Сhat\Edit.cshtml" />
+    <Content Include="Views\Сhat\Index.cshtml" />
     <Resource Include="Resource\bg-img.jpg" />
     <Content Include="Resource\Ableton Push 2 2.jpg" />
     <Resource Include="Resource\breadcrumbs_1_level_after.png" />
