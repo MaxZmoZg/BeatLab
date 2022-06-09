@@ -160,7 +160,6 @@
     <Compile Include="Controllers\MusicPriceChartController.cs" />
     <Compile Include="Controllers\MusicsController.cs" />
     <Compile Include="Controllers\Price_MusicController.cs" />
-    <Compile Include="Controllers\Type_MusicController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
@@ -258,11 +257,6 @@
     <Content Include="Views\Price_Music\Details.cshtml" />
     <Content Include="Views\Price_Music\Edit.cshtml" />
     <Content Include="Views\Price_Music\Index.cshtml" />
-    <Content Include="Views\Type_Music\Create.cshtml" />
-    <Content Include="Views\Type_Music\Delete.cshtml" />
-    <Content Include="Views\Type_Music\Details.cshtml" />
-    <Content Include="Views\Type_Music\Edit.cshtml" />
-    <Content Include="Views\Type_Music\Index.cshtml" />
     <Content Include="Views\MusicPriceChart\Index.cshtml" />
     <Resource Include="Resource\bg-img.jpg" />
     <Content Include="Resource\Ableton Push 2 2.jpg" />

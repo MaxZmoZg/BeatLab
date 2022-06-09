@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using System.Text;
 
 namespace BeatLab
@@ -13,12 +12,14 @@ namespace BeatLab
                 if (columnName == nameof(Name_music))
                     if (string.IsNullOrWhiteSpace(Name_music))
                         return "Введите название трека";
-                //if (columnName == nameof(Price_Music))
-                //    if (Price_Music.LastOrDefault() != null || Price_Music.Last().Price <= 0)
-                //        return "Введите корректную цену";
+                if (columnName == nameof(PriceString))
+                    if (string.IsNullOrWhiteSpace(PriceString) || !int.TryParse(PriceString, out int price) || price <= 0)
+                        return "Введите корректную цену";
                 return null;
             }
         }
+
+        public string PriceString { get; set; }
 
         public string Error
         {
@@ -31,5 +32,6 @@ namespace BeatLab
                 return errors.ToString();
             }
         }
+
     }
 }
