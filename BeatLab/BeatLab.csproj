@@ -18,7 +18,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -127,9 +128,6 @@
     <Compile Include="Alboms.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Answer.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -147,6 +145,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeatLab.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Chat.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Comment_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
@@ -173,13 +174,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\PartialChat.cs" />
     <Compile Include="Models\PartialMusic.cs" />
     <Compile Include="Models\PartialUser.cs" />
     <Compile Include="Models\UserTypes.cs" />
     <Compile Include="Music.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Option.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Order_Music.cs">
@@ -199,13 +198,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />
-    <Compile Include="Question.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\SaltedPasswordGenerator.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
     <Compile Include="Type_Alboms.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
@@ -216,9 +209,6 @@
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="User_Type.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Сhat.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -259,11 +249,7 @@
     <Content Include="Views\Price_Music\Edit.cshtml" />
     <Content Include="Views\Price_Music\Index.cshtml" />
     <Content Include="Views\MusicPriceChart\Index.cshtml" />
-    <Content Include="Views\Сhat\Create.cshtml" />
-    <Content Include="Views\Сhat\Delete.cshtml" />
-    <Content Include="Views\Сhat\Details.cshtml" />
-    <Content Include="Views\Сhat\Edit.cshtml" />
-    <Content Include="Views\Сhat\Index.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
     <Resource Include="Resource\bg-img.jpg" />
     <Content Include="Resource\Ableton Push 2 2.jpg" />
     <Resource Include="Resource\breadcrumbs_1_level_after.png" />
@@ -296,7 +282,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

@@ -36,7 +36,7 @@
                     <li>@Html.ActionLink("Биты", "Musics.Index", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Семплы", "Home.About", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Плагины", "Home.Contact", @class: "header-style-text")</li>
-                    <li>@Html.ActionLink("Чат", "Account.Login", @class: "header-style-text ")</li>
+                    <li>@Html.ActionLink("Чат", "Chat.Index", @class: "header-style-text ")</li>
                     @{
                         if (ViewContext.HttpContext.User.IsInRole("admin"))
                         {
