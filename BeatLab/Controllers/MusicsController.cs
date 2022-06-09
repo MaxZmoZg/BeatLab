@@ -239,7 +239,7 @@ namespace BeatLab.Controllers
             LoadDropDownLists();
             return View("Index", filteredMusics);
         }
-
+        [Authorize]
         public ActionResult PostComment(int musicId, string comment)
         {
             Comment_Music newComment = new Comment_Music
