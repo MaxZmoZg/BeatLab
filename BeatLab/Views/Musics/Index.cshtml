@@ -58,9 +58,6 @@
     {
         foreach (var item in Model)
         {
-
-
-
             <div style="grid-template-rows: 70% 30%; margin: 2em;">
 
                 <div style="position:relative;">
@@ -77,23 +74,11 @@
                         }
                     }
 
-
-
                     <audio id="player">
                         <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
-
-
                     </audio>
-
-
-
-
-
-
-
-
                 </div>
-                <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                <div class="rndclss" style="background-color: lightgray; width: 150px; text-align:center;">
                     <div>
                         @Html.ActionLink(item.Name_music, "Details", new { id = item.ID_Music }, new { @class = "namesongforplayer" })
                     </div>
@@ -102,6 +87,16 @@
                     </div>
                     <div>
                         @Html.ActionLink(@"Жанр: " + item.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
+                    </div>
+                    <div>
+                        Цена: @if (!item.Price_Music.Any())
+                        {
+                            @("не указана")
+                        }
+                        else
+                        {
+                            @(item.Price_Music.First().Price + " руб.")
+                        }
                     </div>
 
                 </div>
