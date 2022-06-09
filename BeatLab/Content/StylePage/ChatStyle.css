@@ -407,11 +407,9 @@ li {
             display: none;
         }
 }
-
 #frame #sidepanel #contacts.expanded {
     height: calc(100% - 334px);
 }
-
 #frame #sidepanel #contacts::-webkit-scrollbar {
     width: 8px;
     background: #2c3e50;
