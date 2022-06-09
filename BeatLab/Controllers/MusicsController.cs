@@ -70,11 +70,16 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User")] Music music, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString")] Music music, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
-                music.Price_Music.Add(new Price_Music { Price = int.Parse((string)Request.Form["PriceInput"]), Date = DateTime.Now }); ;
+                Price_Music priceMusic = new Price_Music
+                {
+                    Price = int.Parse(Request.Form["PriceString"]),
+                    Date = DateTime.Now
+                };
+                music.Price_Music.Add(priceMusic);
                 db.Music.Add(music);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -247,7 +252,7 @@ namespace BeatLab.Controllers
                 ID_Music = musicId,
                 Data_Comments = DateTime.Now,
                 Content_Comments = comment,
-                ID_User = db.User.First(u=>u.Login == HttpContext.User.Identity.Name).ID_User
+                ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User
             };
             db.Comment_Music.Add(newComment);
             db.SaveChanges();
