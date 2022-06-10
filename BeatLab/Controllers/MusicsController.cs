@@ -109,10 +109,10 @@ namespace BeatLab.Controllers
                 return RedirectToAction("Index");
             }
 
-       
+
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music", music.ID_Type_mysic);
-            
+
             return View(music);
         }
 
@@ -129,9 +129,11 @@ namespace BeatLab.Controllers
                 return HttpNotFound();
             }
 
-            music.PriceString = db.Price_Music.ToList().Last().Price.ToString();
-           
-            
+            music.PriceString = db.Price_Music
+                .ToList()
+                .Last().Price
+                .ToString();
+
             ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music", music.ID_Type_mysic);
@@ -144,11 +146,20 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User")] Music music)
+        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(music).State = EntityState.Modified;
+                db.SaveChanges();
+
+                Price_Music priceMusic = new Price_Music
+                {
+                    ID_Music = music.ID_Music,
+                    Price = int.Parse(music.PriceString),
+                    Date = DateTime.Now
+                };
+                db.Price_Music.Add(priceMusic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -177,12 +188,12 @@ namespace BeatLab.Controllers
         // POST: Musics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) 
+        public ActionResult DeleteConfirmed(int id)
         {
-            
+
             Music music = db.Music.Find(id);
-             
-          
+
+
             db.Music.Remove(music);
             db.SaveChanges();
             return RedirectToAction("Index");
