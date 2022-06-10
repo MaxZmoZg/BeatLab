@@ -17,7 +17,7 @@
                     <li class="contact @(Request.QueryString["inputReceiverId"] != null && Request.QueryString["inputReceiverId"] == user.ID_User.ToString() ? "active" : "")">
                         <a onmousedown="window.location.href = &quot;@("/Chat?inputReceiverId=" + user.ID_User)&quot;" style="color: white;">
                             <div class="wrap">
-                                <img src="data:image/jpeg;base64,@if (user.Image_User == null)
+                                <img style="height:35px;" src="data:image/jpeg;base64,@if (user.Image_User == null)
                             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
                             }
@@ -60,7 +60,7 @@
     </div>
     <div class="content">
         <div class="contact-profile">
-            <img src="data:image/jpeg;base64,@if (receiver.Image_User == null)
+            <img style="height:35px;" src="data:image/jpeg;base64,@if (receiver.Image_User == null)
             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
             }
@@ -79,7 +79,7 @@
                     if (message.Sender.Login != User.Identity.Name)
                     {
                         <li class="sent">
-                            <img src="data:image/jpeg;base64,@if (message.Sender.Image_User == null)
+                            <img style="height:22px;" src="data:image/jpeg;base64,@if (message.Sender.Image_User == null)
                             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
                             }
@@ -94,7 +94,7 @@
                     else
                     {
                         <li class="replies">
-                            <img src="data:image/jpeg;base64,@if (message.Receiver.Image_User == null)
+                            <img style="height:22px;" src="data:image/jpeg;base64,@if (message.Receiver.Image_User == null)
                             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
                             }

@@ -92,11 +92,15 @@
                     </div>
 
                 </div>
-                @Html.ActionLink("Добавить бит или семпл", "Musics.", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
+
+                @Html.ActionLink("Добавить бит или семпл", "Create", "Musics", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
             </div>
 
         </section>
+
+        <h4>Мои товары:</h4>
         <div style="display:flex; flex-wrap: wrap;">
+
 
             @foreach (var item in Model.Music)
             {
@@ -149,6 +153,66 @@
                     </div>
                     @Html.ActionLink("Изменить", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
                     @Html.ActionLink("Удалить", "Delete", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
+                </div>
+            }
+
+        </div>
+        <h4>Купленные товары:</h4>
+        
+        <div style="display:flex; flex-wrap: wrap;">
+
+
+            @foreach (var item in Model.Order_Music)
+            {
+
+
+
+                <div style="grid-template-rows: 70% 30%; margin: 2em;">
+
+                    <div style="position:relative;">
+
+                        @{ if (item.Music.Image_music == null)
+                            {
+                                <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
+                            }
+                            else
+                            {
+                                @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                                     + Convert.ToBase64String(item.Music.Image_music) + "\" />")
+                                @Html.ValidationMessageFor(modelItem => item.Music.Image_music, "", new { @class = "text-danger" })
+                            }
+                        }
+
+
+
+                        <audio id="player">
+                            <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
+
+
+                        </audio>
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                        <div>
+                            @Html.ActionLink(item.Music.Name_music, "Details", new { id = item.ID_Music }, new { @class = "namesongforplayer" })
+                        </div>
+                        <div>
+                            @Html.ActionLink(@"от " + item.Music.User.Nickname_User, "Details", new { id = item.ID_Music }, new { @class = "nameartistforlayer" })
+                        </div>
+                        <div>
+                            @Html.ActionLink(@"Жанр: " + item.Music.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
+                        </div>
+
+                    </div>
+                    @Html.ActionLink("Скачать", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
+                 
                 </div>
             }
 

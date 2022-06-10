@@ -159,6 +159,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MusicPriceChartController.cs" />
     <Compile Include="Controllers\MusicsController.cs" />
+    <Compile Include="Controllers\Order_MusicController.cs" />
     <Compile Include="Controllers\Price_MusicController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\СhatController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Content\StylePage\ChatStyle.css" />
     <Content Include="Content\StylePage\DetaliesMusic.css" />
     <Content Include="Content\StylePage\HomeStyle.css" />
+    <Content Include="Content\StylePage\PaymentStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,6 +245,7 @@
     <Content Include="Resource\1828439.png" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />
+    <Resource Include="Resource\card.png" />
     <Content Include="Views\Price_Music\Create.cshtml" />
     <Content Include="Views\Price_Music\Delete.cshtml" />
     <Content Include="Views\Price_Music\Details.cshtml" />
@@ -250,6 +253,11 @@
     <Content Include="Views\Price_Music\Index.cshtml" />
     <Content Include="Views\MusicPriceChart\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Order_Music\Create.cshtml" />
+    <Content Include="Views\Order_Music\Delete.cshtml" />
+    <Content Include="Views\Order_Music\Details.cshtml" />
+    <Content Include="Views\Order_Music\Edit.cshtml" />
+    <Content Include="Views\Order_Music\Index.cshtml" />
     <Resource Include="Resource\bg-img.jpg" />
     <Content Include="Resource\Ableton Push 2 2.jpg" />
     <Resource Include="Resource\breadcrumbs_1_level_after.png" />

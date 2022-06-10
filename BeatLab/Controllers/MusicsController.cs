@@ -72,8 +72,32 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString")] Music music, HttpPostedFileBase uploadImage)
         {
+            if (music.Name_music == null || music.Name_music == "")
+            {
+                ModelState.AddModelError(nameof(music.Name_music), "Введите название");
+            }
+            if (music.Description_Music == null || music.Description_Music == "")
+            {
+                ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
+            }
+            if (music.Music_file == null)
+            {
+                ModelState.AddModelError(nameof(music.Music_file), "Выберите музыкальный файл");
+            }
+
             if (ModelState.IsValid)
             {
+                if (uploadImage != null)
+                {
+                    music.Image_music = uploadImage.ToByteArray();
+                }
+                if (Request.Files["uploadMusic"] != null)
+                {
+                    music.Music_file = Request.Files["uploadMusic"].ToByteArray();
+                }
+
+                music.Alboms = null;
+                music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
                 Price_Music priceMusic = new Price_Music
                 {
                     Price = int.Parse(Request.Form["PriceString"]),
@@ -85,10 +109,10 @@ namespace BeatLab.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
+       
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music", music.ID_Type_mysic);
-            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Nickname_User", music.ID_User);
+            
             return View(music);
         }
 
@@ -104,6 +128,10 @@ namespace BeatLab.Controllers
             {
                 return HttpNotFound();
             }
+
+            music.PriceString = db.Price_Music.ToList().Last().Price.ToString();
+           
+            
             ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music", music.ID_Type_mysic);
@@ -149,9 +177,12 @@ namespace BeatLab.Controllers
         // POST: Musics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id) 
         {
+            
             Music music = db.Music.Find(id);
+             
+          
             db.Music.Remove(music);
             db.SaveChanges();
             return RedirectToAction("Index");

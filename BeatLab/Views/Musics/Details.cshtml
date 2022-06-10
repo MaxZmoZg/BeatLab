@@ -68,7 +68,7 @@
                             <li class="">
                                 @Html.ActionLink(linkText: "График изменения цен", actionName: "Index", controllerName: "MusicPriceChart", routeValues: new { id = Model.ID_Music }, htmlAttributes: null)
                             </li>
-                            <li class="active"><a href="#contact" data-toggle="tab">О пользователе</a></li>
+                            
                             <li class="">@Html.ActionLink("Написать сообщение", "Index", "Chat", new { inputReceiverId = Model.ID_User }, null)</li>
                         </ul>
 
@@ -156,10 +156,7 @@
 
         </dl>*@
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Music }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
 <script>
     function play() {
         var audio = document.querySelector(".adu");

@@ -127,6 +127,7 @@ namespace BeatLab.Controllers
                     Password_Hash = encryptedPasswordAndSalt,
                     Salt = saltBytes,
                     Login = model.Login,
+                    Nickname_User = model.Login,
                     ID_User_Type = UserTypes.User
                 };
 

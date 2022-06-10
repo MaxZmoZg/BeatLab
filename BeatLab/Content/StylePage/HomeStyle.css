@@ -1,4 +1,61 @@
-﻿.u-section-1 {
+﻿div.main .center {
+    position: absolute;
+    top: 37%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 15;
+}
+    div.main .center h1 {
+        color: #fff;
+        font-size: calc(40px + 1.2vw);
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+        animation: showRight 1s;
+        z-index: 1;
+    }
+
+    div.main .center p {
+        color: #fff;
+        font-size: calc(13px + 1.2vw);
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+        animation: showLeft 1s;
+        z-index: 1;
+    }
+
+
+@keyframes showLeft {
+
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+@keyframes showRight {
+
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+.bg-fon {
+    opacity: 0.65;
+    
+   
+}
+
+.u-section-1 {
     background-image: none;
     min-height: 1051px;
 }
