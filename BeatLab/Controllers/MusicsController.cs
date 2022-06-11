@@ -81,10 +81,7 @@ namespace BeatLab.Controllers
             {
                 ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
             }
-            if (music.Music_file == null)
-            {
-                ModelState.AddModelError(nameof(music.Music_file), "Выберите музыкальный файл");
-            }
+            
 
             if (ModelState.IsValid)
             {

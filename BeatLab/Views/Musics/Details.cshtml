@@ -51,7 +51,7 @@
                             <br />
                             <p>@Html.DisplayFor(model => model.Description_Music)</p>
                             <p class="sosmed-author">
-                                Цена: @(Model.Price_Music.ToList().First().Price) руб.
+                                Цена: @(Model.Price_Music.ToList().Last().Price) руб.
                             </p>
                             <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
                                 <source src="@Url.Action("LoadAudio", "Musics", new { musicId = Model.ID_Music })" type="audio/mp3" />
@@ -64,11 +64,15 @@
                 <div class="panel">
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
-                            <li class=""><a href="#contact" data-toggle="tab">Купить</a></li>
+                            <li>
+                            @Html.ActionLink(linkText: "Купить", actionName: "Create", controllerName: "Order_Music", routeValues: new { id = Model.ID_Music }, htmlAttributes: null)
+
+                            </li>
+                           
                             <li class="">
                                 @Html.ActionLink(linkText: "График изменения цен", actionName: "Index", controllerName: "MusicPriceChart", routeValues: new { id = Model.ID_Music }, htmlAttributes: null)
                             </li>
-                            
+
                             <li class="">@Html.ActionLink("Написать сообщение", "Index", "Chat", new { inputReceiverId = Model.ID_User }, null)</li>
                         </ul>
 

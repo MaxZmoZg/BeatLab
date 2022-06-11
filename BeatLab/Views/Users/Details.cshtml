@@ -158,11 +158,36 @@
 
         </div>
         <h4>Купленные товары:</h4>
-        
+
         <div style="display:flex; flex-wrap: wrap;">
 
+            <div style="grid-template-rows: 70% 30%; margin: 2em;">
 
-            @foreach (var item in Model.Order_Music)
+                <div style="position:relative;">
+
+                    <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/239612-1.jpg " />
+                </div>
+                <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                    <div>
+                        <a class="namesongforplayer">Sample 128 BPM</a>
+
+                    </div>
+                    <div>
+                        <a class="nameartistforlayer">от: Izmail</a>
+
+                    </div>
+                    <div>
+                        <a class="nameagenereforsong">Жанр: Хип-хоп</a>
+                    </div>
+                    <div>
+                        <a href="https://TransFiles.ru/95e1w" class="u-black u-btn u-button-style">Скачать</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*@foreach (var item in Model.Order_Music)
             {
 
 
@@ -212,13 +237,15 @@
 
                     </div>
                     @Html.ActionLink("Скачать", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
-                 
-                </div>
-            }
 
-        </div>
+                </div>
+            }*@
+
+
     }
 </div>
+<br />
+<br />
 <div>
     @Html.ActionLink("Удалить аккаунт", "Delete", new { id = Model.ID_User }, new { @class = "header-style-text" })
     @Html.ActionLink("Обратная связь", "Delete", new { id = Model.ID_User }, new { @class = "header-style-text" })

@@ -49,10 +49,13 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User")] Order_Music order_Music)
+        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User")] Order_Music order_Music, Music music)
         {
             if (ModelState.IsValid)
             {
+                order_Music.ID_Music = music.ID_Music;
+                order_Music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User; 
+                
                 db.Order_Music.Add(order_Music);
                 db.SaveChanges();
                 return RedirectToAction("Index");
