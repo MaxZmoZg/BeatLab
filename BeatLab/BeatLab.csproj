@@ -177,6 +177,7 @@
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
     <Compile Include="Models\PartialMusic.cs" />
+    <Compile Include="Models\PartialOrder.cs" />
     <Compile Include="Models\PartialUser.cs" />
     <Compile Include="Models\UserTypes.cs" />
     <Compile Include="Models\Entities\Music.cs">
