@@ -71,6 +71,7 @@
           <Property Name="Music_file" Type="varbinary(max)" />
           <Property Name="Image_music" Type="image" />
           <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Order_Music">
           <Key>
@@ -208,7 +209,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Comment_Music" Type="Self.Comment_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -304,7 +307,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Order_Music" Type="Self.Order_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -376,7 +381,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Price_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Price_Music" Type="Self.Price_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -696,6 +703,7 @@
           <Property Name="Music_file" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Image_music" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Alboms" Relationship="BeatLabDBModel.FK_Music_Alboms" FromRole="Music" ToRole="Alboms" />
           <NavigationProperty Name="Comment_Music" Relationship="BeatLabDBModel.FK_Comment_Music_Music" FromRole="Music" ToRole="Comment_Music" />
           <NavigationProperty Name="Genere_Of_Music" Relationship="BeatLabDBModel.FK_Music_Genere_Of_Music" FromRole="Music" ToRole="Genere_Of_Music" />
@@ -876,7 +884,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Comment_Music" Role="Comment_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -972,7 +982,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Order_Music" Role="Order_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -984,7 +996,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Price_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Price_Music" Role="Price_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -1135,6 +1149,7 @@
           <EntitySetMapping Name="Music">
             <EntityTypeMapping TypeName="BeatLabDBModel.Music">
               <MappingFragment StoreEntitySet="Music">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="Image_music" ColumnName="Image_music" />
                 <ScalarProperty Name="Music_file" ColumnName="Music_file" />

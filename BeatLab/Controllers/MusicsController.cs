@@ -19,6 +19,7 @@ namespace BeatLab.Controllers
         {
             LoadDropDownLists();
             var music = db.Music
+                .Where(m => !m.IsDeleted)
                 .Include(m => m.Alboms)
                 .Include(m => m.Genere_Of_Music)
                 .Include(m => m.Type_Music)
@@ -81,7 +82,7 @@ namespace BeatLab.Controllers
             {
                 ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
             }
-            
+
 
             if (ModelState.IsValid)
             {
@@ -192,7 +193,7 @@ namespace BeatLab.Controllers
             Music music = db.Music.Find(id);
 
 
-            db.Music.Remove(music);
+            music.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -222,6 +223,7 @@ namespace BeatLab.Controllers
         public ActionResult Filter()
         {
             List<Music> filteredMusics = db.Music
+                .Where(m => !m.IsDeleted)
                 .Include(m => m.Alboms)
                 .Include(m => m.Genere_Of_Music)
                 .Include(m => m.Type_Music)
