@@ -145,10 +145,19 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music)
+        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadMusic)
         {
             if (ModelState.IsValid)
             {
+                if (uploadImage != null)
+                {
+                    music.Image_music = uploadImage.ToByteArray();
+                }
+                if (uploadMusic != null)
+                {
+                    music.Music_file = uploadMusic.ToByteArray();
+                }
+
                 db.Entry(music).State = EntityState.Modified;
                 db.SaveChanges();
 
