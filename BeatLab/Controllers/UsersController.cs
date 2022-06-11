@@ -45,13 +45,13 @@ namespace BeatLab.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "ID_User,Last_Name_User,First_Name_User,Middle_Name_User,Description_User,Age_User,Image_User,Nickname_User,Login,Password_Hash,Salt,ID_User_Type,Email_User")] User user)
         {
-            if (user.Last_Name_User == null || user.Last_Name_User == "")
-         
+
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                CreateNewUser(user); 
+               
+                return RedirectToAction("About","Home");
             }
 
             ViewBag.ID_User_Type = new SelectList(db.User_Type, "ID_User_Type", "Name_User_Type", user.ID_User_Type);
@@ -157,5 +157,40 @@ namespace BeatLab.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private static void CreateNewUser(User model)
+        {
+            var a = 123456;
+            SaltedPasswordGenerator.GenerateHashAndSalt(a.ToString(),
+                                         out byte[] saltBytes,
+                                         out byte[] encryptedPasswordAndSalt);
+            using (BeatLabDBEntities db = new BeatLabDBEntities())
+            {
+
+
+                User user = new User
+                {
+                    Last_Name_User = model.Last_Name_User,
+                    First_Name_User = model.First_Name_User,
+                    Middle_Name_User = model.Middle_Name_User,
+                    Email_User = model.Email_User,
+                    Description_User = model.Description_User,
+                    Age_User =model.Age_User,
+                    Password_Hash = encryptedPasswordAndSalt,
+                    Salt = saltBytes,
+                    Login = model.Login,
+                    Nickname_User = model.Login,
+                    ID_User_Type = 2,
+                    Image_User =null
+                    
+                };
+
+                db.User.Add(user);
+                db.SaveChanges();
+            }
+        }
+
+
     }
+
 }

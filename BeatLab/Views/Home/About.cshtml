@@ -1,7 +1,19 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
+<br />
+<br />
+
+<h3>Управление данными:</h3>
+<ul>
+    <li>@Html.ActionLink("Пользователи", "Create", "Users", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Тип пользователя", "Index", "Polzovatels", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Музыкальные товары", "Index", "Tovars", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Тип товара", "Index", "Tip_Tovar", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Жанр товара", "Index", "Variants", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    @*<li>@Html.ActionLink("Мастера", "Index", "Masters", new { area = "" }, new { @class = "header-style-text decor" })</li>*@
+    <li>@Html.ActionLink("Цена товара", "Index", "Tip_Master", new { area = "" }, new { @class = "header-style-text decor" })</li>
+</ul>
 
 
 

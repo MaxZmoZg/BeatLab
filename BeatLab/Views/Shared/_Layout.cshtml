@@ -36,10 +36,10 @@
                     <li>@Html.ActionLink("Биты и семплы", "Musics.Index", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Плагины", "Musics.Index", @class: "header-style-text")</li>
                     <li>@Html.ActionLink("Чат", "Chat.Index", @class: "header-style-text ")</li>
-                    @{
-                        if (ViewContext.HttpContext.User.IsInRole("admin"))
+                     @{
+                        if (User.Identity.Name == "Admin")
                         {
-                            <li>@Html.ActionLink("Управление данными", "Account.Login", @class: "header-style-text ")</li>
+                            <li>@Html.ActionLink("Управление данными", "About", "Home", new { area = "" }, new { @class = "header-style-text " })</li>
                         }
                     }
                 </ul>
