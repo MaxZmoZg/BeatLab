@@ -1,4 +1,5 @@
-﻿using BeatLab.Models.Entities;
+﻿using BeatLab.Models;
+using BeatLab.Models.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -181,7 +182,7 @@ namespace BeatLab.Controllers
                     Salt = saltBytes,
                     Login = model.Login,
                     Nickname_User = model.Login,
-                    ID_User_Type = 2,
+                    ID_User_Type = UserTypes.Admin,
                     Image_User = null
 
                 };
@@ -191,7 +192,11 @@ namespace BeatLab.Controllers
             }
         }
 
-
+        public FileResult DownloadSong(int musicId)
+        {
+            var music = db.Music.Find(musicId);
+            return File(music.Music_file, contentType: "audio/mp3", music.Name_music + ".mp3");
+        }
     }
 
 }
