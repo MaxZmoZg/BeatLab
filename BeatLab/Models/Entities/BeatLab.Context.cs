@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Data.Entity;

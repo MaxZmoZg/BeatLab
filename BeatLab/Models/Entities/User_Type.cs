@@ -7,28 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Alboms
+    public partial class User_Type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Alboms()
+        public User_Type()
         {
-            this.Music = new HashSet<Music>();
+            this.User = new HashSet<User>();
         }
     
-        public int ID_Album { get; set; }
-        public int ID_User { get; set; }
-        public string Name_Album { get; set; }
-        public byte[] Image_Album { get; set; }
-        public int ID_Type_Alboms { get; set; }
+        public int ID_User_Type { get; set; }
+        public string Name_User_Type { get; set; }
     
-        public virtual Type_Alboms Type_Alboms { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Music> Music { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }

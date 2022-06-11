@@ -1,4 +1,5 @@
-﻿@model BeatLab.Order_Music
+﻿@using BeatLab.Models.Entities;
+@model Order_Music
 
 @{
     @Styles.Render("~/Content/StylePage/PaymentStyle.css")
@@ -16,18 +17,17 @@
     <div class="page-header text-center">
         <h3>Оплата товара</h3>
     </div>
-    
+
     <!-- Credit Card Payment Form - START -->
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <div class="tips">
                     <br />
-                    <p>Тип товара: Семпл</p>
+                    <p>Тип товара: ...</p>
                     <p>Название товара: Sample 128 BPM</p>
                     <p>Продавец: Izmail</p>
                     <p>Цена: 101р</p>
-                    
                 </div>
                 <br />
                 <div class="panel panel-default">
@@ -39,8 +39,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <form role="form">
+                    @using (Html.BeginForm("Create", "Order_Music", FormMethod.Post, htmlAttributes: new { style = "height: 50px;" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="form-group">
@@ -62,23 +64,22 @@
                                     <div class="form-group"> <label>ИМЯ ВЛАДЕЛЬЦА</label> <input type="text" class="form-control" placeholder="Введите имя владельца" /> </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class=" col-xs-12 checkbox">
-                        <label>
-                            <input type="checkbox" id="blankCheckbox" value="option1" aria-label="">
-                            <label>Согластны ли вы с условиями пользовательского соглашения?</label>
-                        </label>
-                    </div>
-                    <div class="panel-footer shadowfoother" style="background-color:white;">
-                        <div class="row">
-                            <form action="~/Users/Details?login=Izmail.cshtml" style="height:50px;">
-                                
-                            <div class="col-xs-12"> <button class="btn btn-success btn-lg btn-block" style="background-color: #00b4ef; border-block-color: #00b4ef; "> Оплатить</button> </div>
-
-                            </form>
                         </div>
-                    </div>
+                        <div class=" col-xs-12 checkbox">
+                            <label>
+                                <input type="checkbox" id="blankCheckbox" value="option1" aria-label="">
+                                <label>Согласны ли вы с условиями пользовательского соглашения?</label>
+                            </label>
+                        </div>
+                        <div class="panel-footer shadowfoother" style="background-color:white;">
+                            <div class="row">
+
+                                <div style="height: 50px;">
+                                    <div class="col-xs-12"> <button class="btn btn-success btn-lg btn-block" style="background-color: #00b4ef; border-block-color: #00b4ef; ">Оплатить</button> </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

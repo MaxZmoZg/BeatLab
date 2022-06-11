@@ -1,6 +1,6 @@
 ﻿using BeatLab.Models;
 using System.Linq;
-using System.Web.Mvc;
+using System.Web.Mvc; using BeatLab.Models.Entities; 
 using System.Web.Security;
 
 namespace BeatLab.Controllers

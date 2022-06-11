@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     public partial class User : IDataErrorInfo
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeatLab.Models.Entities;
+using System;
 using System.Linq;
 using System.Web.Security;
 
@@ -38,11 +39,9 @@ namespace BeatLab.Providers
             string[] roles = new string[] { };
             using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
-                // Получаем пользователя
                 User user = db.User.FirstOrDefault(u => u.Email_User == username);
                 if (user != null && user.User_Type != null)
                 {
-                    // получаем роль
                     roles = new string[] { user.User_Type.Name_User_Type };
                 }
                 return roles;

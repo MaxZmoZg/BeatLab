@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0eb4065865214a26b277f43f714f7acf" Name="Diagram1" ZoomLevel="69">
-        <EntityTypeShape EntityType="BeatLabDBModel.Alboms" Width="1.5" PointX="5.25" PointY="11.125" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Chat" Width="1.5" PointX="5.25" PointY="24.875" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Comment_Music" Width="1.5" PointX="12.75" PointY="9" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Comment_Plugin" Width="1.5" PointX="10.5" PointY="8.25" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Format_Plugin" Width="1.5" PointX="6" PointY="14.625" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Genere_Of_Music" Width="1.5" PointX="5.25" PointY="5.375" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Music" Width="1.5" PointX="7.5" PointY="5.25" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Order_Music" Width="1.5" PointX="12.75" PointY="6.25" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Order_Plugin" Width="1.5" PointX="10.5" PointY="11.375" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Plugins" Width="1.5" PointX="8.25" PointY="10.5" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Price_Music" Width="1.5" PointX="9.75" PointY="17.25" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Price_Plugin" Width="1.5" PointX="10.5" PointY="14.375" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Type_Alboms" Width="1.5" PointX="3" PointY="6.625" />
-        <EntityTypeShape EntityType="BeatLabDBModel.Type_Music" Width="1.5" PointX="5.25" PointY="7.75" />
-        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="9.625" />
-        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="11.625" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Alboms" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Chat" Width="1.5" PointX="5.25" PointY="25.375" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Comment_Music" Width="1.5" PointX="9.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Comment_Plugin" Width="1.5" PointX="10.5" PointY="8.625" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Format_Plugin" Width="1.5" PointX="6" PointY="15" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Genere_Of_Music" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Music" Width="1.5" PointX="7.5" PointY="5.625" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Order_Music" Width="1.5" PointX="12.75" PointY="9.25" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Order_Plugin" Width="1.5" PointX="10.5" PointY="11.875" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Plugins" Width="1.5" PointX="8.25" PointY="11" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Price_Music" Width="1.5" PointX="9.75" PointY="18.5" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Price_Plugin" Width="1.5" PointX="10.5" PointY="14.875" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Type_Alboms" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="BeatLabDBModel.Type_Music" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="BeatLabDBModel.User_Type" Width="1.5" PointX="0.75" PointY="12" />
         <AssociationConnector Association="BeatLabDBModel.FK_Alboms_Type_Alboms" />
         <AssociationConnector Association="BeatLabDBModel.FK_Alboms_User" />
         <AssociationConnector Association="BeatLabDBModel.FK_Music_Alboms" />

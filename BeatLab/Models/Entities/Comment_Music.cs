@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Price_Plugin
+    public partial class Comment_Music
     {
-        public int ID_Price_Plugin { get; set; }
-        public int Price { get; set; }
-        public System.DateTime Date { get; set; }
-        public int ID_Plugin { get; set; }
+        public int ID_Comments_Music { get; set; }
+        public string Content_Comments { get; set; }
+        public System.DateTime Data_Comments { get; set; }
+        public int ID_Music { get; set; }
+        public int ID_User { get; set; }
     
-        public virtual Plugins Plugins { get; set; }
+        public virtual Music Music { get; set; }
+        public virtual User User { get; set; }
     }
 }

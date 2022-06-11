@@ -7,23 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Format_Plugin
+    public partial class Alboms
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Format_Plugin()
+        public Alboms()
         {
-            this.Plugins = new HashSet<Plugins>();
+            this.Music = new HashSet<Music>();
         }
     
-        public int ID_Format_Lpugin { get; set; }
-        public string Name_Format_Plugin { get; set; }
+        public int ID_Album { get; set; }
+        public int ID_User { get; set; }
+        public string Name_Album { get; set; }
+        public byte[] Image_Album { get; set; }
+        public int ID_Type_Alboms { get; set; }
     
+        public virtual Type_Alboms Type_Alboms { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plugins> Plugins { get; set; }
+        public virtual ICollection<Music> Music { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -17,6 +17,10 @@ namespace BeatLab
         public int ID_Order_Music { get; set; }
         public int ID_Music { get; set; }
         public int ID_User { get; set; }
+        public string Card_number { get; set; }
+        public string Card_expiration_date { get; set; }
+        public string Card_secure_code { get; set; }
+        public string Card_owner { get; set; }
     
         public virtual Music Music { get; set; }
         public virtual User User { get; set; }

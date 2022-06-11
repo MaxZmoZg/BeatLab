@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User_Type
+    public partial class Format_Plugin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User_Type()
+        public Format_Plugin()
         {
-            this.User = new HashSet<User>();
+            this.Plugins = new HashSet<Plugins>();
         }
     
-        public int ID_User_Type { get; set; }
-        public string Name_User_Type { get; set; }
+        public int ID_Format_Lpugin { get; set; }
+        public string Name_Format_Plugin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<Plugins> Plugins { get; set; }
     }
 }

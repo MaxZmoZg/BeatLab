@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BeatLab.Models.Entities;
 
 
 namespace BeatLab.Controllers
@@ -198,10 +199,7 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
             Music music = db.Music.Find(id);
-
-
             music.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");

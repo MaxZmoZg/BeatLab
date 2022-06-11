@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using BeatLab.Models.Entities;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,9 +50,9 @@ namespace BeatLab.Controllers
             if (ModelState.IsValid)
             {
 
-                CreateNewUser(user); 
-               
-                return RedirectToAction("About","Home");
+                CreateNewUser(user);
+
+                return RedirectToAction("About", "Home");
             }
 
             ViewBag.ID_User_Type = new SelectList(db.User_Type, "ID_User_Type", "Name_User_Type", user.ID_User_Type);
@@ -82,7 +83,7 @@ namespace BeatLab.Controllers
         public ActionResult Edit(User user, HttpPostedFileBase uploadImage)
         {
 
-            if (user.Last_Name_User == null || user.Last_Name_User ==  "")
+            if (user.Last_Name_User == null || user.Last_Name_User == "")
             {
                 ModelState.AddModelError(nameof(user.Last_Name_User), "Введите фамилию");
             }
@@ -94,7 +95,7 @@ namespace BeatLab.Controllers
             {
                 ModelState.AddModelError(nameof(user.First_Name_User), "Введите имя");
             }
-      
+
             if (ModelState.IsValid)
             {
                 User userFromDatabase = db.User.First(u => u.Login == HttpContext.User.Identity.Name);
@@ -175,14 +176,14 @@ namespace BeatLab.Controllers
                     Middle_Name_User = model.Middle_Name_User,
                     Email_User = model.Email_User,
                     Description_User = model.Description_User,
-                    Age_User =model.Age_User,
+                    Age_User = model.Age_User,
                     Password_Hash = encryptedPasswordAndSalt,
                     Salt = saltBytes,
                     Login = model.Login,
                     Nickname_User = model.Login,
                     ID_User_Type = 2,
-                    Image_User =null
-                    
+                    Image_User = null
+
                 };
 
                 db.User.Add(user);

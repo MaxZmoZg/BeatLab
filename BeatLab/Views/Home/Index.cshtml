@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BeatLab.Music>
+﻿@using BeatLab.Models.Entities;
+@model IEnumerable<Music>
 
 @{
     ViewBag.Title = "Home Page";
@@ -10,17 +11,17 @@
 <body class="widthelements ">
 
 
-    <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="carousel_0e53" >
+    <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="carousel_0e53">
 
         <div class="main" style="background-color:#1f2a41 !important">
-        <img src="~/Resource/bg-img.jpg" alt="" class="bg-fon u-expanded-width u-image u-image-default u-image-1" data-image-width="1984" data-image-height="1328">
-        <div class="center">
-            <h1 style="color:white;">Beatlab</h1>
+            <img src="~/Resource/bg-img.jpg" alt="" class="bg-fon u-expanded-width u-image u-image-default u-image-1" data-image-width="1984" data-image-height="1328">
+            <div class="center">
+                <h1 style="color:white;">Beatlab</h1>
 
-            <p style="color:white;">Площадка по продаже своего творчества</p>
+                <p style="color:white;">Площадка по продаже своего творчества</p>
+            </div>
         </div>
-        </div>
-        
+
         <h1 class="u-text u-text-default u-text-1">BeatLab</h1>
         <h3 class="u-text u-text-default u-text-2">Написать трек проще, чем кажется</h3>
     </section>
@@ -37,7 +38,7 @@
                         <h4 class="u-text u-text-custom-color-1 u-text-3">БИТЫ</h4>
                         <img class="u-expanded-width u-image u-image-round u-radius-10 u-image-1" src="~/Resource/TS_sound-board.jpg" alt="" data-image-width="1296" data-image-height="864">
                         <p class="u-text u-text-palette-1-dark-1 u-text-4">Биты - первая состовляющая трека, которая задаст настроение, вызовет эмоции. Найди бит, который подойдет только для тебя</p>
-                        <a  > @Html.ActionLink("К БИТАМ", "Musics.Index", @class: "u-active-none u-border-2 u-border-active-palette-4-dark-1 u-border-hover-palette-4-dark-1 u-border-palette-4-base u-btn u-button-style u-hover-none u-none u-text-active-palette-4-base u-text-body-color u-text-hover-palette-4-base u-btn-1")</a>
+                        <a> @Html.ActionLink("К БИТАМ", "Musics.Index", @class: "u-active-none u-border-2 u-border-active-palette-4-dark-1 u-border-hover-palette-4-dark-1 u-border-palette-4-base u-btn u-button-style u-hover-none u-none u-text-active-palette-4-base u-text-body-color u-text-hover-palette-4-base u-btn-1")</a>
 
                     </div>
                 </div>
@@ -60,8 +61,8 @@
             </div>
         </div>
     </section>
-    
-  
-  
+
+
+
 </body>
 
