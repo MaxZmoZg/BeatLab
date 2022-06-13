@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using BeatLab.Models.Entities;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace BeatLab.Controllers
@@ -21,7 +22,11 @@ namespace BeatLab.Controllers
             {
                 receiverId = db.User.Find(inputReceiverId).ID_User;
             }
-            int senderId = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+            int senderId = db.User.FirstOrDefault(u => u.Login == HttpContext.User.Identity.Name)?.ID_User ?? 0;
+            if (senderId == 0)
+            {
+                return RedirectToAction("Register", "Account");
+            }
             ViewBag.Chat = db.Chat.Where(c => c.ID_Sender == senderId
                                               && c.ID_Receiver == receiverId
                                               || c.ID_Sender == receiverId

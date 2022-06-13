@@ -1,4 +1,4 @@
-﻿@model BeatLab.User
+﻿@model BeatLab.Models.Entities.User
 
 @{
     @Styles.Render("~/Content/StylePage/AccountStyle.css")
@@ -158,90 +158,42 @@
 
         </div>
         <h4>Купленные товары:</h4>
-
         <div style="display:flex; flex-wrap: wrap;">
 
-            <div style="grid-template-rows: 70% 30%; margin: 2em;">
-
-                <div style="position:relative;">
-
-                    <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/239612-1.jpg " />
-                </div>
-                <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
-                    <div>
-                        <a class="namesongforplayer">Sample 128 BPM</a>
-
-                    </div>
-                    <div>
-                        <a class="nameartistforlayer">от: Izmail</a>
-
-                    </div>
-                    <div>
-                        <a class="nameagenereforsong">Жанр: Хип-хоп</a>
-                    </div>
-                    <div>
-                        <a href="https://TransFiles.ru/95e1w" class="u-black u-btn u-button-style">Скачать</a>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        @*@foreach (var item in Model.Order_Music)
+            @foreach (var music in Model.Order_Music.Select(o => o.Music))
             {
-
-
-
                 <div style="grid-template-rows: 70% 30%; margin: 2em;">
-
                     <div style="position:relative;">
-
-                        @{ if (item.Music.Image_music == null)
-                            {
-                                <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
-                            }
-                            else
-                            {
-                                @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
-                                                                     + Convert.ToBase64String(item.Music.Image_music) + "\" />")
-                                @Html.ValidationMessageFor(modelItem => item.Music.Image_music, "", new { @class = "text-danger" })
-                            }
+                        <img id="previewImage"
+                             class="imgactive"
+                             style="width:150px; height:150px;"
+                             src="data:image/jpeg;base64,@if (music.Image_music == null)
+                        {
+                             @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/239612-1.jpg"))))
                         }
-
-
-
-                        <audio id="player">
-                            <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
-
-
-                        </audio>
-
-
-
-
-
-
-
-
+                        else
+                        {
+                            @(Convert.ToBase64String(music.Image_music))
+                        }
+                        " />
                     </div>
                     <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                         <div>
-                            @Html.ActionLink(item.Music.Name_music, "Details", new { id = item.ID_Music }, new { @class = "namesongforplayer" })
+                            <a class="namesongforplayer">@music.Type_Music.Name_Type_Music @music.Name_music</a>
                         </div>
                         <div>
-                            @Html.ActionLink(@"от " + item.Music.User.Nickname_User, "Details", new { id = item.ID_Music }, new { @class = "nameartistforlayer" })
+                            <a class="nameartistforlayer">от: @music.User.Login</a>
                         </div>
                         <div>
-                            @Html.ActionLink(@"Жанр: " + item.Music.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
+                            <a class="nameagenereforsong">Жанр: @music.Genere_Of_Music.Name_Gener_of_music</a>
                         </div>
-
+                        <div>
+                            @Html.ActionLink("Скачать", "DownloadSong", new { musicId = music.ID_Music }, new { @class = "u-black u-btn u-button-style" })
+                        </div>
                     </div>
-                    @Html.ActionLink("Скачать", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
-
                 </div>
-            }*@
-
-
+            }
+        </div>
     }
 </div>
 <br />

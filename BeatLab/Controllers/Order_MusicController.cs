@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using BeatLab.Models.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BeatLab;
 
 namespace BeatLab.Controllers
 {
     public class Order_MusicController : Controller
     {
-        private BeatLabDBEntities db = new BeatLabDBEntities();
+        private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Order_Music
         public ActionResult Index()
@@ -49,13 +45,13 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User")] Order_Music order_Music, Music music)
+        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User,Card_number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Music order_Music)
         {
             if (ModelState.IsValid)
             {
-                order_Music.ID_Music = music.ID_Music;
-                order_Music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User; 
-                
+                order_Music.ID_Music = int.Parse(Request.QueryString["ID_Music"]);
+                order_Music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+
                 db.Order_Music.Add(order_Music);
                 db.SaveChanges();
                 return RedirectToAction("Index");

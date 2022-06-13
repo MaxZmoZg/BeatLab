@@ -1,4 +1,5 @@
-﻿@model BeatLabDBEntities
+﻿@using BeatLab.Models.Entities;
+@model BeatLabDBEntities
 
 @{
     @Styles.Render("~/Content/StylePage/ChatStyle.css")
@@ -111,7 +112,7 @@
         </div>
         <div class="message-input">
             <div class="wrap">
-                @using (Html.BeginForm("PostComment", "Chat", routeValues: new { receiverId = receiver.ID_User, senderId = me.ID_User}))
+                @using (Html.BeginForm("PostComment", "Chat", routeValues: new { receiverId = receiver.ID_User, senderId = me.ID_User }))
                 {
                     <input type="text" name="text" placeholder="Напишитe сообщение..." />
                     <button class="submit" type="submit">

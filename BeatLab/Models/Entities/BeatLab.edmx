@@ -71,6 +71,7 @@
           <Property Name="Music_file" Type="varbinary(max)" />
           <Property Name="Image_music" Type="image" />
           <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Order_Music">
           <Key>
@@ -79,6 +80,10 @@
           <Property Name="ID_Order_Music" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Music" Type="int" Nullable="false" />
           <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="Card_number" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Card_expiration_date" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Card_secure_code" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Card_owner" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Order_Plugin">
           <Key>
@@ -208,7 +213,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Comment_Music" Type="Self.Comment_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -304,7 +311,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Order_Music" Type="Self.Order_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -376,7 +385,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Price_Music_Music">
-          <End Role="Music" Type="Self.Music" Multiplicity="1" />
+          <End Role="Music" Type="Self.Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Price_Music" Type="Self.Price_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -696,6 +707,7 @@
           <Property Name="Music_file" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Image_music" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Alboms" Relationship="BeatLabDBModel.FK_Music_Alboms" FromRole="Music" ToRole="Alboms" />
           <NavigationProperty Name="Comment_Music" Relationship="BeatLabDBModel.FK_Comment_Music_Music" FromRole="Music" ToRole="Comment_Music" />
           <NavigationProperty Name="Genere_Of_Music" Relationship="BeatLabDBModel.FK_Music_Genere_Of_Music" FromRole="Music" ToRole="Genere_Of_Music" />
@@ -711,6 +723,10 @@
           <Property Name="ID_Order_Music" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Music" Type="Int32" Nullable="false" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="Card_number" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Card_expiration_date" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Card_secure_code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Card_owner" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Order_Music_Music" FromRole="Order_Music" ToRole="Music" />
           <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Order_Music_User" FromRole="Order_Music" ToRole="User" />
         </EntityType>
@@ -876,7 +892,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Comment_Music" Role="Comment_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -972,7 +990,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Order_Music" Role="Order_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -984,7 +1004,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Price_Music_Music">
-          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Music" Role="Music" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BeatLabDBModel.Price_Music" Role="Price_Music" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Music">
@@ -1135,6 +1157,7 @@
           <EntitySetMapping Name="Music">
             <EntityTypeMapping TypeName="BeatLabDBModel.Music">
               <MappingFragment StoreEntitySet="Music">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="Image_music" ColumnName="Image_music" />
                 <ScalarProperty Name="Music_file" ColumnName="Music_file" />
@@ -1150,6 +1173,10 @@
           <EntitySetMapping Name="Order_Music">
             <EntityTypeMapping TypeName="BeatLabDBModel.Order_Music">
               <MappingFragment StoreEntitySet="Order_Music">
+                <ScalarProperty Name="Card_owner" ColumnName="Card_owner" />
+                <ScalarProperty Name="Card_secure_code" ColumnName="Card_secure_code" />
+                <ScalarProperty Name="Card_expiration_date" ColumnName="Card_expiration_date" />
+                <ScalarProperty Name="Card_number" ColumnName="Card_number" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="ID_Music" ColumnName="ID_Music" />
                 <ScalarProperty Name="ID_Order_Music" ColumnName="ID_Order_Music" />

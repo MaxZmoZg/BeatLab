@@ -125,34 +125,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alboms.cs">
+    <Compile Include="Models\Entities\Alboms.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BeatLab.Context.cs">
+    <Compile Include="Models\Entities\BeatLab.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeatLab.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="BeatLab.cs">
+    <Compile Include="Models\Entities\BeatLab.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="BeatLab.Designer.cs">
+    <Compile Include="Models\Entities\BeatLab.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BeatLab.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Chat.cs">
+    <Compile Include="Models\Entities\Chat.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Comment_Music.cs">
+    <Compile Include="Models\Entities\Comment_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Comment_Plugin.cs">
+    <Compile Include="Models\Entities\Comment_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
@@ -165,10 +165,10 @@
     <Compile Include="Controllers\СhatController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
-    <Compile Include="Format_Plugin.cs">
+    <Compile Include="Models\Entities\Format_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Genere_Of_Music.cs">
+    <Compile Include="Models\Entities\Genere_Of_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -177,50 +177,51 @@
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
     <Compile Include="Models\PartialMusic.cs" />
+    <Compile Include="Models\PartialOrder.cs" />
     <Compile Include="Models\PartialUser.cs" />
     <Compile Include="Models\UserTypes.cs" />
-    <Compile Include="Music.cs">
+    <Compile Include="Models\Entities\Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Order_Music.cs">
+    <Compile Include="Models\Entities\Order_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Order_Plugin.cs">
+    <Compile Include="Models\Entities\Order_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Plugins.cs">
+    <Compile Include="Models\Entities\Plugins.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Price_Music.cs">
+    <Compile Include="Models\Entities\Price_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Price_Plugin.cs">
+    <Compile Include="Models\Entities\Price_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />
     <Compile Include="Services\SaltedPasswordGenerator.cs" />
-    <Compile Include="Type_Alboms.cs">
+    <Compile Include="Models\Entities\Type_Alboms.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="Type_Music.cs">
+    <Compile Include="Models\Entities\Type_Music.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Models\Entities\User.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
-    <Compile Include="User_Type.cs">
+    <Compile Include="Models\Entities\User_Type.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_README.txt" />
-    <Content Include="BeatLab.Context.tt">
+    <Content Include="Models\Entities\BeatLab.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BeatLab.Context.cs</LastGenOutput>
       <DependentUpon>BeatLab.edmx</DependentUpon>
     </Content>
-    <Content Include="BeatLab.tt">
+    <Content Include="Models\Entities\BeatLab.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BeatLab.edmx</DependentUpon>
       <LastGenOutput>BeatLab.cs</LastGenOutput>
@@ -267,11 +268,11 @@
     <Resource Include="Resource\Magnifying_glass_icon.svg.png" />
     <Content Include="Resource\serum-2048x1657.jpg" />
     <Content Include="Resource\user.png" />
-    <EntityDeploy Include="BeatLab.edmx">
+    <EntityDeploy Include="Models\Entities\BeatLab.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BeatLab.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="BeatLab.edmx.diagram">
+    <Content Include="Models\Entities\BeatLab.edmx.diagram">
       <DependentUpon>BeatLab.edmx</DependentUpon>
     </Content>
     <Content Include="..\.editorconfig">

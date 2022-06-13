@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BeatLab.Models.Entities;
 
 
 namespace BeatLab.Controllers
@@ -19,6 +20,7 @@ namespace BeatLab.Controllers
         {
             LoadDropDownLists();
             var music = db.Music
+                .Where(m => !m.IsDeleted)
                 .Include(m => m.Alboms)
                 .Include(m => m.Genere_Of_Music)
                 .Include(m => m.Type_Music)
@@ -81,7 +83,7 @@ namespace BeatLab.Controllers
             {
                 ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
             }
-            
+
 
             if (ModelState.IsValid)
             {
@@ -144,10 +146,19 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music)
+        public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadMusic)
         {
             if (ModelState.IsValid)
             {
+                if (uploadImage != null)
+                {
+                    music.Image_music = uploadImage.ToByteArray();
+                }
+                if (uploadMusic != null)
+                {
+                    music.Music_file = uploadMusic.ToByteArray();
+                }
+
                 db.Entry(music).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -188,11 +199,8 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
             Music music = db.Music.Find(id);
-
-
-            db.Music.Remove(music);
+            music.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -222,6 +230,7 @@ namespace BeatLab.Controllers
         public ActionResult Filter()
         {
             List<Music> filteredMusics = db.Music
+                .Where(m => !m.IsDeleted)
                 .Include(m => m.Alboms)
                 .Include(m => m.Genere_Of_Music)
                 .Include(m => m.Type_Music)

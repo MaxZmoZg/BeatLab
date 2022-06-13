@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BeatLab.User>
+﻿@using BeatLab.Models.Entities;
+@model IEnumerable<User>
 
 @{
     ViewBag.Title = "Пользователи";
@@ -12,91 +13,92 @@
 <table class="table">
     <tr>
         <th>
-           Фамилия
+            Фамилия
         </th>
         <th>
-           Имя
+            Имя
         </th>
         <th>
-           Отчество
+            Отчество
         </th>
         <th>
-           Описание
+            Описание
         </th>
         <th>
-           Возраст
+            Возраст
         </th>
         <th>
             Фото
         </th>
         <th>
-           Никнейм
+            Никнейм
         </th>
         <th>
             Логин
         </th>
-       
-        
+
+
         <th>
             Email
         </th>
         <th>
-           Тип пользователя
+            Тип пользователя
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Last_Name_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.First_Name_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Middle_Name_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age_User) лет
-        </td>
-        <td>
-            @{
-                if (item.Image_User == null)
-                {
-                    
-                    <img style="width:80px; height:60px;" src="~/Resource/user.png" />
-                }
-                else
-                {
-                    @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
-                               + Convert.ToBase64String(item.Image_User) + "\" />")
-                }
-            }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Name_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Middle_Name_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age_User) лет
+            </td>
+            <td>
+                @{
+                    if (item.Image_User == null)
+                    {
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nickname_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Login)
-        </td>
-     
-        <td>
-            @Html.DisplayFor(modelItem => item.Email_User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User_Type.Name_User_Type)
-        </td>
-        <td>
-            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_User }) |
-            @Html.ActionLink("Детали", "Details", new { id=item.ID_User }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_User })
-        </td>
-    </tr>
-}
+                        <img style="width:80px; height:60px;" src="~/Resource/user.png" />
+                    }
+                    else
+                    {
+                        @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+                                   + Convert.ToBase64String(item.Image_User) + "\" />")
+                    }
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nickname_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_Type.Name_User_Type)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID_User }) |
+                @Html.ActionLink("Детали", "Details", new { id = item.ID_User }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_User })
+            </td>
+        </tr>
+    }
 
 </table>

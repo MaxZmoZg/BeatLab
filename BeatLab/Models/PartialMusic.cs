@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text;
 
-namespace BeatLab
+namespace BeatLab.Models.Entities
 {
     public partial class Music : IDataErrorInfo
     {
