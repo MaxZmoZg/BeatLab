@@ -1,16 +1,18 @@
-﻿@model BeatLab.Models.Entities.Music
+﻿@model BeatLab.Models.Entities.Plugins
 
 @{
     @Styles.Render("~/Content/StylePage/AccountEditStyle.css")
-    ViewBag.Title = "Добавить бит или семпл";
+    ViewBag.Title = "Добавить плагин";
 }
 
 
-@using (Html.BeginForm(Html.BeginForm("Create", "Musics", FormMethod.Post, new { enctype = "multipart/form-data" })))
+
+
+@using (Html.BeginForm(Html.BeginForm(Html.BeginForm("Create", "Plugins", FormMethod.Post, new { enctype = "multipart/form-data" }))))
 {
     @Html.AntiForgeryToken()
 
-    <h2 class="h2--margin">Добавить музыкальный файл</h2>
+    <h2 class="h2--margin">Добавить плагин</h2>
     <section class="u-clearfix u-section-1" id="carousel_34a0">
 
         <div class="u-clearfix u-sheet u-sheet-1">
@@ -28,38 +30,40 @@
                 <form action="#" method="POST" class="u-clearfix u-form-spacing-33 u-form-vertical u-inner-form" source="email" name="form" style="padding: 35px;">
 
                     <div class="u-form-group u-form-name">
-                        <label for="name-4c18" class="u-label">Название</label>
-                        @Html.EditorFor(model => model.Name_music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите название", type = "text" } })
-                        @Html.ValidationMessageFor(model => model.Name_music, "", new { @class = "text-danger" })
-
+                        <label for="name-4c18" class="u-label">Название плагина</label>
+                        @Html.EditorFor(model => model.Name_Plugin, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите название", type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Name_Plugin, "", new { @class = "text-danger" })
                     </div>
+
                     <div class="u-form-group">
                         <label for="message-4c18" class="u-label">Описание</label>
-                        @Html.EditorFor(model => model.Description_Music, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите описание" } })
-                        @Html.ValidationMessageFor(model => model.Description_Music, "", new { @class = "text-danger" })
-
+                        @Html.EditorFor(model => model.Description_plugin, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите описание" } })
+                        @Html.ValidationMessageFor(model => model.Description_plugin, "", new { @class = "text-danger" })
                     </div>
+
                     <div class="u-form-group">
                         <label for="name-4c18" class="u-label">Цена</label>
                         @Html.EditorFor(model => model.PriceString, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите цену" } })
                         @Html.ValidationMessageFor(model => model.PriceString, "", new { @class = "text-danger" })
-
                     </div>
 
                     <div class="u-form-group u-form-group-4">
-                        <label for="text-7110" class="u-label">Тип музыки</label>
-                        @Html.DropDownList("ID_Type_mysic", null, htmlAttributes: new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10" })
-                        @Html.ValidationMessageFor(model => model.ID_Type_mysic, "", new { @class = "text-danger" })
+                        <label for="text-7110" class="u-label">Формат плагина</label>
+                        @Html.DropDownList("ID_Format_Plugin", null, htmlAttributes: new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10" })
+                        @Html.ValidationMessageFor(model => model.ID_Format_Plugin, "", new { @class = "text-danger" })
 
                     </div>
-                    <div class="u-form-group u-form-group-5">
-                        <label for="text-ce90" class="u-label">Жанр</label>
-                        @Html.DropDownList("ID_Genere_of_Music", null, htmlAttributes: new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10" })
-                        @Html.ValidationMessageFor(model => model.ID_Genere_of_Music, "", new { @class = "text-danger" })
-
+                    <div class="u-form-group u-form-name">
+                        <label for="name-4c18" class="u-label">Версия плагина</label>
+                        @Html.EditorFor(model => model.Version_Plugins, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите версию", type = "text" } })
+                        @Html.ValidationMessageFor(model => model.Version_Plugins, "", new { @class = "text-danger" })
                     </div>
-                    
-                   
+                    <div class="u-form-group u-form-name">
+                        <label for="name-4c18" class="u-label">Дата выпуска плагина</label>
+                        @Html.EditorFor(model => model.Date_of_issue_Plugin, new { htmlAttributes = new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10", placeholder = "Введите версию", @type = "date" } })
+                        @Html.ValidationMessageFor(model => model.Date_of_issue_Plugin, "", new { @class = "text-danger" })
+                    </div>
+
 
                     <label for="text-1f9b" class="u-label">Фото</label>
                     <div class="form-group editCard--margin">
@@ -67,7 +71,7 @@
                         <div class="col-md-10 editCard_DivImage--margin">
 
 
-                            @Html.ValidationMessageFor(model => model.Image_music, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Image_Plugin, "", new { @class = "text-danger" })
 
 
                         </div>
@@ -78,22 +82,22 @@
 
 
 
-                    <label for="text-1f9b" class="u-label">Музыкальный файл</label>
+                    <label for="text-1f9b" class="u-label">Rar файл</label>
                     <div class="form-group editCard--margin">
 
                         <div class="col-md-10 editCard_DivImage--margin">
 
                             @*@Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
+                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
 
 
-                            @Html.ValidationMessageFor(model => model.Music_file, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Plugin_file, "", new { @class = "text-danger" })
 
 
                         </div>
 
                         <div class="editCard--margin">
-                            <input id="musicInput" type="file" name="uploadMusic" />
+                            <input id="musicInput" type="file" name="uploadPlugin" />
                         </div>
                     </div>
 
@@ -123,6 +127,14 @@
 <div>
     @Html.ActionLink("Вернуться к личному кабинету", "Users.Details", @class: "header-style-text")
 </div>
+
+
+
+
+
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

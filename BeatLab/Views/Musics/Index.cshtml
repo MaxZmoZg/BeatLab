@@ -2,7 +2,7 @@
 @model IEnumerable<BeatLab.Models.Entities.Music>
 
 @{
-    ViewBag.Title = "Биты|ADMIN";
+    ViewBag.Title = "Биты";
 }
 
 
@@ -142,7 +142,7 @@
             </div>
 
             <div class="player__controls-box">
-                <audio controls autoplay>
+                <audio controls   controlsList="nodownload" autoplay >
                     <source src="/Musics/LoadAudio?musicId=@(Request.QueryString["musicId"])" />
                     В вашем браузере не поддерживается проигрывание музыки.
                 </audio>
@@ -152,14 +152,7 @@
             <div class="player__tools-box">
                 <div class="player__add-btn-box">
 
-                    <button class="bg" tabindex="0">
-                        <span class="text">
-                            Купить
-                        </span>
-                        <span class="btn-icon icon-cart">
-
-                        </span>
-                    </button>
+                    
 
                 </div>
             </div>

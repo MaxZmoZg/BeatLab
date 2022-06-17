@@ -1,0 +1,102 @@
+﻿@using BeatLab.Models.Entities;
+@model IEnumerable<BeatLab.Models.Entities.Plugins>
+
+@{
+    ViewBag.Title = "Плагины";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-level-1" style="color:white; font-size:24px;">
+        Плагины
+    </div>
+
+</div>
+
+@using (@Html.BeginForm("Filter", "Plugins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="display: flex; flex-wrap: wrap;  align-items: flex-end; ">
+
+        <div class="bar">
+            <div class="bar2">
+
+                @Html.TextBox("Name", "", htmlAttributes: new { @class = "searchbar" })
+
+                <a href="#"> <img class="voice" src="~/Resource/Magnifying_glass_icon.svg.png" title="Search by Voice"></a>
+            </div>
+        </div>
+
+        <div style="display: flex;" class="div_filter ">
+            <label class="labelstyle ">Формат плагина</label>
+            @Html.DropDownList("ID_Format_Plugin", null, htmlAttributes: new { @class = "cb" })
+
+        </div>
+        <div style="display: flex;" class="div_filter ">
+            <label class="labelstyle">Продавец</label>
+            @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "cb" })
+
+        </div>
+        <input type="submit" style=" margin-bottom:15px;" name="Искать" value="Найти" class="cb btn btn-default btn_filter ">
+    </div>
+    <div>
+        <label style="color: #a7a7a7; font-size: 14px; ">Сортировать по</label>
+        <input type="submit" value="Алфавиту" name="Алфавиту" class="btn_sort btn_sort--margin">
+        <input type="submit" value="Цене" name="Цене" class="btn_sort btn_sort--margin">
+    </div>
+}
+<div style="display:flex; flex-wrap: wrap; margin-left:50px; ">
+    @if (Model.Count() == 0)
+    {
+        @("Ничего не найдено. Введите другое условие запроса");
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div style="grid-template-rows: 70% 30%; margin: 2em;">
+
+                <div style="position:relative;">
+
+                    <a onmousedown="window.location.href = &quot;@("/Plugins?pluginId=" + item.ID_Plugin)&quot;">
+                        <img id="previewImage"
+                             class="imgactive"
+                             style="width:150px; height:150px;"
+                             src="data:image/jpeg;base64,@if (item.Image_Plugin == null)
+                        {
+                             @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
+                        }
+                        else
+                        {
+                            @(Convert.ToBase64String(item.Image_Plugin))
+                        }
+                        " />
+                    </a>
+                    @Html.ValidationMessageFor(modelItem => item.Image_Plugin, "", new { @class = "text-danger" })
+                </div>
+                <div class="rndclss" style="background-color: lightgray; width: 150px; text-align:center;">
+                    <div>
+                        @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin }, new { @class = "namesongforplayer" })
+                    </div>
+                    <div>
+                        @Html.ActionLink(@"от " + item.User.Nickname_User, "", new { id = item.ID_Plugin}, new { @class = "nameartistforlayer" })
+                    </div>
+                    <div>
+                        @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "", new { id = item.ID_Plugin}, new { @class = "nameagenereforsong" })
+                    </div>
+                    <div>
+                        Цена: @if (!item.Price_Plugin.Any())
+                        {
+                            @("не указана")
+                        }
+                        else
+                        {
+                            @(item.Price_Plugin.Last().Price + " руб.")
+                        }
+                    </div>
+                    @Html.ActionLink(@"Купить", "Create", "Order_Plugin", new { item.ID_Plugin}, new { @class = "u-black u-btn u-button-style" })
+
+                </div>
+            </div>
+        }
+    }
+</div>
+
+

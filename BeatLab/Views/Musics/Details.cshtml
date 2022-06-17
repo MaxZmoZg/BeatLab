@@ -65,7 +65,9 @@
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
                             <li>
-                            @Html.ActionLink(linkText: "Купить", actionName: "Create", controllerName: "Order_Music", routeValues: new { id = Model.ID_Music }, htmlAttributes: null)
+
+                              
+                                @Html.ActionLink(@"Купить", "Create", "Order_Music", new { Model.ID_Music }, new { @class = "" })
 
                             </li>
                            

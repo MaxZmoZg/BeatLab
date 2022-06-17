@@ -16,6 +16,7 @@ namespace BeatLab.Controllers
         private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Musics
+        [Authorize]
         public ActionResult Index()
         {
             LoadDropDownLists();
@@ -27,7 +28,7 @@ namespace BeatLab.Controllers
                 .Include(m => m.User);
             return View(music.ToList());
         }
-
+       
         private void LoadDropDownLists()
         {
             List<Genere_Of_Music> genres = db.Genere_Of_Music.ToList();
@@ -38,7 +39,7 @@ namespace BeatLab.Controllers
             types.Insert(0, new Type_Music { Name_Type_Music = "-----" });
             ViewBag.ID_Type_mysic = new SelectList(types, "ID_Type_music", "Name_Type_Music");
 
-            List<User> users = db.User.ToList();
+            List<User> users = db.User.ToList().Where(u => u.User_Type.Name_User_Type == "admin" && u.ID_User != Me.GetId()).ToList();
             users.Insert(0, new User { Nickname_User = "-----" });
             ViewBag.ID_User = new SelectList(users, "ID_User", "Nickname_User");
         }

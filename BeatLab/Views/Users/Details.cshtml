@@ -98,11 +98,11 @@
 
         </section>
 
-        <h4>Мои товары:</h4>
+        <h4>Мои музыкальные товары:</h4>
         <div style="display:flex; flex-wrap: wrap;">
 
 
-            @foreach (var item in Model.Music)
+            @foreach (var item in Model.Music.ToList().Where(m => !m.IsDeleted))
             {
 
 
@@ -132,12 +132,6 @@
                         </audio>
 
 
-
-
-
-
-
-
                     </div>
                     <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                         <div>
@@ -157,10 +151,57 @@
             }
 
         </div>
+        @Html.ActionLink("Добавить плагин", "Create", "Pluins", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
+
+        <h4>Мои плагины:</h4>
+        <div style="display:flex; flex-wrap: wrap;">
+
+
+            @foreach (var item in Model.Plugins.ToList().Where(m => !m.IsDeleted))
+            {
+
+
+
+                <div style="grid-template-rows: 70% 30%; margin: 2em;">
+
+                    <div style="position:relative;">
+
+                        @{ if (item.Image_Plugin == null)
+                            {
+                                <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
+                            }
+                            else
+                            {
+                                @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                                     + Convert.ToBase64String(item.Image_Plugin) + "\" />")
+                                @Html.ValidationMessageFor(modelItem => item.Image_Plugin, "", new { @class = "text-danger" })
+                            }
+                        }
+
+                    </div>
+                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                        <div>
+                            @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin}, new { @class = "namesongforplayer" })
+                        </div>
+                        <div>
+                            @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Plugin}, new { @class = "nameartistforlayer" })
+                        </div>
+                        <div>
+                            @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "GenereOfMusic", new { id = item.ID_Plugin }, new { @class = "nameagenereforsong" })
+                        </div>
+
+                    </div>
+                    @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                    @Html.ActionLink("Удалить", "Delete", "Musics", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                </div>
+            }
+
+        </div>
+
         <h4>Купленные товары:</h4>
         <div style="display:flex; flex-wrap: wrap;">
 
-            @foreach (var music in Model.Order_Music.Select(o => o.Music))
+            @foreach (var music in Model.Order_Music.Select(o => o.Music).ToList().Where(m => !m.IsDeleted))
             {
                 <div style="grid-template-rows: 70% 30%; margin: 2em;">
                     <div style="position:relative;">

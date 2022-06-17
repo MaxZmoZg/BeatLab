@@ -651,3 +651,14 @@ audio::-webkit-media-controls-panel {
     font-size: 20px;
     color: black;
 }
+
+@media (min-width: 580px) and (max-width:780.98px) {
+    .common-container {
+        padding: 0 30px;
+    }
+}
+@media (min-width: 100px) and (max-width:580.98px) {
+    .common-container {
+        padding: 0 0px;
+    }
+}
