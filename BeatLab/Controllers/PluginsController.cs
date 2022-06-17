@@ -120,33 +120,33 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString")] Plugins plugins, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadPlugin)
+        public ActionResult Edit([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString")] Plugins plugin, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadPlugin)
         {
             if (ModelState.IsValid)
             {
                 if (uploadImage != null)
                 {
-                    plugins.Image_Plugin = uploadImage.ToByteArray();
+                    plugin.Image_Plugin = uploadImage.ToByteArray();
                 }
                 if (uploadPlugin != null)
                 {
-                    plugins.Plugin_file = uploadPlugin.ToByteArray();
+                    plugin.Plugin_file = uploadPlugin.ToByteArray();
                 }
-                db.Entry(plugins).State = EntityState.Modified;
+                db.Entry(plugin).State = EntityState.Modified;
                 db.SaveChanges();
-                Price_Plugin pricePlugin = new Price_Plugin
+                Price_Plugin price = new Price_Plugin
                 {
-                    ID_Plugin = plugins.ID_Plugin,
-                    Price = int.Parse(plugins.PriceString),
+                    ID_Plugin = plugin.ID_Plugin,
+                    Price = int.Parse(plugin.PriceString),
                     Date = DateTime.Now
                 };
-                db.Price_Plugin.Add(pricePlugin);
+                db.Price_Plugin.Add(price);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugins.ID_Format_Plugin);
-            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugins.ID_User);
-            return View(plugins);
+            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugin.ID_Format_Plugin);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugin.ID_User);
+            return View(plugin);
         }
 
         // GET: Plugins/Delete/5
