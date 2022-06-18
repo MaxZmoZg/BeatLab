@@ -96,7 +96,23 @@
                             <input id="musicInput" type="file" name="uploadMusic" />
                         </div>
                     </div>
+                      <div class=" col-xs-12 checkbox">
+                          @*тут  после model я не знаю че вставить, вставил хуйню*@
+                        <label>
+                            @Html.CheckBoxFor(model => model.Order_Music.First().IsConsentContract,
+                                           new
+                                           {
+                                               htmlAttributes = new
+                                                    {
 
+                                                       @class = "form-control",
+                                                        type = "checkbox",
+                                                        id = "blankCheckbox",
+                                                    }
+                                           })
+                            <label>Согласны ли вы с условиями пользовательского соглашения?</label>
+                        </label>
+                    </div>
                     <div class="form-group u-align-center u-form-group u-form-submit">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Сохранить" class="btn btn btn-primary editCard_button_size" />

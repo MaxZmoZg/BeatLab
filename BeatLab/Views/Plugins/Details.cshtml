@@ -1,82 +1,136 @@
 ﻿@model BeatLab.Models.Entities.Plugins
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "О плагине";
 }
 
-<h2>Details</h2>
+<br />
 
-<div>
-    <h4>Plugins</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Date_of_issue_Plugin)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Date_of_issue_Plugin)
-        </dd>
+<div class="container">
+    <div id="main">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name_Plugin)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name_Plugin)
-        </dd>
+        <div class="row" id="real-estates-detail">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <div class="text-center">
+                                <strong>Плагин</strong>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="panel-body" style=" overflow: hidden;">
+                        <div class="text-center" id="author">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Plugin_file)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Plugin_file)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Version_Plugins)
-        </dt>
+                            @{ if (Model.Image_Plugin == null)
+                                {
+                                    <img id='previewImage' class="img_cardDetalies " src="~/Resource/user.png" />
+                                }
+                                else
+                                {
+                                    @Html.Raw("<img id='previewImage' class='img_cardDetalies'   src=\"data:image/jpeg;base64,"
+                                              + Convert.ToBase64String(Model.Image_Plugin) + "\" />")
 
-        <dd>
-            @Html.DisplayFor(model => model.Version_Plugins)
-        </dd>
+                                }
+                            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description_plugin)
-        </dt>
+                            <h3>@Html.DisplayFor(model => model.Name_Plugin)</h3>
+                            <small class="label label-warning"> Формат: @Html.DisplayFor(model => model.Format_Plugin.Name_Format_Plugin)</small>
+                            <br />
+                            <br />
+                            <p>@Html.DisplayFor(model => model.Description_plugin)</p>
+                            <p class="sosmed-author">
+                                Цена: @(Model.Price_Plugin.ToList().Last().Price) руб.
+                            </p>
+                            <p>
+                                Дата создания: @Html.DisplayFor(model => model.Date_of_issue_Plugin)
+                            </p>
+                            <p>
+                                Версия: @Html.DisplayFor(model => model.Version_Plugins)
+                            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description_plugin)
-        </dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <ul id="myTab" class="nav nav-pills">
+                            <li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image_Plugin)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image_Plugin)
-        </dd>
+                                @Html.ActionLink(@"Купить", "Create", "Order_Plugin", new { Model.ID_Plugin }, new { @class = "" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Format_Plugin.Name_Format_Plugin)
-        </dt>
+                            </li>
 
-        <dd>
-            @Html.DisplayFor(model => model.Format_Plugin.Name_Format_Plugin)
-        </dd>
+                            <li class="">
+                                @Html.ActionLink(linkText: "График изменения цен", actionName: "Index", controllerName: "PluginPriceChart", routeValues: new { id = Model.ID_Plugin }, htmlAttributes: null)
+                            </li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Last_Name_User)
-        </dt>
+                            <li class="">@Html.ActionLink("Написать сообщение", "Index", "Chat", new { inputReceiverId = Model.ID_User }, null)</li>
+                        </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.Last_Name_User)
-        </dd>
+                        <div class="row">
 
-    </dl>
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        @using (Html.BeginForm("PostComment", "Plugins", new { pluginId = Model.ID_Plugin }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {
+                                            <textarea name="comment" class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"></textarea>
+                                            <div class="mar-top clearfix">
+                                                <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Добавить</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="panel">
+                                    <div class="panel-body">
+
+                                        @foreach (var item in Model.Comment_Plugin)
+                                        {
+                                            <div class="media-block">
+                                                <a class="media-left" href="#">
+                                                    @{ if (item.User.Image_User == null)
+                                                        {
+                                                            <img id='previewImage' class="img-circle img-sm" alt="Профиль пользователя" src="~/Resource/user.png" />
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Raw("<img id='previewImage' class='img-circle img-sm'  alt='Профиль пользователя' src=\"data:image/jpeg;base64,"
+                                                                                                 + Convert.ToBase64String(item.User.Image_User) + "\" />")
+
+                                                        }
+                                                    }
+
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="mar-btm">
+                                                        <a href="#" class="btn-link text-semibold media-heading box-inline"> @(item.User.Nickname_User)</a>
+                                                        <p class="text-muted text-sm"><i class="fa fa-globe fa-lg"></i> - @(item.Date_Comment.Day).@(item.Date_Comment.Month).@(item.Date_Comment.Year)</p>
+                                                    </div>
+                                                    <p>@(item.Content_Comment)</p>
+
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Plugin }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+

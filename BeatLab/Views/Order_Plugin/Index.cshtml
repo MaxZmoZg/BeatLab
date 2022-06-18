@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Order_Plugin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Card_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Card_expiration_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Card_secure_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Card_owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plugins.Name_Plugin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card_Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card_expiration_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card_secure_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Card_owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plugins.Name_Plugin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Order_Plugin }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Order_Plugin }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Order_Plugin })
+        </td>
+    </tr>
+}
+
+</table>

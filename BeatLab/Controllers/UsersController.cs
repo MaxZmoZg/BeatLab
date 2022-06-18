@@ -197,6 +197,12 @@ namespace BeatLab.Controllers
             var music = db.Music.Find(musicId);
             return File(music.Music_file, contentType: "audio/mp3", music.Name_music + ".mp3");
         }
+
+        public FileResult DownloadPlugin(int pluginId)
+        {
+            var plugin = db.Plugins.Find(pluginId);
+            return File(plugin.Plugin_file, contentType: "application/x-rar-compressed", plugin.Name_Plugin + ".rar");
+        }
     }
 
 }

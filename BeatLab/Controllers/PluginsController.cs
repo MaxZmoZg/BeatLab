@@ -170,7 +170,8 @@ namespace BeatLab.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Plugins plugins = db.Plugins.Find(id);
-            db.Plugins.Remove(plugins);
+            plugins.IsDeleted = true;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -239,6 +240,20 @@ namespace BeatLab.Controllers
             }
             LoadDropDownLists();
             return View("Index", filteredPlugins);
+        }
+        [Authorize]
+        public ActionResult PostComment(int pluginId, string comment)
+        {
+            Comment_Plugin newComment = new Comment_Plugin
+            {
+                ID_Plugin = pluginId,
+                Date_Comment = DateTime.Now,
+                Content_Comment = comment,
+                ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User
+            };
+            db.Comment_Plugin.Add(newComment);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = pluginId });
         }
     }
 }

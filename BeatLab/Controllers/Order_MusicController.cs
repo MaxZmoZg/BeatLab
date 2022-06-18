@@ -54,7 +54,7 @@ namespace BeatLab.Controllers
 
                 db.Order_Music.Add(order_Music);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Users");
             }
 
             ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music", order_Music.ID_Music);

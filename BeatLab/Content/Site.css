@@ -39,6 +39,11 @@
         background: white !important;
     }
 
+    .linkaction{
+        color:black;
+        text-decoration:none;
+    }
+
 .brand-style {
     color: black;
 }

@@ -151,7 +151,7 @@
             }
 
         </div>
-        @Html.ActionLink("Добавить плагин", "Create", "Pluins", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
+        @Html.ActionLink("Добавить плагин", "Create", "Plugins", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
 
         <h4>Мои плагины:</h4>
         <div style="display:flex; flex-wrap: wrap;">
@@ -181,10 +181,10 @@
                     </div>
                     <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                         <div>
-                            @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin}, new { @class = "namesongforplayer" })
+                            @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin }, new { @class = "namesongforplayer" })
                         </div>
                         <div>
-                            @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Plugin}, new { @class = "nameartistforlayer" })
+                            @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Plugin }, new { @class = "nameartistforlayer" })
                         </div>
                         <div>
                             @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "GenereOfMusic", new { id = item.ID_Plugin }, new { @class = "nameagenereforsong" })
@@ -192,13 +192,13 @@
 
                     </div>
                     @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
-                    @Html.ActionLink("Удалить", "Delete", "Musics", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                    @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
                 </div>
             }
 
         </div>
 
-        <h4>Купленные товары:</h4>
+        <h4>Купленные музыкальные товары:</h4>
         <div style="display:flex; flex-wrap: wrap;">
 
             @foreach (var music in Model.Order_Music.Select(o => o.Music).ToList().Where(m => !m.IsDeleted))
@@ -218,7 +218,7 @@
                         }
                         " />
                     </div>
-                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:80px; text-align:center;">
                         <div>
                             <a class="namesongforplayer">@music.Type_Music.Name_Type_Music @music.Name_music</a>
                         </div>
@@ -230,6 +230,45 @@
                         </div>
                         <div>
                             @Html.ActionLink("Скачать", "DownloadSong", new { musicId = music.ID_Music }, new { @class = "u-black u-btn u-button-style" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <h4>Купленные плагины:</h4>
+        <div style="display:flex; flex-wrap: wrap;">
+
+            @foreach (var plugin in Model.Order_Plugin.Select(o => o.Plugins).ToList().Where(m => !m.IsDeleted))
+            {
+                <div style="grid-template-rows: 70% 30%; margin: 2em;">
+                    <div style="position:relative;">
+                        <img id="previewImage"
+                             class="imgactive"
+                             style="width:150px; height:150px;"
+                             src="data:image/jpeg;base64,@if (plugin.Image_Plugin == null)
+                        {
+                             @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/239612-1.jpg"))))
+                        }
+                        else
+                        {
+                            @(Convert.ToBase64String(plugin.Image_Plugin))
+                        }
+                        " />
+                    </div>
+                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:40px; text-align:center;">
+                        <div>
+                            <a class="namesongforplayer">@plugin.Format_Plugin.Name_Format_Plugin @plugin.Name_Plugin</a>
+                        </div>
+                        <div>
+                            <a class="nameartistforlayer">от: @plugin.User.Login</a>
+                        </div>
+
+                        <div>
+                            @Html.ActionLink("Скачать", "DownloadPlugin", new { pluginId = plugin.ID_Plugin }, new { @class = "u-black u-btn u-button-style" })
                         </div>
                     </div>
                 </div>

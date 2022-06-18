@@ -17,6 +17,10 @@ namespace BeatLab.Models.Entities
         public int ID_Order_Plugin { get; set; }
         public int ID_Plugin { get; set; }
         public int ID_User { get; set; }
+        public string Card_Number { get; set; }
+        public string Card_expiration_date { get; set; }
+        public string Card_secure_code { get; set; }
+        public string Card_owner { get; set; }
     
         public virtual Plugins Plugins { get; set; }
         public virtual User User { get; set; }

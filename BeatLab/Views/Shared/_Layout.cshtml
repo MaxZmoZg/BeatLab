@@ -68,8 +68,11 @@
             <audio ></audio>
         </div>
         <hr />
-        <footer>
-            <p class="dada">&copy;BeatLab|2022</p>
+        <footer style="display: inline">
+
+            <p class="dada">&copy;BeatLab|2022 @Html.ActionLink(@"Пользовательское соглашение", "Index", "LicenseAgreement", null, new { @class = "dada" })</p>
+
+            
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

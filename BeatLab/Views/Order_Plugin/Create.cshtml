@@ -1,11 +1,10 @@
 ﻿@using BeatLab.Models.Entities;
-@model Order_Music
+@model BeatLab.Models.Entities.Order_Plugin
 
 @{
     @Styles.Render("~/Content/StylePage/PaymentStyle.css")
     ViewBag.Title = "Create";
 }
-
 
 
 
@@ -21,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
-                
+
                 <br />
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -138,11 +137,7 @@
             </div>
         </div>
     </div>
-
 }
-
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,20 @@
+﻿@using BeatLab.Models.Entities;
+@model IEnumerable<Price_Plugin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>График цены</h2>
+@{
+    var pricesChart = new Chart(width: 600, height: 400)
+        .AddTitle("График цены")
+        .SetXAxis(title: "Дата")
+        .SetYAxis(title: "Цена")
+        .AddSeries(
+            name: "Prices",
+            chartType: "Spline",
+            xValue: Model.Select(m => m.Date.ToString("dddd MM")).ToArray(), xField: "Цена",
+            yValues: Model.Select(m => m.Price).ToArray(), yFields: "Дата")
+        .Write();
+}

@@ -92,6 +92,10 @@
           <Property Name="ID_Order_Plugin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Plugin" Type="int" Nullable="false" />
           <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="Card_Number" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Card_expiration_date" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Card_secure_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Card_owner" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Plugins">
           <Key>
@@ -744,6 +748,10 @@
           <Property Name="ID_Order_Plugin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Plugin" Type="Int32" Nullable="false" />
           <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="Card_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Card_expiration_date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Card_secure_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Card_owner" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Order_Plugin_Plugins" FromRole="Order_Plugin" ToRole="Plugins" />
           <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Order_Plugin_User" FromRole="Order_Plugin" ToRole="User" />
         </EntityType>
@@ -1198,6 +1206,10 @@
           <EntitySetMapping Name="Order_Plugin">
             <EntityTypeMapping TypeName="BeatLabDBModel.Order_Plugin">
               <MappingFragment StoreEntitySet="Order_Plugin">
+                <ScalarProperty Name="Card_owner" ColumnName="Card_owner" />
+                <ScalarProperty Name="Card_secure_code" ColumnName="Card_secure_code" />
+                <ScalarProperty Name="Card_expiration_date" ColumnName="Card_expiration_date" />
+                <ScalarProperty Name="Card_Number" ColumnName="Card_Number" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="ID_Plugin" ColumnName="ID_Plugin" />
                 <ScalarProperty Name="ID_Order_Plugin" ColumnName="ID_Order_Plugin" />
