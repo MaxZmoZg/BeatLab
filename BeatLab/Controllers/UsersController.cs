@@ -45,15 +45,18 @@ namespace BeatLab.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "ID_User,Last_Name_User,First_Name_User,Middle_Name_User,Description_User,Age_User,Image_User,Nickname_User,Login,Password_Hash,Salt,ID_User_Type,Email_User")] User user)
+        public ActionResult Create([Bind(Include = "ID_User,Last_Name_User,First_Name_User,Middle_Name_User,Description_User,Age_User,Image_User,Nickname_User,Login,Password_Hash,Salt,ID_User_Type,Email_User")] User user, HttpPostedFileBase uploadImage)
         {
 
             if (ModelState.IsValid)
             {
-
+                if (uploadImage != null)
+                {
+                    user.Image_User = uploadImage.ToByteArray();
+                }
                 CreateNewUser(user);
 
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("Index", "Users");
             }
 
             ViewBag.ID_User_Type = new SelectList(db.User_Type, "ID_User_Type", "Name_User_Type", user.ID_User_Type);
@@ -181,7 +184,7 @@ namespace BeatLab.Controllers
                     Login = model.Login,
                     Nickname_User = model.Login,
                     ID_User_Type = UserTypes.Admin,
-                    Image_User = null
+                 
                 };
 
                 db.User.Add(user);

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Type_Music>
+
+@{
+    ViewBag.Title = "Тип музыки";
+}
+
+<h2>Тип музыки</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый тип музыки", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Наименование типа музыки
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name_Type_Music)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Type_music }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Type_music })
+        </td>
+    </tr>
+}
+
+</table>

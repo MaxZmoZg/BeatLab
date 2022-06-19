@@ -125,10 +125,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Genere_Of_MusicAdminController.cs" />
     <Compile Include="Controllers\LicenseAgreementController.cs" />
     <Compile Include="Controllers\Order_PluginController.cs" />
     <Compile Include="Controllers\PluginPriceChartController.cs" />
     <Compile Include="Controllers\PluginsController.cs" />
+    <Compile Include="Controllers\Type_MusicAdminController.cs" />
     <Compile Include="Extensions\Me.cs" />
     <Compile Include="Models\Entities\Alboms.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
@@ -267,6 +269,16 @@
     <Content Include="Views\Order_Plugin\Edit.cshtml" />
     <Content Include="Views\Order_Plugin\Index.cshtml" />
     <Content Include="Views\LicenseAgreement\Index.cshtml" />
+    <Content Include="Views\Type_MusicAdmin\Create.cshtml" />
+    <Content Include="Views\Type_MusicAdmin\Delete.cshtml" />
+    <Content Include="Views\Type_MusicAdmin\Details.cshtml" />
+    <Content Include="Views\Type_MusicAdmin\Edit.cshtml" />
+    <Content Include="Views\Type_MusicAdmin\Index.cshtml" />
+    <Content Include="Views\Genere_Of_MusicAdmin\Create.cshtml" />
+    <Content Include="Views\Genere_Of_MusicAdmin\Delete.cshtml" />
+    <Content Include="Views\Genere_Of_MusicAdmin\Details.cshtml" />
+    <Content Include="Views\Genere_Of_MusicAdmin\Edit.cshtml" />
+    <Content Include="Views\Genere_Of_MusicAdmin\Index.cshtml" />
     <Resource Include="Resource\239612-1.jpg" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />
