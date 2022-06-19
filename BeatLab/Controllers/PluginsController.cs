@@ -255,5 +255,12 @@ namespace BeatLab.Controllers
             db.SaveChanges();
             return RedirectToAction("Details", new { id = pluginId });
         }
+
+        [Authorize]
+        public FileResult DownloadPlugin(int pluginId)
+        {
+            Plugins plugin = db.Plugins.Find(pluginId);
+            return File(plugin.Plugin_file, contentType: "application/x-rar-compressed", plugin.Name_Plugin + ".rar");
+        }
     }
 }

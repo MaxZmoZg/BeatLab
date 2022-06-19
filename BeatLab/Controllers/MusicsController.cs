@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeatLab.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BeatLab.Models.Entities;
 
 
 namespace BeatLab.Controllers
@@ -28,7 +28,7 @@ namespace BeatLab.Controllers
                 .Include(m => m.User);
             return View(music.ToList());
         }
-       
+
         private void LoadDropDownLists()
         {
             List<Genere_Of_Music> genres = db.Genere_Of_Music.ToList();
@@ -307,6 +307,13 @@ namespace BeatLab.Controllers
             db.Comment_Music.Add(newComment);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = musicId });
+        }
+
+        [Authorize]
+        public FileResult DownloadSong(int musicId)
+        {
+            Music music = db.Music.Find(musicId);
+            return File(music.Music_file, contentType: "audio/mp3", music.Name_music + ".mp3");
         }
     }
 }

@@ -229,7 +229,7 @@
                             <a class="nameagenereforsong">Жанр: @music.Genere_Of_Music.Name_Gener_of_music</a>
                         </div>
                         <div>
-                            @Html.ActionLink("Скачать", "DownloadSong", new { musicId = music.ID_Music }, new { @class = "u-black u-btn u-button-style" })
+                            @Html.ActionLink("Скачать", "DownloadSong", "Musics", new { musicId = music.ID_Music }, new { @class = "u-black u-btn u-button-style" })
                         </div>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
                         </div>
 
                         <div>
-                            @Html.ActionLink("Скачать", "DownloadPlugin", new { pluginId = plugin.ID_Plugin }, new { @class = "u-black u-btn u-button-style" })
+                            @Html.ActionLink("Скачать", "DownloadPlugin", "Plugins", new { pluginId = plugin.ID_Plugin }, new { @class = "u-black u-btn u-button-style" })
                         </div>
                     </div>
                 </div>
