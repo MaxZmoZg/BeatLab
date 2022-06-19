@@ -15,7 +15,7 @@ namespace BeatLab.Models.Entities
             {
                 if (columnName == nameof(Name_Plugin))
                     if (string.IsNullOrWhiteSpace(Name_Plugin))
-                        return "Введите название трека";
+                        return "Введите название плагина";
                 if (columnName == nameof(PriceString))
                     if (string.IsNullOrWhiteSpace(PriceString) || !int.TryParse(PriceString, out int price) || price <= 0)
                         return "Введите корректную цену";
