@@ -49,20 +49,25 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Order_Plugin,ID_Plugin,ID_User,Card_Number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Plugin order_Plugin)
+        public ActionResult Create([Bind(Include = "ID_Order_Plugin,ID_Plugin,ID_User,Card_Number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Plugin pluginOrder)
         {
+            if (!pluginOrder.IsConsentContract)
+            {
+                ModelState.AddModelError(nameof(pluginOrder.IsConsentContract),
+                                         "Подтвердите условия пользовательского соглашения");
+            }
             if (ModelState.IsValid)
             {
-                order_Plugin.ID_Plugin = int.Parse(Request.QueryString["ID_Plugin"]);
-                order_Plugin.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
-                db.Order_Plugin.Add(order_Plugin);
+                pluginOrder.ID_Plugin = int.Parse(Request.QueryString["ID_Plugin"]);
+                pluginOrder.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+                db.Order_Plugin.Add(pluginOrder);
                 db.SaveChanges();
                 return RedirectToAction("Details","Users");
             }
 
-            ViewBag.ID_Plugin = new SelectList(db.Plugins, "ID_Plugin", "Name_Plugin", order_Plugin.ID_Plugin);
-            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", order_Plugin.ID_User);
-            return View(order_Plugin);
+            ViewBag.ID_Plugin = new SelectList(db.Plugins, "ID_Plugin", "Name_Plugin", pluginOrder.ID_Plugin);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", pluginOrder.ID_User);
+            return View(pluginOrder);
         }
 
         // GET: Order_Plugin/Edit/5

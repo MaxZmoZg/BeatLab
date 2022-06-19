@@ -45,21 +45,26 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User,Card_number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Music order_Music)
+        public ActionResult Create([Bind(Include = "ID_Order_Music,ID_Music,ID_User,Card_number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Music musicOrder)
         {
+            if (!musicOrder.IsConsentContract)
+            {
+                ModelState.AddModelError(nameof(musicOrder.IsConsentContract),
+                                         "Подтвердите условия пользовательского соглашения");
+            }
             if (ModelState.IsValid)
             {
-                order_Music.ID_Music = int.Parse(Request.QueryString["ID_Music"]);
-                order_Music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+                musicOrder.ID_Music = int.Parse(Request.QueryString["ID_Music"]);
+                musicOrder.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
 
-                db.Order_Music.Add(order_Music);
+                db.Order_Music.Add(musicOrder);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Users");
             }
 
-            ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music", order_Music.ID_Music);
-            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", order_Music.ID_User);
-            return View(order_Music);
+            ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music", musicOrder.ID_Music);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", musicOrder.ID_User);
+            return View(musicOrder);
         }
 
         // GET: Order_Music/Edit/5
