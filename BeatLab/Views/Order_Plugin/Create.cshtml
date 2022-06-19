@@ -122,6 +122,7 @@
                                            })
                             <label>Согласны ли вы с условиями пользовательского соглашения?</label>
                         </label>
+                        @Html.ValidationMessageFor(model => model.IsConsentContract, "", new { @class = "text-danger" })
                     </div>
                     <div class="panel-footer shadowfoother" style="background-color:white;">
                         <div class="row">

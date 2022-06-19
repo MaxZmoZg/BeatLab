@@ -162,14 +162,12 @@ namespace BeatLab.Controllers
 
         private static void CreateNewUser(User model)
         {
-            var a = 123456;
-            SaltedPasswordGenerator.GenerateHashAndSalt(a.ToString(),
+            string password = "123456";
+            SaltedPasswordGenerator.GenerateHashAndSalt(password,
                                          out byte[] saltBytes,
                                          out byte[] encryptedPasswordAndSalt);
             using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
-
-
                 User user = new User
                 {
                     Last_Name_User = model.Last_Name_User,
@@ -184,25 +182,11 @@ namespace BeatLab.Controllers
                     Nickname_User = model.Login,
                     ID_User_Type = UserTypes.Admin,
                     Image_User = null
-
                 };
 
                 db.User.Add(user);
                 db.SaveChanges();
             }
         }
-
-        public FileResult DownloadSong(int musicId)
-        {
-            var music = db.Music.Find(musicId);
-            return File(music.Music_file, contentType: "audio/mp3", music.Name_music + ".mp3");
-        }
-
-        public FileResult DownloadPlugin(int pluginId)
-        {
-            var plugin = db.Plugins.Find(pluginId);
-            return File(plugin.Plugin_file, contentType: "application/x-rar-compressed", plugin.Name_Plugin + ".rar");
-        }
     }
-
 }

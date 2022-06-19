@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeatLab.Models.Entities
 {
-    public partial class Plugins: IDataErrorInfo
+    public partial class Plugins : IDataErrorInfo
     {
         public string this[string columnName]
         {
@@ -15,10 +16,13 @@ namespace BeatLab.Models.Entities
             {
                 if (columnName == nameof(Name_Plugin))
                     if (string.IsNullOrWhiteSpace(Name_Plugin))
-                        return "Введите название трека";
+                        return "Введите название плагина";
                 if (columnName == nameof(PriceString))
                     if (string.IsNullOrWhiteSpace(PriceString) || !int.TryParse(PriceString, out int price) || price <= 0)
                         return "Введите корректную цену";
+                if (columnName == nameof(IsLicenseAgreementAccepted))
+                    if (!IsLicenseAgreementAccepted)
+                        return "Подвердите условия пользовательского соглашения";
                 return null;
             }
         }
@@ -37,5 +41,7 @@ namespace BeatLab.Models.Entities
             }
         }
 
+        [NotMapped]
+        public bool IsLicenseAgreementAccepted { get; set; }
     }
 }

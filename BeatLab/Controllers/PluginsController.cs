@@ -64,7 +64,7 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString")] Plugins plugins, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString,IsLicenseAgreementAccepted")] Plugins plugins, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
@@ -254,6 +254,13 @@ namespace BeatLab.Controllers
             db.Comment_Plugin.Add(newComment);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = pluginId });
+        }
+
+        [Authorize]
+        public FileResult DownloadPlugin(int pluginId)
+        {
+            Plugins plugin = db.Plugins.Find(pluginId);
+            return File(plugin.Plugin_file, contentType: "application/x-rar-compressed", plugin.Name_Plugin + ".rar");
         }
     }
 }

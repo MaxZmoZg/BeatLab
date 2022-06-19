@@ -25,7 +25,7 @@
             </div>
             <div class="u-align-left u-image u-image-circle u-preserve-proportions u-image-1" data-image-width="616" data-image-height="616"></div>
             <div class="u-palette-1-light-2 u-shape u-shape-circle u-shape-2"></div>
-            <div class="u-form u-radius-31 u-white u-form-1 editCrard--padding editCard--shadow ">
+            <div class="u-form u-radius-31 u-white u-form-1 editCrard--padding editCard--shadow " style="height: 900px !important;">
 
                 <form action="#" method="POST" class="u-clearfix u-form-spacing-33 u-form-vertical u-inner-form" source="email" name="form" style="padding: 35px;">
 
@@ -86,24 +86,15 @@
                     <div class="form-group editCard--margin">
 
                         <div class="col-md-10 editCard_DivImage--margin">
-
-                            @*@Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
-                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
-
-
                             @Html.ValidationMessageFor(model => model.Plugin_file, "", new { @class = "text-danger" })
-
-
                         </div>
-
                         <div class="editCard--margin">
                             <input id="musicInput" type="file" name="uploadPlugin" />
                         </div>
                     </div>
                     <div class=" col-xs-12 checkbox">
-                        @*тут  после model я не знаю че вставить, вставил хуйню*@
                         <label>
-                            @Html.CheckBoxFor(model => model.Order_Plugin.First().IsConsentContract,
+                            @Html.CheckBoxFor(model => model.IsLicenseAgreementAccepted,
                                            new
                                            {
                                                htmlAttributes = new
@@ -115,6 +106,7 @@
                                                     }
                                            })
                             <label>Согласны ли вы с условиями пользовательского соглашения?</label>
+                            @Html.ValidationMessageFor(model => model.IsLicenseAgreementAccepted, "", new { @class = "text-danger" })
                         </label>
                     </div>
                     <div class="form-group u-align-center u-form-group u-form-submit">
@@ -122,22 +114,11 @@
                             <input type="submit" value="Сохранить" class="btn btn btn-primary editCard_button_size" />
                         </div>
                     </div>
-
-
-
-
-
-
                 </form>
 
             </div>
         </div>
     </section>
-
-
-
-
-
 }
 
 <div>

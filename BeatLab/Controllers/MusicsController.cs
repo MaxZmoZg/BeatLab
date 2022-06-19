@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeatLab.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BeatLab.Models.Entities;
 
 
 namespace BeatLab.Controllers
@@ -28,7 +28,7 @@ namespace BeatLab.Controllers
                 .Include(m => m.User);
             return View(music.ToList());
         }
-       
+
         private void LoadDropDownLists()
         {
             List<Genere_Of_Music> genres = db.Genere_Of_Music.ToList();
@@ -74,15 +74,18 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString")] Music music, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,IsLicenseAgreementAccepted")] Music music, HttpPostedFileBase uploadImage)
         {
-            if (music.Name_music == null || music.Name_music == "")
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(nameof(music.Name_music), "Введите название");
-            }
-            if (music.Description_Music == null || music.Description_Music == "")
-            {
-                ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
+                if (music.Name_music == null || music.Name_music == "")
+                {
+                    ModelState.AddModelError(nameof(music.Name_music), "Введите название");
+                }
+                if (music.Description_Music == null || music.Description_Music == "")
+                {
+                    ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
+                }
             }
 
 
@@ -307,6 +310,13 @@ namespace BeatLab.Controllers
             db.Comment_Music.Add(newComment);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = musicId });
+        }
+
+        [Authorize]
+        public FileResult DownloadSong(int musicId)
+        {
+            Music music = db.Music.Find(musicId);
+            return File(music.Music_file, contentType: "audio/mp3", music.Name_music + ".mp3");
         }
     }
 }
