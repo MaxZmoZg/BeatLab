@@ -30,7 +30,7 @@ namespace BeatLab.Controllers
             formats.Insert(0, new Format_Plugin { Name_Format_Plugin = "-----" });
             ViewBag.ID_Format_Plugin = new SelectList(formats, "ID_Format_Plugin", "Name_Format_Plugin");
 
-            
+
             List<User> users = db.User.ToList().Where(u => u.User_Type.Name_User_Type == "admin" && u.ID_User != Me.GetId()).ToList();
             users.Insert(0, new User { Nickname_User = "-----" });
             ViewBag.ID_User = new SelectList(users, "ID_User", "Nickname_User");
@@ -88,7 +88,7 @@ namespace BeatLab.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin","Name_Format_Plugin", plugins.ID_Format_Plugin);
+            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugins.ID_Format_Plugin);
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugins.ID_User);
             return View(plugins);
         }
@@ -100,19 +100,20 @@ namespace BeatLab.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Plugins plugins = db.Plugins.Find(id);
-            if (plugins == null)
+            Plugins plugin = db.Plugins.Find(id);
+            if (plugin == null)
             {
                 return HttpNotFound();
             }
-            plugins.PriceString = db.Price_Plugin
+            plugin.IsLicenseAgreementAccepted = true;
+            plugin.PriceString = db.Price_Plugin
                 .ToList()
                 .Last().Price
                 .ToString();
 
-            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugins.ID_Format_Plugin);
-            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugins.ID_User);
-            return View(plugins);
+            ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugin.ID_Format_Plugin);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugin.ID_User);
+            return View(plugin);
         }
 
         // POST: Plugins/Edit/5
@@ -120,7 +121,7 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString")] Plugins plugin, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadPlugin)
+        public ActionResult Edit([Bind(Include = "ID_Plugin,Date_of_issue_Plugin,ID_Format_Plugin,Name_Plugin,Plugin_file,Version_Plugins,Description_plugin,Image_Plugin,ID_User,PriceString,IsLicenseAgreementAccepted")] Plugins plugin, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadPlugin)
         {
             if (ModelState.IsValid)
             {
@@ -221,7 +222,7 @@ namespace BeatLab.Controllers
                     .OrderByDescending(m => m.Name_Plugin)
                     .ToList();
             }
-          
+
             else if (Request.Form.Keys.OfType<string>().Contains("Цене"))
             {
                 filteredPlugins = filteredPlugins
