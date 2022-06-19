@@ -1,0 +1,26 @@
+﻿@model BeatLab.Models.Entities.Type_Music
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Type_Music</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Type_Music)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Type_Music)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Type_music }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
