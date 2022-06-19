@@ -74,15 +74,18 @@ namespace BeatLab.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString")] Music music, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,IsLicenseAgreementAccepted")] Music music, HttpPostedFileBase uploadImage)
         {
-            if (music.Name_music == null || music.Name_music == "")
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(nameof(music.Name_music), "Введите название");
-            }
-            if (music.Description_Music == null || music.Description_Music == "")
-            {
-                ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
+                if (music.Name_music == null || music.Name_music == "")
+                {
+                    ModelState.AddModelError(nameof(music.Name_music), "Введите название");
+                }
+                if (music.Description_Music == null || music.Description_Music == "")
+                {
+                    ModelState.AddModelError(nameof(music.Description_Music), "Введите описание");
+                }
             }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BeatLab.Models.Entities
@@ -15,6 +16,9 @@ namespace BeatLab.Models.Entities
                 if (columnName == nameof(PriceString))
                     if (string.IsNullOrWhiteSpace(PriceString) || !int.TryParse(PriceString, out int price) || price <= 0)
                         return "Введите корректную цену";
+                if (columnName == nameof(IsLicenseAgreementAccepted))
+                    if (!IsLicenseAgreementAccepted)
+                        return "Подвердите условия пользовательского соглашения";
                 return null;
             }
         }
@@ -33,5 +37,7 @@ namespace BeatLab.Models.Entities
             }
         }
 
+        [NotMapped]
+        public bool IsLicenseAgreementAccepted { get; set; }
     }
 }

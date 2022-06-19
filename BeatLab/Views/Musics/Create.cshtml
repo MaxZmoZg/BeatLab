@@ -58,8 +58,8 @@
                         @Html.ValidationMessageFor(model => model.ID_Genere_of_Music, "", new { @class = "text-danger" })
 
                     </div>
-                    
-                   
+
+
 
                     <label for="text-1f9b" class="u-label">Фото</label>
                     <div class="form-group editCard--margin">
@@ -96,10 +96,9 @@
                             <input id="musicInput" type="file" name="uploadMusic" />
                         </div>
                     </div>
-                      <div class=" col-xs-12 checkbox">
-                          @*тут  после model я не знаю че вставить, вставил хуйню*@
+                    <div class=" col-xs-12 checkbox">
                         <label>
-                            @Html.CheckBoxFor(model => model.Order_Music.First().IsConsentContract,
+                            @Html.CheckBoxFor(model => model.IsLicenseAgreementAccepted,
                                            new
                                            {
                                                htmlAttributes = new
@@ -112,28 +111,17 @@
                                            })
                             <label>Согласны ли вы с условиями пользовательского соглашения?</label>
                         </label>
+                        @Html.ValidationMessageFor(model => model.IsLicenseAgreementAccepted, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group u-align-center u-form-group u-form-submit">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Сохранить" class="btn btn btn-primary editCard_button_size" />
                         </div>
                     </div>
-
-
-
-
-
-
                 </form>
-
             </div>
         </div>
     </section>
-
-
-
-
-
 }
 
 <div>

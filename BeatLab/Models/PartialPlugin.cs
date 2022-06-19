@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeatLab.Models.Entities
 {
-    public partial class Plugins: IDataErrorInfo
+    public partial class Plugins : IDataErrorInfo
     {
         public string this[string columnName]
         {
@@ -37,5 +38,7 @@ namespace BeatLab.Models.Entities
             }
         }
 
+        [NotMapped]
+        public bool IsLicenseAgreementAccepted { get; set; }
     }
 }
