@@ -152,6 +152,7 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file")] Music music, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadMusic)
         {
+            music.IsLicenseAgreementAccepted = true;
             if (ModelState.IsValid)
             {
                 if (uploadImage != null)

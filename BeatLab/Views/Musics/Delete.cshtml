@@ -4,11 +4,10 @@
     ViewBag.Title = "Удаление музыки";
 }
 
-<h2>Delete</h2>
 
 <h3>Вы точно хотите удалить эту музыку?</h3>
 <div>
-    <h4>Music</h4>
+
     <hr />
     
 
@@ -17,7 +16,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Верунсться", "Index", new {@class = "btn btn-default" })
+            @Html.ActionLink("Вернуться", "Index","", new {@class = "btn btn-default" })
         </div>
     }
 </div>
