@@ -20,6 +20,9 @@ namespace BeatLab.Models.Entities
                 if (columnName == nameof(PriceString))
                     if (string.IsNullOrWhiteSpace(PriceString) || !int.TryParse(PriceString, out int price) || price <= 0)
                         return "Введите корректную цену";
+                if (columnName == nameof(IsLicenseAgreementAccepted))
+                    if (!IsLicenseAgreementAccepted)
+                        return "Подвердите условия пользовательского соглашения";
                 return null;
             }
         }
