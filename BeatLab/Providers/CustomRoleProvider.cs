@@ -39,7 +39,7 @@ namespace BeatLab.Providers
             string[] roles = new string[] { };
             using (BeatLabDBEntities db = new BeatLabDBEntities())
             {
-                User user = db.User.FirstOrDefault(u => u.Email_User == username);
+                User user = db.User.FirstOrDefault(u => u.Login == username);
                 if (user != null && user.User_Type != null)
                 {
                     roles = new string[] { user.User_Type.Name_User_Type };
