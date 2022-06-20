@@ -104,13 +104,8 @@
 
             @foreach (var item in Model.Music.ToList().Where(m => !m.IsDeleted))
             {
-
-
-
                 <div style="grid-template-rows: 70% 30%; margin: 2em;">
-
                     <div style="position:relative;">
-
                         @{ if (item.Image_music == null)
                             {
                                 <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
@@ -122,16 +117,9 @@
                                 @Html.ValidationMessageFor(modelItem => item.Image_music, "", new { @class = "text-danger" })
                             }
                         }
-
-
-
                         <audio id="player">
                             <source src="@Url.Action("LoadAudio", "Musics", new { musicId = item.ID_Music })" type="audio/mp3" />
-
-
                         </audio>
-
-
                     </div>
                     <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                         <div>
@@ -143,13 +131,14 @@
                         <div>
                             @Html.ActionLink(@"Жанр: " + item.Genere_Of_Music.Name_Gener_of_music, "GenereOfMusic", new { id = item.ID_Music }, new { @class = "nameagenereforsong" })
                         </div>
-
                     </div>
-                    @Html.ActionLink("Изменить", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
-                    @Html.ActionLink("Удалить", "Delete", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style " })
+                    @if (item.Order_Music.Count == 0)
+                    {
+                        @Html.ActionLink("Изменить", "Edit", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style" })
+                        @Html.ActionLink("Удалить", "Delete", "Musics", new { id = item.ID_Music }, new { @class = "u-black u-btn u-button-style" })
+                    }
                 </div>
             }
-
         </div>
         @Html.ActionLink("Добавить плагин", "Create", "Plugins", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
 
@@ -159,11 +148,7 @@
 
             @foreach (var item in Model.Plugins.ToList().Where(m => !m.IsDeleted))
             {
-
-
-
                 <div style="grid-template-rows: 70% 30%; margin: 2em;">
-
                     <div style="position:relative;">
 
                         @{ if (item.Image_Plugin == null)
@@ -177,7 +162,6 @@
                                 @Html.ValidationMessageFor(modelItem => item.Image_Plugin, "", new { @class = "text-danger" })
                             }
                         }
-
                     </div>
                     <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
                         <div>
@@ -189,13 +173,14 @@
                         <div>
                             @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "GenereOfMusic", new { id = item.ID_Plugin }, new { @class = "nameagenereforsong" })
                         </div>
-
                     </div>
-                    @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
-                    @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                    @if (item.Order_Plugin.Count == 0)
+                    {
+                        @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                        @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                    }
                 </div>
             }
-
         </div>
 
         <h4>Купленные музыкальные товары:</h4>
