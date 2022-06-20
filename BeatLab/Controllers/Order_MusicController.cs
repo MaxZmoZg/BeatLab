@@ -8,6 +8,7 @@ namespace BeatLab.Controllers
 {
     public class Order_MusicController : Controller
     {
+        private const int SampleTypeId = 2;
         private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Order_Music
@@ -33,8 +34,19 @@ namespace BeatLab.Controllers
         }
 
         // GET: Order_Music/Create
-        public ActionResult Create()
+        public ActionResult Create(int? ID_Music)
         {
+            if (ID_Music.HasValue)
+            {
+                Music music = db.Music.Find(ID_Music);
+                if (music.Order_Music.Count > 0)
+                {
+                    if (music.ID_Type_mysic != SampleTypeId)
+                    {
+                        return RedirectToAction("Index", "AlreadySold");
+                    }
+                }
+            }
             ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music");
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User");
             return View();
