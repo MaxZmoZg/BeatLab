@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlreadySoldController.cs" />
     <Compile Include="Controllers\Genere_Of_MusicAdminController.cs" />
     <Compile Include="Controllers\LicenseAgreementController.cs" />
     <Compile Include="Controllers\Order_PluginController.cs" />
@@ -279,6 +280,7 @@
     <Content Include="Views\Genere_Of_MusicAdmin\Details.cshtml" />
     <Content Include="Views\Genere_Of_MusicAdmin\Edit.cshtml" />
     <Content Include="Views\Genere_Of_MusicAdmin\Index.cshtml" />
+    <Content Include="Views\AlreadySold\Index.cshtml" />
     <Resource Include="Resource\239612-1.jpg" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />

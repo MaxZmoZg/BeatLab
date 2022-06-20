@@ -37,8 +37,15 @@ namespace BeatLab.Controllers
         }
 
         // GET: Order_Plugin/Create
-        public ActionResult Create()
+        public ActionResult Create(int? ID_Plugin)
         {
+            if (ID_Plugin.HasValue)
+            {
+                if (db.Plugins.Find(ID_Plugin).Order_Plugin.Count > 0)
+                {
+                    return RedirectToAction("Index", "AlreadySold");
+                }
+            }
             ViewBag.ID_Plugin = new SelectList(db.Plugins, "ID_Plugin", "Name_Plugin");
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User");
             return View();
