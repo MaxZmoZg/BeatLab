@@ -181,9 +181,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entities\sysdiagrams.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
     <Compile Include="Models\PartialMusic.cs" />
@@ -315,6 +312,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\embedded\1.0\visio-web-embedded.debug-vsdoc.js" />
     <Content Include="Scripts\embedded\1.0\visio-web-embedded.debug.js" />
     <Content Include="Scripts\embedded\1.0\visio-web-embedded.js" />

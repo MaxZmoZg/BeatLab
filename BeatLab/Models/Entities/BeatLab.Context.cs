@@ -37,7 +37,6 @@ namespace BeatLab.Models.Entities
         public virtual DbSet<Plugins> Plugins { get; set; }
         public virtual DbSet<Price_Music> Price_Music { get; set; }
         public virtual DbSet<Price_Plugin> Price_Plugin { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_Alboms> Type_Alboms { get; set; }
         public virtual DbSet<Type_Music> Type_Music { get; set; }
         public virtual DbSet<User> User { get; set; }

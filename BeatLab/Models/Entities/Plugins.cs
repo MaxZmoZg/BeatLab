@@ -11,8 +11,7 @@ namespace BeatLab.Models.Entities
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Plugins
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +23,6 @@ namespace BeatLab.Models.Entities
         }
     
         public int ID_Plugin { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_of_issue_Plugin { get; set; }
         public int ID_Format_Plugin { get; set; }
         public string Name_Plugin { get; set; }
