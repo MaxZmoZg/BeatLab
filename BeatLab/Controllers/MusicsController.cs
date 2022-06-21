@@ -100,7 +100,7 @@ namespace BeatLab.Controllers
                     music.Music_file = Request.Files["uploadMusic"].ToByteArray();
                 }
 
-                music.Alboms = null;
+                
                 music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
                 Price_Music priceMusic = new Price_Music
                 {

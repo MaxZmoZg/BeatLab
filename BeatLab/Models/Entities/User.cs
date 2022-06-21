@@ -22,6 +22,7 @@ namespace BeatLab.Models.Entities
             this.Chat1 = new HashSet<Chat>();
             this.Comment_Music = new HashSet<Comment_Music>();
             this.Comment_Plugin = new HashSet<Comment_Plugin>();
+            this.Feedback = new HashSet<Feedback>();
             this.Music = new HashSet<Music>();
             this.Order_Music = new HashSet<Order_Music>();
             this.Order_Plugin = new HashSet<Order_Plugin>();
@@ -52,6 +53,8 @@ namespace BeatLab.Models.Entities
         public virtual ICollection<Comment_Music> Comment_Music { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment_Plugin> Comment_Plugin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedback { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Music> Music { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

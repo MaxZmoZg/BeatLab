@@ -9,6 +9,7 @@ namespace BeatLab.Controllers
         private readonly BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Chat
+        [Authorize]
         public ActionResult Index(int? inputReceiverId)
         {
             int receiverId;

@@ -143,45 +143,52 @@
         @Html.ActionLink("Добавить плагин", "Create", "Plugins", new { id = Model.ID_User }, new { @class = "u-black u-btn u-button-style " })
 
         <h4>Мои плагины:</h4>
-        <div style="display:flex; flex-wrap: wrap;">
+        <div>
+           
+                    <div style="display:flex; flex-wrap: wrap;">
 
 
-            @foreach (var item in Model.Plugins.ToList().Where(m => !m.IsDeleted))
-            {
-                <div style="grid-template-rows: 70% 30%; margin: 2em;">
-                    <div style="position:relative;">
+                        @foreach (var item in Model.Plugins.ToList().Where(m => !m.IsDeleted))
+                        {
+                            <div style="grid-template-rows: 70% 30%; margin: 2em;">
+                                <div style="position:relative;">
 
-                        @{ if (item.Image_Plugin == null)
-                            {
-                                <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
-                            }
-                            else
-                            {
-                                @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
-                                                                     + Convert.ToBase64String(item.Image_Plugin) + "\" />")
-                                @Html.ValidationMessageFor(modelItem => item.Image_Plugin, "", new { @class = "text-danger" })
-                            }
+                                    @{ if (item.Image_Plugin == null)
+                                        {
+                                            <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                                                 + Convert.ToBase64String(item.Image_Plugin) + "\" />")
+                                            @Html.ValidationMessageFor(modelItem => item.Image_Plugin, "", new { @class = "text-danger" })
+                                        }
+                                    }
+                                </div>
+                                <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                                    <div>
+                                        @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin }, new { @class = "namesongforplayer" })
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Plugin }, new { @class = "nameartistforlayer" })
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "GenereOfMusic", new { id = item.ID_Plugin }, new { @class = "nameagenereforsong" })
+                                    </div>
+                                </div>
+                                @if (item.Order_Plugin.Count == 0)
+                                {
+                                    @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                                    @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
+                                }
+                            </div>
                         }
                     </div>
-                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
-                        <div>
-                            @Html.ActionLink(item.Name_Plugin, "Details", new { id = item.ID_Plugin }, new { @class = "namesongforplayer" })
-                        </div>
-                        <div>
-                            @Html.ActionLink(@"от " + item.User.Nickname_User, "Details", new { id = item.ID_Plugin }, new { @class = "nameartistforlayer" })
-                        </div>
-                        <div>
-                            @Html.ActionLink(@"Жанр: " + item.Format_Plugin.Name_Format_Plugin, "GenereOfMusic", new { id = item.ID_Plugin }, new { @class = "nameagenereforsong" })
-                        </div>
-                    </div>
-                    @if (item.Order_Plugin.Count == 0)
-                    {
-                        @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
-                        @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Plugin }, new { @class = "u-black u-btn u-button-style " })
-                    }
-                </div>
-            }
+                
+            
         </div>
+
+       
 
         <h4>Купленные музыкальные товары:</h4>
         <div style="display:flex; flex-wrap: wrap;">
@@ -259,11 +266,50 @@
                 </div>
             }
         </div>
+
+
+        <h4>Мои альбомы:</h4>
+        <div style="display:flex; flex-wrap: wrap;">
+
+
+            @foreach (var item in Model.Alboms.ToList())
+            {
+                <div style="grid-template-rows: 70% 30%; margin: 2em;">
+                    <div style="position:relative;">
+
+                        @{ if (item.Image_Album == null)
+                            {
+                                <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/user.png" />
+                            }
+                            else
+                            {
+                                @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                                     + Convert.ToBase64String(item.Image_Album) + "\" />")
+                                @Html.ValidationMessageFor(modelItem => item.Image_Album, "", new { @class = "text-danger" })
+                            }
+                        }
+                    </div>
+                    <div class="rndclss" style="background-color: lightgray; width: 150px; height:60px; text-align:center;">
+                        <div>
+                            @Html.ActionLink(@"Название: " + item.Name_Album, "Details", new { id = item.ID_Album }, new { @class = "namesongforplayer" })
+                        </div>
+                        <div>
+                            @Html.ActionLink(@"Тип: " + item.Type_Alboms.Name_Type_Alboms, "Details", new { id = item.ID_Album }, new { @class = "nameartistforlayer" })
+                        </div>
+                        
+                    </div>
+                   
+                        @Html.ActionLink("Изменить", "Edit", "Plugins", new { id = item.ID_Album }, new { @class = "u-black u-btn u-button-style " })
+                        @Html.ActionLink("Удалить", "Delete", "Plugins", new { id = item.ID_Album }, new { @class = "u-black u-btn u-button-style " })
+                    
+                </div>
+            }
+        </div>
     }
 </div>
 <br />
 <br />
 <div>
     @Html.ActionLink("Удалить аккаунт", "Delete", new { id = Model.ID_User }, new { @class = "header-style-text" })
-    @Html.ActionLink("Обратная связь", "Delete", new { id = Model.ID_User }, new { @class = "header-style-text" })
+    @Html.ActionLink("Обратная связь", "Index", "Feedbacks", new { id = Model.ID_User }, new { @class = "header-style-text" })
 </div>

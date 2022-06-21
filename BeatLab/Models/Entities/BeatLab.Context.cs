@@ -29,6 +29,7 @@ namespace BeatLab.Models.Entities
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<Comment_Music> Comment_Music { get; set; }
         public virtual DbSet<Comment_Plugin> Comment_Plugin { get; set; }
+        public virtual DbSet<Feedback> Feedback { get; set; }
         public virtual DbSet<Format_Plugin> Format_Plugin { get; set; }
         public virtual DbSet<Genere_Of_Music> Genere_Of_Music { get; set; }
         public virtual DbSet<Music> Music { get; set; }
@@ -37,6 +38,7 @@ namespace BeatLab.Models.Entities
         public virtual DbSet<Plugins> Plugins { get; set; }
         public virtual DbSet<Price_Music> Price_Music { get; set; }
         public virtual DbSet<Price_Plugin> Price_Plugin { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_Alboms> Type_Alboms { get; set; }
         public virtual DbSet<Type_Music> Type_Music { get; set; }
         public virtual DbSet<User> User { get; set; }

@@ -44,6 +44,15 @@
           <Property Name="ID_Plugin" Type="int" Nullable="false" />
           <Property Name="ID_User" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID_Feedback" />
+          </Key>
+          <Property Name="ID_Feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Comment" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Format_Plugin">
           <Key>
             <PropertyRef Name="ID_Format_Plugin" />
@@ -129,6 +138,16 @@
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ID_Plugin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Type_Alboms">
           <Key>
@@ -261,6 +280,18 @@
               <PropertyRef Name="ID_User" />
             </Principal>
             <Dependent Role="Comment_Plugin">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Feedback">
               <PropertyRef Name="ID_User" />
             </Dependent>
           </ReferentialConstraint>
@@ -426,6 +457,7 @@
           <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment_Music" EntityType="Self.Comment_Music" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment_Plugin" EntityType="Self.Comment_Plugin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Format_Plugin" EntityType="Self.Format_Plugin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genere_Of_Music" EntityType="Self.Genere_Of_Music" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Music" EntityType="Self.Music" Schema="dbo" store:Type="Tables" />
@@ -434,6 +466,7 @@
           <EntitySet Name="Plugins" EntityType="Self.Plugins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Price_Music" EntityType="Self.Price_Music" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Price_Plugin" EntityType="Self.Price_Plugin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_Alboms" EntityType="Self.Type_Alboms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_Music" EntityType="Self.Type_Music" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -469,6 +502,10 @@
           <AssociationSet Name="FK_Comment_Plugin_User" Association="Self.FK_Comment_Plugin_User">
             <End Role="User" EntitySet="User" />
             <End Role="Comment_Plugin" EntitySet="Comment_Plugin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_User" Association="Self.FK_Feedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_Music_Alboms" Association="Self.FK_Music_Alboms">
             <End Role="Alboms" EntitySet="Alboms" />
@@ -532,6 +569,7 @@
           <EntitySet Name="Chat" EntityType="BeatLabDBModel.Chat" />
           <EntitySet Name="Comment_Music" EntityType="BeatLabDBModel.Comment_Music" />
           <EntitySet Name="Comment_Plugin" EntityType="BeatLabDBModel.Comment_Plugin" />
+          <EntitySet Name="Feedback" EntityType="BeatLabDBModel.Feedback" />
           <EntitySet Name="Format_Plugin" EntityType="BeatLabDBModel.Format_Plugin" />
           <EntitySet Name="Genere_Of_Music" EntityType="BeatLabDBModel.Genere_Of_Music" />
           <EntitySet Name="Music" EntityType="BeatLabDBModel.Music" />
@@ -540,6 +578,7 @@
           <EntitySet Name="Plugins" EntityType="BeatLabDBModel.Plugins" />
           <EntitySet Name="Price_Music" EntityType="BeatLabDBModel.Price_Music" />
           <EntitySet Name="Price_Plugin" EntityType="BeatLabDBModel.Price_Plugin" />
+          <EntitySet Name="sysdiagrams" EntityType="BeatLabDBModel.sysdiagrams" />
           <EntitySet Name="Type_Alboms" EntityType="BeatLabDBModel.Type_Alboms" />
           <EntitySet Name="Type_Music" EntityType="BeatLabDBModel.Type_Music" />
           <EntitySet Name="User" EntityType="BeatLabDBModel.User" />
@@ -579,6 +618,10 @@
           <AssociationSet Name="FK_Comment_Plugin_User" Association="BeatLabDBModel.FK_Comment_Plugin_User">
             <End Role="User" EntitySet="User" />
             <End Role="Comment_Plugin" EntitySet="Comment_Plugin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_User" Association="BeatLabDBModel.FK_Feedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_Plugins_Format_Plugin" Association="BeatLabDBModel.FK_Plugins_Format_Plugin">
             <End Role="Format_Plugin" EntitySet="Format_Plugin" />
@@ -676,6 +719,16 @@
           <Property Name="ID_User" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Comment_Plugin_Plugins" FromRole="Comment_Plugin" ToRole="Plugins" />
           <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Comment_Plugin_User" FromRole="Comment_Plugin" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID_Feedback" />
+          </Key>
+          <Property Name="ID_Feedback" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Comment" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BeatLabDBModel.FK_Feedback_User" FromRole="Feedback" ToRole="User" />
         </EntityType>
         <EntityType Name="Format_Plugin">
           <Key>
@@ -783,6 +836,16 @@
           <Property Name="ID_Plugin" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Plugins" Relationship="BeatLabDBModel.FK_Price_Plugin_Plugins" FromRole="Price_Plugin" ToRole="Plugins" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Type_Alboms">
           <Key>
             <PropertyRef Name="ID_Type_Alboms" />
@@ -821,6 +884,7 @@
           <NavigationProperty Name="Chat1" Relationship="BeatLabDBModel.FK_Chat_Sender" FromRole="User" ToRole="Chat" />
           <NavigationProperty Name="Comment_Music" Relationship="BeatLabDBModel.FK_Comment_Music_User" FromRole="User" ToRole="Comment_Music" />
           <NavigationProperty Name="Comment_Plugin" Relationship="BeatLabDBModel.FK_Comment_Plugin_User" FromRole="User" ToRole="Comment_Plugin" />
+          <NavigationProperty Name="Feedback" Relationship="BeatLabDBModel.FK_Feedback_User" FromRole="User" ToRole="Feedback" />
           <NavigationProperty Name="Music" Relationship="BeatLabDBModel.FK_Music_User" FromRole="User" ToRole="Music" />
           <NavigationProperty Name="Order_Music" Relationship="BeatLabDBModel.FK_Order_Music_User" FromRole="User" ToRole="Order_Music" />
           <NavigationProperty Name="Order_Plugin" Relationship="BeatLabDBModel.FK_Order_Plugin_User" FromRole="User" ToRole="Order_Plugin" />
@@ -939,6 +1003,18 @@
               <PropertyRef Name="ID_User" />
             </Principal>
             <Dependent Role="Comment_Plugin">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_User">
+          <End Type="BeatLabDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BeatLabDBModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Feedback">
               <PropertyRef Name="ID_User" />
             </Dependent>
           </ReferentialConstraint>
@@ -1136,6 +1212,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Feedback">
+            <EntityTypeMapping TypeName="BeatLabDBModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date_Comment" ColumnName="Date_Comment" />
+                <ScalarProperty Name="ID_Feedback" ColumnName="ID_Feedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Format_Plugin">
             <EntityTypeMapping TypeName="BeatLabDBModel.Format_Plugin">
               <MappingFragment StoreEntitySet="Format_Plugin">
@@ -1227,6 +1313,17 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ID_Price_Plugin" ColumnName="ID_Price_Plugin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BeatLabDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

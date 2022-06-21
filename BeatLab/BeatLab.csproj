@@ -125,10 +125,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlbomsController.cs" />
     <Compile Include="Controllers\AlreadySoldController.cs" />
     <Compile Include="Controllers\ChatAdminController.cs" />
     <Compile Include="Controllers\Comment_MusicAdminController.cs" />
     <Compile Include="Controllers\Comment_PluginAdminController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\Format_PluginAdminController.cs" />
     <Compile Include="Controllers\Genere_Of_MusicAdminController.cs" />
     <Compile Include="Controllers\LicenseAgreementController.cs" />
@@ -181,6 +183,9 @@
     <Compile Include="Controllers\СhatController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Models\Entities\Feedback.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Format_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
@@ -189,6 +194,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\sysdiagrams.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
@@ -328,6 +336,16 @@
     <Content Include="Views\ChatAdmin\Details.cshtml" />
     <Content Include="Views\ChatAdmin\Edit.cshtml" />
     <Content Include="Views\ChatAdmin\Index.cshtml" />
+    <Content Include="Views\Alboms\Create.cshtml" />
+    <Content Include="Views\Alboms\Delete.cshtml" />
+    <Content Include="Views\Alboms\Details.cshtml" />
+    <Content Include="Views\Alboms\Edit.cshtml" />
+    <Content Include="Views\Alboms\Index.cshtml" />
+    <Content Include="Views\Feedbacks\Create.cshtml" />
+    <Content Include="Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Views\Feedbacks\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
     <Resource Include="Resource\239612-1.jpg" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />

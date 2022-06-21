@@ -15,6 +15,7 @@ namespace BeatLab.Controllers
         private BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Plugins
+        [Authorize]
         public ActionResult Index()
         {
             LoadDropDownLists();
