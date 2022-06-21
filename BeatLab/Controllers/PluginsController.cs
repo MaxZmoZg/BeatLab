@@ -93,6 +93,8 @@ namespace BeatLab.Controllers
             return View(plugins);
         }
 
+
+
         // GET: Plugins/Edit/5
         public ActionResult Edit(int? id)
         {

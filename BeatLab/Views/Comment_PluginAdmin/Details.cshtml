@@ -1,0 +1,50 @@
+﻿@model BeatLab.Models.Entities.Comment_Plugin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment_Plugin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Plugins.Name_Plugin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plugins.Name_Plugin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Last_Name_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Comment_Plugin }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

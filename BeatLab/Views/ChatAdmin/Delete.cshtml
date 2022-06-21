@@ -1,16 +1,16 @@
-﻿@model BeatLab.Models.Entities.Order_Plugin
+﻿@model BeatLab.Models.Entities.Chat
 
 @{
-    ViewBag.Title = "Удаление заказа плагина";
+    ViewBag.Title = "Удаление сообщения в чате";
 }
 
 
 
-<h3>Вы точно хотите удалить данный плагин?</h3>
+<h3>Вы точно хотите удалить это сообщение?</h3>
 <div>
 
     <hr />
-  
+ 
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

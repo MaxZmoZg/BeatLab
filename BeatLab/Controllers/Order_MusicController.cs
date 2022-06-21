@@ -79,6 +79,51 @@ namespace BeatLab.Controllers
             return View(musicOrder);
         }
 
+        // GET: Order_Music/Create
+        public ActionResult CreateAdmin(int? ID_Music)
+        {
+            if (ID_Music.HasValue)
+            {
+                Music music = db.Music.Find(ID_Music);
+                if (music.Order_Music.Count > 0)
+                {
+                    if (music.ID_Type_mysic != SampleTypeId)
+                    {
+                        return RedirectToAction("Index", "AlreadySold");
+                    }
+                }
+            }
+            ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music");
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User");
+            return View();
+        }
+
+        // POST: Order_Music/Create
+        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
+        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdmin([Bind(Include = "ID_Order_Music,ID_Music,ID_User,Card_number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Music musicOrder)
+        {
+            if (!musicOrder.IsConsentContract)
+            {
+                ModelState.AddModelError(nameof(musicOrder.IsConsentContract),
+                                         "Подтвердите условия пользовательского соглашения");
+            }
+            if (ModelState.IsValid)
+            {
+                musicOrder.ID_Music = int.Parse(Request.QueryString["ID_Music"]);
+                musicOrder.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+
+                db.Order_Music.Add(musicOrder);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Users");
+            }
+
+            ViewBag.ID_Music = new SelectList(db.Music, "ID_Music", "Name_music", musicOrder.ID_Music);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", musicOrder.ID_User);
+            return View(musicOrder);
+        }
         // GET: Order_Music/Edit/5
         public ActionResult Edit(int? id)
         {

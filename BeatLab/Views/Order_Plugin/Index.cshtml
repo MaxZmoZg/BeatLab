@@ -1,33 +1,33 @@
 ﻿@model IEnumerable<BeatLab.Models.Entities.Order_Plugin>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Заказы плагина";
 }
 
-<h2>Index</h2>
+<h2>Заказы плагина</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новый", "CreateAdmin")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Card_Number)
+            <label for="name-4c18" class="control-label col-md-2">Номер карты</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Card_expiration_date)
+            <label for="name-4c18" class="control-label col-md-2">Срок годности карты</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Card_secure_code)
+            <label for="name-4c18" class="control-label col-md-2">Защитный код карты</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Card_owner)
+            <label for="name-4c18" class="control-label col-md-2">Имя владельца на карте</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Plugins.Name_Plugin)
+            <label for="name-4c18" class="control-label col-md-2">Название плагина</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+            <label for="name-4c18" class="control-label col-md-2">Покупатель</label>
         </th>
         <th></th>
     </tr>
@@ -53,9 +53,8 @@
             @Html.DisplayFor(modelItem => item.User.Last_Name_User)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Order_Plugin }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Order_Plugin }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Order_Plugin })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Order_Plugin }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Order_Plugin })
         </td>
     </tr>
 }

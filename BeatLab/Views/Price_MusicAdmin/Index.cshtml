@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Price_Music>
+
+@{
+    ViewBag.Title = "Цена на музыку";
+}
+
+<h2>Цена на музыку</h2>
+
+<p>
+    @Html.ActionLink("Создать новую цену", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Цена</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Дата</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название музыки</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) рублей
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Music.Name_music)
+        </td>
+        <td>
+            @Html.ActionLink("Редактирование", "Edit", new { id=item.ID_Price_Music }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Price_Music })
+        </td>
+    </tr>
+}
+
+</table>

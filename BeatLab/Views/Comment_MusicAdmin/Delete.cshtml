@@ -1,0 +1,21 @@
+﻿@model BeatLab.Models.Entities.Comment_Music
+
+@{
+    ViewBag.Title = "Удаление комментария к музыкальному товару";
+}
+
+<h3>Вы точнго хотите удалить данный музыкальный товар?</h3>
+<div>
+
+    <hr />
+    
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться", "Index","",new {@class = "btn btn-default" })
+        </div>
+    }
+</div>

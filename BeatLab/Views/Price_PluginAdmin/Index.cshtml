@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Price_Plugin>
+
+@{
+    ViewBag.Title = "Цена на плагины";
+}
+
+<h2>Цена на плагины</h2>
+
+<p>
+    @Html.ActionLink("Добавить новую цену", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Цена</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Дата</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название плагина</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plugins.Name_Plugin)
+        </td>
+        <td>
+            @Html.ActionLink("Редактирование", "Edit", new { id=item.ID_Price_Plugin }) |
+            @Html.ActionLink("Удаление", "Delete", new { id=item.ID_Price_Plugin })
+        </td>
+    </tr>
+}
+
+</table>

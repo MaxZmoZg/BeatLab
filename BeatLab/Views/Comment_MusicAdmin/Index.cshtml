@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Comment_Music>
+
+@{
+    ViewBag.Title = "Комментарии к музыки";
+}
+
+<h2>Комментарии к музыки</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Комментарий
+        </th>
+        <th>
+            Дата публикации
+        </th>
+        <th>
+            Название музыкального товара
+        </th>
+        <th>
+             Никейм пользователя
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Music.Name_music)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Nickname_User)
+        </td>
+        <td>
+            @Html.ActionLink("Редактирование", "Edit", new { id=item.ID_Comments_Music }) |
+            @Html.ActionLink("Удаление", "Delete", new { id=item.ID_Comments_Music })
+        </td>
+    </tr>
+}
+
+</table>

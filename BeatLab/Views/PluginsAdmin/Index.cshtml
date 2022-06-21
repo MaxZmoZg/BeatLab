@@ -1,0 +1,91 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Plugins>
+
+@{
+    ViewBag.Title = "Плагины";
+}
+
+<h2>Плагины</h2>
+
+<p>
+    @Html.ActionLink("Создать новый", "Plugins.Create", @class: "")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Дата выпуска</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название</label>
+        </th>
+      
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Версия плагина</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Удален ли плагин</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Описание</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Изображение</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Формат плагина</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Никнейм продавца</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Цена плагина</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date_of_issue_Plugin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name_Plugin)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Version_Plugins)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsDeleted)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description_plugin)
+    </td>
+    <td>
+        @if (item.Image_Plugin == null)
+        {
+
+            <img style="width:80px; height:60px;" src="~/Resource/user.png" />
+        }
+        else
+        {
+            @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+                       + Convert.ToBase64String(item.Image_Plugin) + "\" />")
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Format_Plugin.Name_Format_Plugin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price_Plugin.ToList().Last().Price) руб.
+    </td>
+    <td>
+        @Html.ActionLink("Редактировать", "Plugins.Edit", new { id = item.ID_Plugin }, @class: "")
+        @Html.ActionLink("Удалить", "Plugins.Delete", new { id = item.ID_Plugin }, @class: "")
+    </td>
+</tr>
+}
+
+</table>

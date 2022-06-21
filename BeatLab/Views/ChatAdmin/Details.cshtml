@@ -1,0 +1,42 @@
+﻿@model BeatLab.Models.Entities.Chat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Last_Name_User)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User1.Last_Name_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User1.Last_Name_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Chat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
