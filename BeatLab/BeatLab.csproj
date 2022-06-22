@@ -173,6 +173,9 @@
     <Compile Include="Controllers\СhatController.cs" />
     <Compile Include="Extensions\LinkShortExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Models\Entities\Feedback.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Format_Plugin.cs">
       <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
@@ -181,9 +184,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entities\sysdiagrams.cs">
-      <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
@@ -281,6 +281,7 @@
     <Content Include="Views\Genere_Of_MusicAdmin\Edit.cshtml" />
     <Content Include="Views\Genere_Of_MusicAdmin\Index.cshtml" />
     <Content Include="Views\AlreadySold\Index.cshtml" />
+    <Content Include="Views\Account\Deactivated.cshtml" />
     <Resource Include="Resource\239612-1.jpg" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />

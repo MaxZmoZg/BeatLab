@@ -12,14 +12,13 @@ namespace BeatLab.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Chat
+    public partial class Feedback
     {
-        public int ID_Chat { get; set; }
-        public int ID_Sender { get; set; }
-        public int ID_Receiver { get; set; }
-        public string Message { get; set; }
+        public int ID_Feedback { get; set; }
+        public System.DateTime Date_Comment { get; set; }
+        public string Comment { get; set; }
+        public int ID_User { get; set; }
     
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }
