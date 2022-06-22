@@ -15,6 +15,7 @@ namespace BeatLab.Controllers
         private BeatLabDBEntities db = new BeatLabDBEntities();
 
         // GET: Plugins
+        [Authorize]
         public ActionResult Index()
         {
             LoadDropDownLists();
@@ -92,6 +93,8 @@ namespace BeatLab.Controllers
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugins.ID_User);
             return View(plugins);
         }
+
+
 
         // GET: Plugins/Edit/5
         public ActionResult Edit(int? id)

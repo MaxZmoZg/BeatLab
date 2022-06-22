@@ -2,21 +2,21 @@
 @model IEnumerable<Order_Music>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Заказы музыки";
 }
 
-<h2>Index</h2>
+<h2>Заказы музыки</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новый", "CreateAdmin")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Music.Name_music)
+           Название музыки
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+           Никнейм
         </th>
         <th></th>
     </tr>
@@ -27,12 +27,11 @@
             @Html.DisplayFor(modelItem => item.Music.Name_music)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+            @Html.DisplayFor(modelItem => item.User.Nickname_User)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Order_Music }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Order_Music }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Order_Music })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Order_Music }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Order_Music })
         </td>
     </tr>
 }

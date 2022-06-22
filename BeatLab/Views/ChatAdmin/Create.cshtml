@@ -1,0 +1,49 @@
+﻿@model BeatLab.Models.Entities.Chat
+
+@{
+    ViewBag.Title = "Добавить сообщение в чат";
+}
+<br />
+
+<h2>Добавить сообщение в чат</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Отправитель</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Sender", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Sender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Получатель</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Receiver", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Receiver, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Сообщение</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

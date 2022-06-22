@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Feedback>
+
+@{
+    ViewBag.Title = "Обратная связь";
+}
+
+<br />
+<br />
+<br />
+<div>
+    <h3 style="margin-left:15px;">Обратная связь</h3>
+
+</div>
+
+
+
+
+<section class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    @using (Html.BeginForm("PostComment", "Feedbacks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        <textarea name="comment" class="form-control" rows="2" style="height:80px;" placeholder="Добавьте Ваш комментарий"></textarea>
+                        
+                        <div class="mar-top clearfix">
+                            <button class="btn btn-sm btn-primary pull-left" type="submit"><i class="fa fa-pencil fa-fw"></i> Добавить</button>
+                        </div>
+
+
+                    }
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    @foreach (var item in Model)
+                    {
+                        <div class="media-block">
+                            <a class="media-left" href="#">
+                                @{ if (item.User.Image_User == null)
+                                    {
+                                        <img id='previewImage' class="img-circle img-sm" alt="Профиль пользователя" src="~/Resource/user.png" />
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("<img id='previewImage' class='img-circle img-sm'  alt='Профиль пользователя' src=\"data:image/jpeg;base64,"
+                                              + Convert.ToBase64String(item.User.Image_User) + "\" />")
+
+                                    }
+                                }
+
+                            </a>
+                            <div class="media-body">
+                                <div class="mar-btm">
+                                    <a href="#" class="btn-link text-semibold media-heading box-inline"> @(item.User.Nickname_User)</a>
+                                    <p class="text-muted text-sm"><i class="fa fa-globe fa-lg"></i> - @(item.Date_Comment.Day).@(item.Date_Comment.Month).@(item.Date_Comment.Year)</p>
+                                </div>
+                                <p>@(item.Comment)</p>
+                                @{
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        @Html.ActionLink("Редактировать", "Edit", "Feedbacks", new { id = item.ID_Feedback }, new { @class = "btn btn-default " })
+                                        @Html.ActionLink("Удалить", "Delete", "Feedbacks", new { id = item.ID_Feedback }, new { @class = "btn btn-default " })
+                                        }
+                                    }
+                                        <hr>
+
+                                    </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div><!-- /.row -->
+</section><!-- /.container -->

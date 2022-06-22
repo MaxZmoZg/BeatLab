@@ -1,0 +1,75 @@
+﻿@model BeatLab.Models.Entities.Order_Music
+
+@{
+    ViewBag.Title = "Создать заказ музыки";
+}
+<br />
+<h2>Создать заказ музыки</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Название музыки</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Music", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Music, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Пользователь</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_User, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Номер карты</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Card_Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Card_Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Срок годности</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Card_expiration_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Card_expiration_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Защитный код</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Card_secure_code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Card_secure_code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name-4c18" class="control-label col-md-2">Владелец карты</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Card_owner, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Card_owner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Создать" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Вернуться", "Index")
+</div>

@@ -100,7 +100,7 @@ namespace BeatLab.Controllers
                     music.Music_file = Request.Files["uploadMusic"].ToByteArray();
                 }
 
-                music.Alboms = null;
+                
                 music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
                 Price_Music priceMusic = new Price_Music
                 {
@@ -153,6 +153,7 @@ namespace BeatLab.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Music,ID_Genere_of_Music,ID_Type_mysic,Name_music,Description_Music,Price_Music,ID_Alboms,Image_music,ID_User,PriceString,Music_file,IsLicenseAgreementAccepted")] Music music, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadMusic)
         {
+            music.IsLicenseAgreementAccepted = true;
             if (ModelState.IsValid)
             {
                 if (uploadImage != null)

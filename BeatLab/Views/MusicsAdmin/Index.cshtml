@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Music>
+
+@{
+    ViewBag.Title = "Музыкальные товары";
+}
+
+<h2>Музыкальные товары</h2>
+
+<p>
+    @Html.ActionLink("Создать новый", "Musics.Create", @class: "")
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название </label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Описание</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Цена</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Удаленн ли товар</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Музыкальный файл</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Фотография</label>
+        </th>
+
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название жанра музыки</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Название типа музыки</label>
+        </th>
+        <th>
+            <label for="name-4c18" class="control-label col-md-2">Никнейм продавца</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name_music)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description_Music)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price_Music.ToList().Last().Price) руб.
+       
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsDeleted)
+    </td>
+    <td>
+        <audio controls controlsList="nodownload" oncontextmenu="return false;" id="player">
+            <source src="@Url.Action("LoadAudio", "Musics", new {musicId = item.ID_Music})" type="audio/mp3" />
+        </audio>
+    </td>
+    <td>
+        @if (item.Image_music == null)
+        {
+
+        <img style="width:80px; height:60px;" src="~/Resource/user.png" />
+        }
+        else
+        {
+        @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+                   + Convert.ToBase64String(item.Image_music) + "\" />")
+        }
+    </td>
+  
+    <td>
+        @Html.DisplayFor(modelItem => item.Genere_Of_Music.Name_Gener_of_music)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Type_Music.Name_Type_Music)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Nickname_User)
+    </td>
+    <td>
+        @Html.ActionLink("Редактировать", "Musics.Edit", new { id = item.ID_Music }, @class: "")
+        |
+        @Html.ActionLink("Удалить", "Musics.Delete", new { id = item.ID_Music }, @class: "")
+    </td>
+</tr>
+}
+
+</table>

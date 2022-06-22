@@ -1,0 +1,23 @@
+﻿@model BeatLab.Models.Entities.Comment_Plugin
+
+@{
+    ViewBag.Title = "Удаление плагина";
+}
+
+
+
+<h3>Вы точно хотите удалить данный плагин?</h3>
+<div>
+
+    <hr />
+   
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться", "Index","",new {@class = "btn btn-default" })
+        </div>
+    }
+</div>

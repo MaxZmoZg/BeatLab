@@ -59,6 +59,12 @@
 
                     </div>
 
+                    <div class="u-form-group u-form-group-5">
+                        <label for="text-ce90" class="u-label">Альбом</label>
+                        @Html.DropDownList("ID_Alboms",  null, htmlAttributes: new { @class = "form-control u-border-2 u-border-palette-1-light-2 u-input u-input-rectangle u-palette-1-light-3 u-radius-10" })
+                        @Html.ValidationMessageFor(model => model.ID_Alboms, "", new { @class = "text-danger" })
+
+                    </div>
 
 
                     <label for="text-1f9b" class="u-label">Фото</label>
@@ -84,7 +90,7 @@
                         <div class="col-md-10 editCard_DivImage--margin">
 
                             @*@Html.Raw("<img id='previewImage' style='width:130px; height:120px;' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
+                + Convert.ToBase64String(Model.Image_music) + "\" />")*@
 
 
                             @Html.ValidationMessageFor(model => model.Music_file, "", new { @class = "text-danger" })

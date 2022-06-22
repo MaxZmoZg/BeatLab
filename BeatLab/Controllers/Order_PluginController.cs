@@ -76,6 +76,46 @@ namespace BeatLab.Controllers
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", pluginOrder.ID_User);
             return View(pluginOrder);
         }
+        public ActionResult CreateAdmin(int? ID_Plugin)
+        {
+            if (ID_Plugin.HasValue)
+            {
+                if (db.Plugins.Find(ID_Plugin).Order_Plugin.Count > 0)
+                {
+                    return RedirectToAction("Index", "AlreadySold");
+                }
+            }
+            ViewBag.ID_Plugin = new SelectList(db.Plugins, "ID_Plugin", "Name_Plugin");
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User");
+            return View();
+        }
+
+        // POST: Order_Plugin/Create
+        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
+        // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdmin([Bind(Include = "ID_Order_Plugin,ID_Plugin,ID_User,Card_Number,Card_expiration_date,Card_secure_code,Card_owner,IsConsentContract")] Order_Plugin pluginOrder)
+        {
+            if (!pluginOrder.IsConsentContract)
+            {
+                ModelState.AddModelError(nameof(pluginOrder.IsConsentContract),
+                                         "Подтвердите условия пользовательского соглашения");
+            }
+            if (ModelState.IsValid)
+            {
+                pluginOrder.ID_Plugin = int.Parse(Request.QueryString["ID_Plugin"]);
+                pluginOrder.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
+                db.Order_Plugin.Add(pluginOrder);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Users");
+            }
+
+            ViewBag.ID_Plugin = new SelectList(db.Plugins, "ID_Plugin", "Name_Plugin", pluginOrder.ID_Plugin);
+            ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", pluginOrder.ID_User);
+            return View(pluginOrder);
+        }
+
 
         // GET: Order_Plugin/Edit/5
         public ActionResult Edit(int? id)

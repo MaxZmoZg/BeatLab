@@ -2,24 +2,24 @@
 @model IEnumerable<Price_Music>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Цена на музыку";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать новую цену", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            <label for="name-4c18" class="control-label col-md-2">Цена</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            <label for="name-4c18" class="control-label col-md-2">Дата</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Music.Name_music)
+            <label for="name-4c18" class="control-label col-md-2">Название музыки</label>
         </th>
         <th></th>
     </tr>
@@ -37,9 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Music.Name_music)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Price_Music }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_Price_Music }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_Price_Music })
+                @Html.ActionLink("Редактирование", "Edit", new { id = item.ID_Price_Music }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Price_Music })
             </td>
         </tr>
 

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Comment_Plugin>
+
+@{
+    ViewBag.Title = "Комментарии к плагинам";
+}
+
+<h2>Комментарии к плагинам</h2>
+
+<p>
+    @Html.ActionLink("Добавить новый", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Комментари
+        </th>
+        <th>
+            Дата публикации
+        </th>
+        <th>
+           Название плагина
+        </th>
+        <th>
+           Пользователь
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plugins.Name_Plugin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+        </td>
+        <td>
+            @Html.ActionLink("Редактирование", "Edit", new { id=item.ID_Comment_Plugin }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Comment_Plugin })
+        </td>
+    </tr>
+}
+
+</table>

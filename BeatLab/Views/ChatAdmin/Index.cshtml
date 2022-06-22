@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BeatLab.Models.Entities.Chat>
+
+@{
+    ViewBag.Title = "Сообщения в чате";
+}
+
+<h2>Сообщения в чате</h2>
+
+<p>
+    @Html.ActionLink("Добавить новое", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Сообщение
+        </th>
+        <th>
+            Никнейм пользователя,отправившего коммент
+        </th>
+        <th>
+            Никнейм получателя
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Last_Name_User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User1.Last_Name_User)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Chat }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Chat })
+        </td>
+    </tr>
+}
+
+</table>

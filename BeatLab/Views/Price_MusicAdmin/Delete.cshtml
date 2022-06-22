@@ -1,0 +1,23 @@
+﻿@model BeatLab.Models.Entities.Price_Music
+
+@{
+    ViewBag.Title = "Удаление цены на музыку";
+}
+
+
+
+<h3>Вы точно хотите удалить данную цену на музыку?</h3>
+<div>
+
+    <hr />
+    
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться", "Index", "", new {@class = "btn btn-default" })
+        </div>
+    }
+</div>

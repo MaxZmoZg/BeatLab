@@ -1,0 +1,42 @@
+﻿@model BeatLab.Models.Entities.Feedback
+
+@{
+    ViewBag.Title = "Редактирование комментария";
+}
+<br />
+<h2>Редактирование комментария</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+    
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID_Feedback)
+
+    <div class="form-group">
+        <label for="name-4c18" class="control-label col-md-2">Комментарий</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name-4c18" class="control-label col-md-2">Пользователь</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ID_User", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_User, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
