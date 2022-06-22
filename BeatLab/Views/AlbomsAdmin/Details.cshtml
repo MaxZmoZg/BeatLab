@@ -1,0 +1,50 @@
+﻿@model BeatLab.Models.Entities.Alboms
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Alboms</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Album)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image_Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image_Album)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_Alboms.Name_Type_Alboms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_Alboms.Name_Type_Alboms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Last_Name_User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Last_Name_User)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Album }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

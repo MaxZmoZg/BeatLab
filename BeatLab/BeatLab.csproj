@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlbomsAdminController.cs" />
     <Compile Include="Controllers\AlbomsController.cs" />
     <Compile Include="Controllers\AlreadySoldController.cs" />
     <Compile Include="Controllers\ChatAdminController.cs" />
@@ -194,6 +195,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\sysdiagrams.cs">
+      <DependentUpon>BeatLab.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PartialChat.cs" />
@@ -343,6 +347,11 @@
     <Content Include="Views\Feedbacks\Details.cshtml" />
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
+    <Content Include="Views\AlbomsAdmin\Create.cshtml" />
+    <Content Include="Views\AlbomsAdmin\Delete.cshtml" />
+    <Content Include="Views\AlbomsAdmin\Details.cshtml" />
+    <Content Include="Views\AlbomsAdmin\Edit.cshtml" />
+    <Content Include="Views\AlbomsAdmin\Index.cshtml" />
     <Resource Include="Resource\239612-1.jpg" />
     <Content Include="Resource\4753121.png" />
     <Content Include="Resource\646094.png" />
