@@ -1,0 +1,10 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Deactivated";
+}
+
+<h2>Deactivated</h2>
+
+<p>Ваш аккаунт удалён</p>
+@Html.ActionLink("Восстановить", "Recover", routeValues: new { id = Model })
