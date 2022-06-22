@@ -62,7 +62,7 @@ namespace BeatLab.Controllers
         // GET: Musics/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album");
+            ViewBag.ID_Alboms = new SelectList(Me.User.Alboms, "ID_Album", "Name_Album");
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music");
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music");
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Nickname_User");
@@ -100,7 +100,7 @@ namespace BeatLab.Controllers
                     music.Music_file = Request.Files["uploadMusic"].ToByteArray();
                 }
 
-                
+
                 music.ID_User = db.User.First(u => u.Login == HttpContext.User.Identity.Name).ID_User;
                 Price_Music priceMusic = new Price_Music
                 {
@@ -110,7 +110,7 @@ namespace BeatLab.Controllers
                 music.Price_Music.Add(priceMusic);
                 db.Music.Add(music);
                 db.SaveChanges();
-                return RedirectToAction("Details","Users");
+                return RedirectToAction("Details", "Users");
             }
 
 
@@ -139,7 +139,7 @@ namespace BeatLab.Controllers
                 .Last().Price
                 .ToString();
 
-            ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
+            ViewBag.ID_Alboms = new SelectList(Me.User.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
             ViewBag.ID_Type_mysic = new SelectList(db.Type_Music, "ID_Type_music", "Name_Type_Music", music.ID_Type_mysic);
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Nickname_User", music.ID_User);
