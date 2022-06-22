@@ -39,7 +39,7 @@ namespace BeatLab.Controllers
             types.Insert(0, new Type_Music { Name_Type_Music = "-----" });
             ViewBag.ID_Type_mysic = new SelectList(types, "ID_Type_music", "Name_Type_Music");
 
-            List<User> users = db.User.ToList().Where(u => u.User_Type.Name_User_Type == "admin" && u.ID_User != Me.GetId()).ToList();
+            List<User> users = db.User.ToList().Where(u => u.User_Type.Name_User_Type == "user" && u.ID_User != Me.GetId()).ToList();
             users.Insert(0, new User { Nickname_User = "-----" });
             ViewBag.ID_User = new SelectList(users, "ID_User", "Nickname_User");
         }
@@ -110,7 +110,7 @@ namespace BeatLab.Controllers
                 music.Price_Music.Add(priceMusic);
                 db.Music.Add(music);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Users");
             }
 
 
@@ -176,7 +176,7 @@ namespace BeatLab.Controllers
                 };
                 db.Price_Music.Add(priceMusic);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Users");
             }
             ViewBag.ID_Alboms = new SelectList(db.Alboms, "ID_Album", "Name_Album", music.ID_Alboms);
             ViewBag.ID_Genere_of_Music = new SelectList(db.Genere_Of_Music, "ID_Genere_Of_Music", "Name_Gener_of_music", music.ID_Genere_of_Music);
@@ -208,7 +208,7 @@ namespace BeatLab.Controllers
             Music music = db.Music.Find(id);
             music.IsDeleted = true;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Users");
         }
 
 
@@ -271,7 +271,7 @@ namespace BeatLab.Controllers
             if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
             {
                 filteredMusics = filteredMusics
-                    .OrderByDescending(m => m.Name_music)
+                    .OrderBy(m => m.Name_music)
                     .ToList();
             }
             else if (Request.Form.Keys.OfType<string>().Contains("Рейтингу"))
@@ -283,7 +283,7 @@ namespace BeatLab.Controllers
             else if (Request.Form.Keys.OfType<string>().Contains("Цене"))
             {
                 filteredMusics = filteredMusics
-                    .OrderByDescending(m =>
+                    .OrderBy(m =>
                     {
                         if (m.Price_Music.LastOrDefault() is Price_Music priceMusic)
                         {

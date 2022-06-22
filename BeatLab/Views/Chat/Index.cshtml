@@ -77,9 +77,9 @@
             <ul>
                 @foreach (var message in (IEnumerable<Chat>)ViewBag.Chat)
                 {
-                    if (message.Sender.Login != User.Identity.Name)
+                    if (message.Sender.Login == User.Identity.Name)
                     {
-                        <li class="sent">
+                        <li class="replies">
                             <img style="height:22px;" src="data:image/jpeg;base64,@if (message.Sender.Image_User == null)
                             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))
@@ -94,7 +94,7 @@
                     }
                     else
                     {
-                        <li class="replies">
+                        <li class="sent">
                             <img style="height:22px;" src="data:image/jpeg;base64,@if (message.Receiver.Image_User == null)
                             {
                                  @(Convert.ToBase64String(File.ReadAllBytes(Server.MapPath("~/Resource/user.png"))))

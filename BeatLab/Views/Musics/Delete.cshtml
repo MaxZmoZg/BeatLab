@@ -14,9 +14,10 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Вернуться", "Index","", new {@class = "btn btn-default" })
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Удалить" class="btn btn-default" /> |
+    @Html.ActionLink("Вернуться", "Users.Details","", @class: "header-style-text")
+
+</div>
     }
 </div>

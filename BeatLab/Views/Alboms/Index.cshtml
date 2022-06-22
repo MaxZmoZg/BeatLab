@@ -71,10 +71,10 @@
                 </div>
                 <div class="rndclss" style="background-color: lightgray; width: 150px; text-align:center;">
                     <div>
-                        @Html.ActionLink(@"Название " + item.Name_Album, "Details", new { id = item.ID_Album }, new { @class = "namesongforplayer" })
+                        @Html.ActionLink(@"Название: " + item.Name_Album, "Details", new { id = item.ID_Album }, new { @class = "namesongforplayer" })
                     </div>
                     <div>
-                        @Html.ActionLink(@"Тип альбома " + item.User.Nickname_User, "", new { id = item.ID_Album }, new { @class = "nameartistforlayer" })
+                        @Html.ActionLink(@"Тип альбома: " + item.Type_Alboms.Name_Type_Alboms, "", new { id = item.ID_Album }, new { @class = "nameartistforlayer" })
                     </div>
                    
                    

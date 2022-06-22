@@ -86,7 +86,7 @@ namespace BeatLab.Controllers
                 plugins.Price_Plugin.Add(pricePlugin);
                 db.Plugins.Add(plugins);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Users");
             }
 
             ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugins.ID_Format_Plugin);
@@ -146,7 +146,7 @@ namespace BeatLab.Controllers
                 };
                 db.Price_Plugin.Add(price);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Users");
             }
             ViewBag.ID_Format_Plugin = new SelectList(db.Format_Plugin, "ID_Format_Plugin", "Name_Format_Plugin", plugin.ID_Format_Plugin);
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", plugin.ID_User);
@@ -177,7 +177,7 @@ namespace BeatLab.Controllers
             plugins.IsDeleted = true;
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Users");
         }
 
         protected override void Dispose(bool disposing)
@@ -222,14 +222,14 @@ namespace BeatLab.Controllers
             if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
             {
                 filteredPlugins = filteredPlugins
-                    .OrderByDescending(m => m.Name_Plugin)
+                    .OrderBy(m => m.Name_Plugin)
                     .ToList();
             }
 
             else if (Request.Form.Keys.OfType<string>().Contains("Цене"))
             {
                 filteredPlugins = filteredPlugins
-                    .OrderByDescending(m =>
+                    .OrderBy(m =>
                     {
                         if (m.Price_Plugin.LastOrDefault() is Price_Plugin pricePlugin)
                         {

@@ -80,7 +80,7 @@ namespace BeatLab.Controllers
                 alboms.ID_User = Me.GetId();
                 db.Alboms.Add(alboms);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Users");
             }
 
             ViewBag.ID_Type_Alboms = new SelectList(db.Type_Alboms, "ID_Type_Alboms", "Name_Type_Alboms", alboms.ID_Type_Alboms);
@@ -120,7 +120,7 @@ namespace BeatLab.Controllers
                 }
                 db.Entry(alboms).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Users");
             }
             ViewBag.ID_Type_Alboms = new SelectList(db.Type_Alboms, "ID_Type_Alboms", "Name_Type_Alboms", alboms.ID_Type_Alboms);
             ViewBag.ID_User = new SelectList(db.User, "ID_User", "Last_Name_User", alboms.ID_User);
@@ -150,7 +150,7 @@ namespace BeatLab.Controllers
             Alboms alboms = db.Alboms.Find(id);
             db.Alboms.Remove(alboms);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details","Users");
         }
 
         [HttpPost]
@@ -182,7 +182,7 @@ namespace BeatLab.Controllers
             if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
             {
                 filteredAlboms = filteredAlboms
-                    .OrderByDescending(m => m.Name_Album)
+                    .OrderBy(m => m.Name_Album)
                     .ToList();
             }
 
