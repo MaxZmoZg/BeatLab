@@ -169,7 +169,8 @@
           <Property Name="Password_Hash" Type="varbinary" MaxLength="1024" Nullable="false" />
           <Property Name="Salt" Type="varbinary" MaxLength="16" Nullable="false" />
           <Property Name="ID_User_Type" Type="int" Nullable="false" />
-          <Property Name="Email_User" Type="varchar" MaxLength="50" />
+          <Property Name="Email_User" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="User_Type">
           <Key>
@@ -270,18 +271,6 @@
               <PropertyRef Name="ID_User" />
             </Principal>
             <Dependent Role="Comment_Plugin">
-              <PropertyRef Name="ID_User" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Feedback_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID_User" />
-            </Principal>
-            <Dependent Role="Feedback">
               <PropertyRef Name="ID_User" />
             </Dependent>
           </ReferentialConstraint>
