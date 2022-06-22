@@ -16,8 +16,10 @@ namespace BeatLab.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var user = db.User.Include(u => u.User_Type);
-            return View(user.ToList());
+            IQueryable<User> users = db.User
+                .Include(u => u.User_Type)
+                .Where(u => !u.IsDeleted);
+            return View(users);
         }
 
         // GET: Users/Details/{login}
@@ -149,7 +151,7 @@ namespace BeatLab.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.User.Find(id);
-            db.User.Remove(user);
+            user.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -184,7 +186,7 @@ namespace BeatLab.Controllers
                     Login = model.Login,
                     Nickname_User = model.Login,
                     ID_User_Type = UserTypes.Admin,
-                 
+
                 };
 
                 db.User.Add(user);

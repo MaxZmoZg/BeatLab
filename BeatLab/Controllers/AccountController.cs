@@ -1,23 +1,22 @@
 ﻿using BeatLab.Models;
+using BeatLab.Models.Entities;
 using System.Linq;
-using System.Web.Mvc; using BeatLab.Models.Entities; 
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BeatLab.Controllers
 {
     public class AccountController : Controller
     {
-        private const string EmailPattern = @"\w+@\w+\.\w{2,3}";
-
-            [Authorize]
-            public ActionResult Logout()
-            {
-                FormsAuthentication.SignOut();
-                Session.Clear();
-                Session.RemoveAll();
-                Session.Abandon();
-                return RedirectToAction("Index", "Home");
-            }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Login()
         {
             return View();
@@ -34,6 +33,10 @@ namespace BeatLab.Controllers
                 bool isUserFound = user != null;
                 if (isUserFound)
                 {
+                    if (user.IsDeleted)
+                    {
+                        return RedirectToAction("Deactivated", new { id = user.ID_User });
+                    }
                     FormsAuthentication.SetAuthCookie(model.Login, true);
                     return RedirectToAction("Index", "Home");
                 }
@@ -46,7 +49,7 @@ namespace BeatLab.Controllers
 
             return View(model);
         }
-        
+
         private static User SearchUserInDatabase(LoginModel model)
         {
             User user = null;
@@ -133,6 +136,22 @@ namespace BeatLab.Controllers
 
                 db.User.Add(user);
                 db.SaveChanges();
+            }
+        }
+
+        public ActionResult Deactivated(int id)
+        {
+            return View(id);
+        }
+
+        public ActionResult Recover(int id)
+        {
+            using (BeatLabDBEntities entities = new BeatLabDBEntities())
+            {
+                entities.User.Find(id).IsDeleted = false;
+                entities.SaveChanges();
+                FormsAuthentication.SetAuthCookie(entities.User.Find(id).Login, true);
+                return RedirectToAction("Index", "Home");
             }
         }
     }
